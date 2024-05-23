@@ -71,6 +71,7 @@
 		79A22ECD2BFFE8F600FF13A0 /* RequestHeaderAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ECB2BFFE8F600FF13A0 /* RequestHeaderAdapter.swift */; };
 		79A22ECE2BFFE8F600FF13A0 /* RequestParametersAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ECC2BFFE8F600FF13A0 /* RequestParametersAdapter.swift */; };
 		79A22ED02BFFE9A400FF13A0 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ECF2BFFE9A400FF13A0 /* Networking.swift */; };
+		79A22ED22BFFEF4700FF13A0 /* JSONDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ED12BFFEF4700FF13A0 /* JSONDecoding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -136,6 +137,7 @@
 		79A22ECB2BFFE8F600FF13A0 /* RequestHeaderAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestHeaderAdapter.swift; sourceTree = "<group>"; };
 		79A22ECC2BFFE8F600FF13A0 /* RequestParametersAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestParametersAdapter.swift; sourceTree = "<group>"; };
 		79A22ECF2BFFE9A400FF13A0 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		79A22ED12BFFEF4700FF13A0 /* JSONDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoding.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,6 +335,7 @@
 				79A22ECC2BFFE8F600FF13A0 /* RequestParametersAdapter.swift */,
 				79A22EC92BFFE8E800FF13A0 /* RequestBuilder.swift */,
 				79A22ECF2BFFE9A400FF13A0 /* Networking.swift */,
+				79A22ED12BFFEF4700FF13A0 /* JSONDecoding.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				7909A7FA2B536C5F00417C60 /* Collection+Extension.swift in Sources */,
 				7909A7772B53431E00417C60 /* AppDelegate.swift in Sources */,
 				7909A7F82B536BEC00417C60 /* UIStackView+Extensions.swift in Sources */,
+				79A22ED22BFFEF4700FF13A0 /* JSONDecoding.swift in Sources */,
 				7909A7792B53431E00417C60 /* SceneDelegate.swift in Sources */,
 				79A22ECA2BFFE8E800FF13A0 /* RequestBuilder.swift in Sources */,
 				7909A7F62B536B2B00417C60 /* CompositionalLayout+Extension.swift in Sources */,
