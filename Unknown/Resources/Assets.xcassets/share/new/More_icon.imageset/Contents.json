@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "More_icon.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

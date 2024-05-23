@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "animate image tool banner.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

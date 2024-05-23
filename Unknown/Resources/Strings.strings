@@ -1,0 +1,14 @@
+/* 
+  Strings.strings
+  Unknown
+
+  Created by Danyl Timofeyev on 14.01.2024.
+  
+*/
+
+
+"home.processing_preview.view_all" = "View All";
+"home.processing_preview.avatars" = "My Avatars";
+"home.processing_preview.pack_single" = "%@ pack";
+"home.processing_preview.pack_multiple" = "%@ packs";
+"home.processing_preview.time_remaining" = "%.0f min";
