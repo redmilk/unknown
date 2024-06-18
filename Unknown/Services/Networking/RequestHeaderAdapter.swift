@@ -9,7 +9,8 @@
 import Foundation
 
 final class RequestHeaderAdapter: URLRequestAdaptable {
-    
+    private let apiKey = "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"
+
     enum ContentType: String {
         case json = "application/json"
         case jsonUtf8 = "application/json; charset=utf-8"
@@ -24,7 +25,8 @@ final class RequestHeaderAdapter: URLRequestAdaptable {
     }
 
     func adapt(_ urlRequest: inout URLRequest) {
-        urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
+        //urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
+        urlRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         urlRequest.setValue(ContentType.jsonUtf8.rawValue, forHTTPHeaderField: "Content-Type")
         headers.forEach { urlRequest.setValue($0.1, forHTTPHeaderField: $0.0) }
     }

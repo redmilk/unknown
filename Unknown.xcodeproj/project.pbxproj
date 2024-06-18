@@ -72,6 +72,12 @@
 		79A22ECE2BFFE8F600FF13A0 /* RequestParametersAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ECC2BFFE8F600FF13A0 /* RequestParametersAdapter.swift */; };
 		79A22ED02BFFE9A400FF13A0 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ECF2BFFE9A400FF13A0 /* Networking.swift */; };
 		79A22ED22BFFEF4700FF13A0 /* JSONDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ED12BFFEF4700FF13A0 /* JSONDecoding.swift */; };
+		79A22ED42BFFF5A600FF13A0 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ED32BFFF5A600FF13A0 /* APIClient.swift */; };
+		79EB692C2C0A8386008C055D /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB692B2C0A8386008C055D /* APIRequest.swift */; };
+		79EB692E2C0A83CF008C055D /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB692D2C0A83CF008C055D /* APIError.swift */; };
+		79EB69312C0A9D82008C055D /* ChatGPT in Frameworks */ = {isa = PBXBuildFile; productRef = 79EB69302C0A9D82008C055D /* ChatGPT */; };
+		79EB69332C0A9D82008C055D /* GPT in Frameworks */ = {isa = PBXBuildFile; productRef = 79EB69322C0A9D82008C055D /* GPT */; };
+		79EB69352C0A9D82008C055D /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 79EB69342C0A9D82008C055D /* OpenAI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,6 +144,9 @@
 		79A22ECC2BFFE8F600FF13A0 /* RequestParametersAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestParametersAdapter.swift; sourceTree = "<group>"; };
 		79A22ECF2BFFE9A400FF13A0 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		79A22ED12BFFEF4700FF13A0 /* JSONDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoding.swift; sourceTree = "<group>"; };
+		79A22ED32BFFF5A600FF13A0 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		79EB692B2C0A8386008C055D /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		79EB692D2C0A83CF008C055D /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,12 +155,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7909A7A32B53501400417C60 /* SnapKit in Frameworks */,
+				79EB69352C0A9D82008C055D /* OpenAI in Frameworks */,
 				79A22EC42BFFE32500FF13A0 /* Alamofire in Frameworks */,
 				7909A7A02B534EF200417C60 /* SDWebImageMapKit in Frameworks */,
+				79EB69312C0A9D82008C055D /* ChatGPT in Frameworks */,
 				7909A79E2B534EF200417C60 /* SDWebImage in Frameworks */,
 				7909A7A52B53501400417C60 /* SnapKit-Dynamic in Frameworks */,
 				79A22EC62BFFE32500FF13A0 /* AlamofireDynamic in Frameworks */,
 				799F7A4F2B6E66A20080D304 /* SnapKit in Frameworks */,
+				79EB69332C0A9D82008C055D /* GPT in Frameworks */,
 				799F7A512B6E66A20080D304 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,6 +348,9 @@
 				79A22EC92BFFE8E800FF13A0 /* RequestBuilder.swift */,
 				79A22ECF2BFFE9A400FF13A0 /* Networking.swift */,
 				79A22ED12BFFEF4700FF13A0 /* JSONDecoding.swift */,
+				79A22ED32BFFF5A600FF13A0 /* APIClient.swift */,
+				79EB692B2C0A8386008C055D /* APIRequest.swift */,
+				79EB692D2C0A83CF008C055D /* APIError.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -365,6 +380,9 @@
 				799F7A502B6E66A20080D304 /* SnapKit-Dynamic */,
 				79A22EC32BFFE32500FF13A0 /* Alamofire */,
 				79A22EC52BFFE32500FF13A0 /* AlamofireDynamic */,
+				79EB69302C0A9D82008C055D /* ChatGPT */,
+				79EB69322C0A9D82008C055D /* GPT */,
+				79EB69342C0A9D82008C055D /* OpenAI */,
 			);
 			productName = Unknown;
 			productReference = 7909A7732B53431E00417C60 /* Unknown.app */;
@@ -398,6 +416,7 @@
 				7909A79C2B534EF200417C60 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				7909A7A12B53501400417C60 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				79A22EC22BFFE32500FF13A0 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				79EB692F2C0A9D82008C055D /* XCRemoteSwiftPackageReference "GPTSwift" */,
 			);
 			productRefGroup = 7909A7742B53431E00417C60 /* Products */;
 			projectDirPath = "";
@@ -444,7 +463,9 @@
 				7909A7D92B535EA800417C60 /* MultipleImageCell.swift in Sources */,
 				790AEB5D2B6E6240004A1784 /* HeaderView.swift in Sources */,
 				79A22ECE2BFFE8F600FF13A0 /* RequestParametersAdapter.swift in Sources */,
+				79A22ED42BFFF5A600FF13A0 /* APIClient.swift in Sources */,
 				7909A7A72B53538400417C60 /* ControlTouchRecognizer.swift in Sources */,
+				79EB692C2C0A8386008C055D /* APIRequest.swift in Sources */,
 				7909A77B2B53431E00417C60 /* HomeViewController.swift in Sources */,
 				7909A7972B534D6500417C60 /* AVPlayer+Extension.swift in Sources */,
 				7909A7DF2B5361C000417C60 /* SectionHeaderView.swift in Sources */,
@@ -473,6 +494,7 @@
 				7909A7952B534D1F00417C60 /* NoNibView.swift in Sources */,
 				7909A7932B534CCA00417C60 /* VideoPlayerView.swift in Sources */,
 				7909A7DB2B535EFB00417C60 /* MultipleImagePreviewCell.swift in Sources */,
+				79EB692E2C0A83CF008C055D /* APIError.swift in Sources */,
 				7909A7AE2B5357FD00417C60 /* ProcessingHeaderCell.swift in Sources */,
 				7909A78B2B53441900417C60 /* HomeCollectionView.swift in Sources */,
 				7909A7992B534E7800417C60 /* HeaderCell.swift in Sources */,
@@ -718,6 +740,14 @@
 				minimumVersion = 5.9.1;
 			};
 		};
+		79EB692F2C0A9D82008C055D /* XCRemoteSwiftPackageReference "GPTSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftedMind/GPTSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -760,6 +790,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 79A22EC22BFFE32500FF13A0 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = AlamofireDynamic;
+		};
+		79EB69302C0A9D82008C055D /* ChatGPT */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79EB692F2C0A9D82008C055D /* XCRemoteSwiftPackageReference "GPTSwift" */;
+			productName = ChatGPT;
+		};
+		79EB69322C0A9D82008C055D /* GPT */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79EB692F2C0A9D82008C055D /* XCRemoteSwiftPackageReference "GPTSwift" */;
+			productName = GPT;
+		};
+		79EB69342C0A9D82008C055D /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79EB692F2C0A9D82008C055D /* XCRemoteSwiftPackageReference "GPTSwift" */;
+			productName = OpenAI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -8,7 +8,10 @@
 
 import Foundation
 
-typealias RequestParameter = (title: String, value: String)
+struct RequestParameter {
+    let title: String
+    let value: Any
+}
 
 struct RequestParametersAdapter: URLRequestAdaptable {
     let parameters: [RequestParameter]
@@ -29,7 +32,7 @@ extension RequestParametersAdapter {
         guard let url = urlRequest.url,
             var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return }
         
-        let queryItems = parameters.map { URLQueryItem(name: $0.title, value: $0.value) }
+        let queryItems = parameters.map { URLQueryItem(name: $0.title, value: $0.value as? String) }
         urlComponents.queryItems = urlComponents.queryItems ?? [] + queryItems
         urlRequest.url = urlComponents.url
     }
