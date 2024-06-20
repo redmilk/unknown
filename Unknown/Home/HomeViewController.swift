@@ -23,7 +23,7 @@ final class HomeViewController: BaseViewController, HomeViewControllerIn {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //configureLayout()
+        configureLayout()
         configureView()
     }
     
@@ -34,14 +34,15 @@ final class HomeViewController: BaseViewController, HomeViewControllerIn {
 
     // MARK: - Private
     private func configureView() {
-        view.backgroundColor = .green
+        //view.backgroundColor = .green
     }
     
     private func configureLayout() {
         view.addSubview(collection)
         collection.snp.makeConstraints { make in
-            make.edges.equalToSuperview().multipliedBy(0.6)
+            make.edges.equalToSuperview()
         }
+        //collection.update(with: .init(blocks: <#T##[HomeCollectionView.ViewModel.Block]#>, onSeeAll: <#T##Command#>, onScrolledToIndex: <#T##CommandWith<Int>#>, hasAnyCollection: <#T##Bool#>, isThemePacksAB: <#T##Bool#>))
     }
 }
 

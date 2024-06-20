@@ -9,6 +9,26 @@ import UIKit
 import ChatGPT
 import Alamofire
 
+enum Prompts {
+    static let quiz = """
+    Provide 10 unique questions in single JSON with different difficulty level about pooping for a quiz game with six possible answers of this question formatted as a correctly formatted JSON object questions.
+    Question with properties:
+            1. id as “replaceWithID”
+            2. category name
+            2. array with question objects with properties like: question, array of answers, right answer string, id as combined timestamp and order number string
+    
+    JSON example:
+
+        struct Question: Codable {
+            let id: String
+            let category: String
+            let question: String
+            let answers: [String]
+            let correctAnswer: String
+        }
+    """
+}
+
 class MyEventMonitor: EventMonitor {
     let queue = DispatchQueue(label: "com.alamofire.eventMonitor")
 
@@ -47,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func sendMsg() {
-        let message = Message(id: UUID(), role: .user, content: "Tell me a joke", createdAt: Date())
+        let message = Message(id: UUID(), role: .user, content: Prompts.quiz, createdAt: Date())
         sendMessage(messages: [message], completion: {
             print("📣 📢 💬 \("nil")")
         })
