@@ -15,7 +15,6 @@ final class MultipleImageCell: UICollectionViewCell {
     struct ViewModel {
         let title: String
         let isPreviewed: Bool
-        let isTheme: Bool
         let items: [Item]
     }
     
@@ -58,7 +57,6 @@ final class MultipleImageCell: UICollectionViewCell {
         self.viewModel = viewModel
         titleLabel.text = viewModel.title
         newPackNotificationView.isVisible = !viewModel.isPreviewed
-        themeLabel.isHidden = !viewModel.isTheme
         diffable.apply(makeSnapshot(for: viewModel))
     }
     

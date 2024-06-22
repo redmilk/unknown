@@ -18,52 +18,36 @@
             endingLineNumber = "20"
             landmarkName = "onViewDidLoad()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "627EA919-7DB3-4665-9286-66597F7F5C9B"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Unknown/AppDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
-            landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "627EA919-7DB3-4665-9286-66597F7F5C9B - 14535949956b98db"
+                  uuid = "BA353384-CB39-47D1-9F39-18CA7B99E5C2 - 9a437567d368f25c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Unknown.AppDelegate.application(_: __C.UIApplication, didFinishLaunchingWithOptions: Swift.Optional&lt;Swift.Dictionary&lt;__C.UIApplicationLaunchOptionsKey, Any&gt;&gt;) -&gt; Swift.Bool"
+                  symbolName = "Unknown.HomePresenter.onViewDidLoad() -&gt; ()"
                   moduleName = "Unknown"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ikefir/Desktop/Unknown/Unknown/AppDelegate.swift"
+                  urlString = "file:///Users/ikefir/Desktop/Unknown/Unknown/Home/HomePresenter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "21"
-                  endingLineNumber = "21"
-                  offsetFromSymbolStart = "184">
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "48">
                </Location>
                <Location
-                  uuid = "627EA919-7DB3-4665-9286-66597F7F5C9B - 14535949956b97d3"
+                  uuid = "BA353384-CB39-47D1-9F39-18CA7B99E5C2 - 9a437567d368f25c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Unknown.AppDelegate.application(_: __C.UIApplication, didFinishLaunchingWithOptions: Swift.Optional&lt;Swift.Dictionary&lt;__C.UIApplicationLaunchOptionsKey, Any&gt;&gt;) -&gt; Swift.Bool"
+                  symbolName = "Unknown.HomePresenter.onViewDidLoad() -&gt; ()"
                   moduleName = "Unknown"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ikefir/Desktop/Unknown/Unknown/AppDelegate.swift"
+                  urlString = "file:///Users/ikefir/Desktop/Unknown/Unknown/Home/HomePresenter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "100">
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "44">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -71,17 +55,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "464CD80E-6DF0-442B-A16D-67BFA9DF5BC3"
-            shouldBeEnabled = "No"
+            uuid = "E9730257-8B18-455A-98D9-881FD18AC2E2"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Unknown/AppDelegate.swift"
+            filePath = "Unknown/Home/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "update(with:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E9730257-8B18-455A-98D9-881FD18AC2E2 - b7eff1c87060a1ed"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Unknown.HomeViewController.viewDidAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "Unknown"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ikefir/Desktop/Unknown/Unknown/Home/HomeViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "140">
+               </Location>
+               <Location
+                  uuid = "E9730257-8B18-455A-98D9-881FD18AC2E2 - 178cad65bc738f07"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Unknown.HomeViewController.update(with: Unknown.HomeViewController.ViewModel) -&gt; ()"
+                  moduleName = "Unknown"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ikefir/Desktop/Unknown/Unknown/Home/HomeViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "68">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

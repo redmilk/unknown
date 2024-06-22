@@ -47,48 +47,13 @@ class MyEventMonitor: EventMonitor {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        //Task { await APIClientImpl.shared.tryRequest() }
-        
-//        requestChatGPT(prompt: "Tell me a joke") { result in
-//            switch result {
-//            case .success(let response):
-//                print(response.object)
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-     
-
-        sendMsg()
-        
+        //sendMsg()
         return true
     }
     
     func sendMsg() {
         let message = Message(id: UUID(), role: .user, content: Prompts.quiz, createdAt: Date())
-        sendMessage(messages: [message], completion: {
-            print("📣 📢 💬 \("nil")")
-        })
-    }
-    
-    func askChatGPT() async throws {
-      let chatGPT = ChatGPT(apiKey: "sk-proj-1RAOrYwUi01zW4Q4qucST3BlbkFJxq4wCKNITRtcOIJqGTDz", defaultModel: .gpt3)
-
-      // Basic query
-      let firstResponse = try await chatGPT.ask("What is the answer to life, the universe and everything in it?")
-      print(firstResponse)
-
-      // Send multiple messages
-      let secondResponse = try await chatGPT.ask(
-          messages: [
-              ChatMessage(role: .system, content: "You are a dog."),
-              ChatMessage(role: .user, content: "Do you actually like playing fetch?")
-          ],
-          model: .gpt3.stableVersion() // Override default model, if needed
-      )
-      print(secondResponse)
+        sendMessage(messages: [message], completion: { })
     }
 
     // MARK: UISceneSession Lifecycle
@@ -104,7 +69,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }
 

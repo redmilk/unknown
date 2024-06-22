@@ -1,27 +1,14 @@
 //
-//  HomePresenter.swift
+//  HomeUtils.swift
 //  Unknown
 //
-//  Created by Danyl Timofeyev on 03.02.2024.
+//  Created by Danyl Timofeyev on 22.06.2024.
 //
-
-let video = URL(string: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4")!
 
 import Foundation
 
-final class HomePresenter: Presenter {
-    
-    var view: HomeViewControllerIn?
-    
-    init() {
-    }
-    
-    func onViewDidLoad() {
-        let collectionModel = makeViewModel()
-        view?.update(with: .init(collectionViewModel: collectionModel))
-    }
-    
-    func makeViewModel() -> HomeCollectionView.ViewModel {
+final class HomeUtils {
+    static func makeViewModel() -> HomeCollectionView.ViewModel {
         
         let headerConfig = HeaderConfig(title: "Test Title", subtitle: "Test Subtitle", buttonTitle: "Test button", buttonLink: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, headerContentLink: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, isVideoHeader: false)
         let headerItem1 = HeaderCell.ViewModel(state: .empty, config: headerConfig, onGenerate: nil, hasCollections: false)

@@ -18,8 +18,6 @@ final class HomeCollectionView: UICollectionView {
         let blocks: [Block]
         let onSeeAll: Command
         let onScrolledToIndex: CommandWith<Int>
-        let hasAnyCollection: Bool
-        let isThemePacksAB: Bool
     }
     
     struct Item: HashItem {
@@ -31,7 +29,6 @@ final class HomeCollectionView: UICollectionView {
             case userCollection(MultipleImageCell.ViewModel, onSelect: Command)
             case style(ContentCell.ViewModel, onSelect: Command)
             case themePack(ContentCell.ViewModel, onSelect: Command)
-            case preview(MultipleImagePreviewCell.ViewModel, onSelect: Command)
         }
     }
     
@@ -40,7 +37,6 @@ final class HomeCollectionView: UICollectionView {
         case userCollections
         case styles
         case themePacks
-        case resultOverview
     }
     
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
@@ -67,6 +63,7 @@ final class HomeCollectionView: UICollectionView {
         delegate = self
         decelerationRate = .normal
         collectionViewLayout = makeLayout()
+        backgroundColor = .black
     }
     
     required init?(coder: NSCoder) {
@@ -97,10 +94,6 @@ extension HomeCollectionView {
                 case let .header(header):
                     let cell = collectionView.dequeueCell(ofType: HeaderCell.self, for: indexPath)
                     cell.update(with: header)
-                    return cell
-                case let .preview(vm, _):
-                    let cell = collectionView.dequeueCell(ofType: MultipleImagePreviewCell.self, for: indexPath)
-                    cell.update(with: vm)
                     return cell
                 case let .userCollection(vm, _):
                     let cell = collectionView.dequeueCell(ofType: MultipleImageCell.self, for: indexPath)
@@ -150,8 +143,6 @@ extension HomeCollectionView: UICollectionViewDelegate {
             onSelect.perform()
         case let .userCollection(_, onSelect):
             onSelect.perform()
-        case let .preview(_, onSelect):
-            onSelect.perform()
         default:
             break
         }
@@ -190,8 +181,6 @@ private extension HomeCollectionView {
             return userCollectionsSection()
         case .styles:
             return productsSection()
-        case .resultOverview:
-            return nil
         }
     }
     
@@ -245,10 +234,7 @@ private extension HomeCollectionView {
     }
     
     func getMainHeaderHeight() -> CGFloat {
-        guard viewModel.hasAnyCollection else {
-            return UIScreen.main.bounds.width * 3 / 4
-        }
-        return 50
+        UIScreen.main.bounds.width * 3 / 4
     }
 
     func userCollectionsSection() -> NSCollectionLayoutSection {
@@ -313,7 +299,7 @@ private extension HomeCollectionView {
         )
         header.pinToVisibleBounds = true
         header.zIndex = Int.max
-        section.boundarySupplementaryItems = viewModel.isThemePacksAB ? [header] : []
+        section.boundarySupplementaryItems = [header]
 
         return section
     }
@@ -336,9 +322,7 @@ private extension HomeCollectionView.ViewModel {
         HomeCollectionView.ViewModel(
             blocks: [],
             onSeeAll: .nop,
-            onScrolledToIndex: .nop,
-            hasAnyCollection: true,
-            isThemePacksAB: false
+            onScrolledToIndex: .nop
         )
     }
 }
