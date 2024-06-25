@@ -332,13 +332,13 @@ private extension HomeCollectionView {
             widthDimension: .fractionalWidth(1),
             heightDimension: heightDimension
         )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: itemsInRow)
-        group.interItemSpacing = .fixed(12)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: itemsInRow)
         
         // Section
         let section = NSCollectionLayoutSection(group: group)
         let inset = Constants.sectionInset
         section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: inset, bottom: 8, trailing: inset)
+        section.interGroupSpacing = 20
 
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: .make(height: Constants.headerHeight),

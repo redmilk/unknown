@@ -23,6 +23,7 @@ final class ClassicQuizCell: UICollectionViewCell {
         let asnwers: [String]
         let category: String
         let correctAnswer: String
+        let answerExplanation: String
         let image: URL?
     }
     
@@ -30,6 +31,7 @@ final class ClassicQuizCell: UICollectionViewCell {
     private let imageView = UIImageView()
     private let questionLabel = UILabel()
     private let categoryLabel = UILabel()
+    private let explanationLabel = UILabel()
     private let answersStack = UIStackView()
     
     override init(frame: CGRect) {
@@ -46,16 +48,24 @@ final class ClassicQuizCell: UICollectionViewCell {
         buildAnswerViews(answers: model.asnwers)
         questionLabel.text = model.question
         categoryLabel.text = model.category
+        explanationLabel.text = model.answerExplanation
     }
     
     private func configureView() {
         clipsToBounds = true
         containerStack.axis = .vertical
+        containerStack.spacing = 0
         answersStack.axis = .vertical
-        answersStack.spacing = 8
-        questionLabel.textColor = .white
-        categoryLabel.textColor = .white
+        answersStack.spacing = 2
+        questionLabel.textColor = .red
         questionLabel.numberOfLines = 0
+        questionLabel.textAlignment = .center
+        categoryLabel.textColor = .white
+        categoryLabel.textAlignment = .center
+        categoryLabel.font = .systemFont(ofSize: 11)
+        explanationLabel.textColor = .gray1
+        explanationLabel.numberOfLines = 0
+        explanationLabel.font = .systemFont(ofSize: 13)
     }
     
     private func configureLayout() {
@@ -69,13 +79,11 @@ final class ClassicQuizCell: UICollectionViewCell {
             make.edges.equalToSuperview()
         }
         
-        categoryLabel.snp.makeConstraints { make in
-            make.height.equalTo(40)
-        }
         containerStack.addArrangedSubviews([
             categoryLabel,
             questionLabel,
-            answersStack
+            answersStack,
+            explanationLabel
         ])
     }
     
@@ -84,18 +92,38 @@ final class ClassicQuizCell: UICollectionViewCell {
         var pair = [String]()
         answers.forEach { answer in
             pair.append(answer)
-            guard pair.count == 2 else { return }
+            guard pair.count == determineAnswersCountInLine(answers) else { return }
             let stack = UIStackView()
             stack.axis = .horizontal
             stack.distribution = .fillEqually
-            stack.spacing = 8
+            stack.spacing = 2
             pair.forEach {
                 let button = UIButton()
+                button.backgroundColor = .blueDark
+                button.titleLabel?.numberOfLines = 0
                 button.setTitle($0, for: .normal)
                 stack.addArrangedSubview(button)
             }
             answersStack.addArrangedSubview(stack)
             pair.removeAll()
         }
+    }
+    
+    private func determineAnswersCountInLine(_ answers: [String]) -> Int {
+        let isShortAnswers = answers.filter { $0.count > Constants.considarableShortAnswer }.isEmpty
+        let isLongAnswers = !answers.filter { $0.count > Constants.considarableLongAnswer }.isEmpty
+        
+        if isLongAnswers {
+            return 1
+        } else if isShortAnswers {
+            return 4
+        } else {
+            return 2
+        }
+    }
+    
+    private enum Constants {
+        static let considarableLongAnswer: Int = 17
+        static let considarableShortAnswer: Int = 5
     }
 }
