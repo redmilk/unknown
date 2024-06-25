@@ -56,6 +56,7 @@
 		7909A7FD2B536E7A00417C60 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7909A7FC2B536E7A00417C60 /* Fonts.swift */; };
 		790AEB5B2B6E61DF004A1784 /* BackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790AEB5A2B6E61DF004A1784 /* BackgroundDecorationView.swift */; };
 		790AEB5D2B6E6240004A1784 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790AEB5C2B6E6240004A1784 /* HeaderView.swift */; };
+		792C01472C28B891003EA585 /* ClassicQuizCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C01462C28B891003EA585 /* ClassicQuizCell.swift */; };
 		7969D90C2B895C2800A67963 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7969D90B2B895C2800A67963 /* BaseViewController.swift */; };
 		7969D90E2B895C6800A67963 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7969D90D2B895C6800A67963 /* Presenter.swift */; };
 		799F7A432B6E66180080D304 /* reface-assets.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 799F7A402B6E66180080D304 /* reface-assets.stencil */; };
@@ -73,7 +74,6 @@
 		79A22ED22BFFEF4700FF13A0 /* JSONDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ED12BFFEF4700FF13A0 /* JSONDecoding.swift */; };
 		79A22ED42BFFF5A600FF13A0 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ED32BFFF5A600FF13A0 /* APIClient.swift */; };
 		79BB61BC2C2759A2004084C2 /* MultipleImagePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB61BB2C2759A2004084C2 /* MultipleImagePreviewCell.swift */; };
-		79BB61BE2C275B20004084C2 /* HomeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB61BD2C275B20004084C2 /* HomeUtils.swift */; };
 		79EB692C2C0A8386008C055D /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB692B2C0A8386008C055D /* APIRequest.swift */; };
 		79EB692E2C0A83CF008C055D /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB692D2C0A83CF008C055D /* APIError.swift */; };
 		79EB69312C0A9D82008C055D /* ChatGPT in Frameworks */ = {isa = PBXBuildFile; productRef = 79EB69302C0A9D82008C055D /* ChatGPT */; };
@@ -129,6 +129,7 @@
 		7909A7FC2B536E7A00417C60 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		790AEB5A2B6E61DF004A1784 /* BackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDecorationView.swift; sourceTree = "<group>"; };
 		790AEB5C2B6E6240004A1784 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		792C01462C28B891003EA585 /* ClassicQuizCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicQuizCell.swift; sourceTree = "<group>"; };
 		7969D90B2B895C2800A67963 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7969D90D2B895C6800A67963 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		799F7A402B6E66180080D304 /* reface-assets.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "reface-assets.stencil"; sourceTree = "<group>"; };
@@ -146,7 +147,6 @@
 		79A22ED12BFFEF4700FF13A0 /* JSONDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoding.swift; sourceTree = "<group>"; };
 		79A22ED32BFFF5A600FF13A0 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		79BB61BB2C2759A2004084C2 /* MultipleImagePreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleImagePreviewCell.swift; sourceTree = "<group>"; };
-		79BB61BD2C275B20004084C2 /* HomeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUtils.swift; sourceTree = "<group>"; };
 		79EB692B2C0A8386008C055D /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		79EB692D2C0A83CF008C055D /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -246,6 +246,7 @@
 		7909A7EF2B5365BE00417C60 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				792C01482C28C830003EA585 /* Questions */,
 				790AEB592B6E61C7004A1784 /* Supplimentary */,
 				7909A7982B534E7800417C60 /* HeaderCell.swift */,
 				7909A7AD2B5357FD00417C60 /* ProcessingHeaderCell.swift */,
@@ -316,6 +317,14 @@
 			path = Supplimentary;
 			sourceTree = "<group>";
 		};
+		792C01482C28C830003EA585 /* Questions */ = {
+			isa = PBXGroup;
+			children = (
+				792C01462C28B891003EA585 /* ClassicQuizCell.swift */,
+			);
+			path = Questions;
+			sourceTree = "<group>";
+		};
 		7969D90F2B895C7300A67963 /* MVP */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,7 +339,6 @@
 			children = (
 				7909A77A2B53431E00417C60 /* HomeViewController.swift */,
 				799F7A632B6E69910080D304 /* HomePresenter.swift */,
-				79BB61BD2C275B20004084C2 /* HomeUtils.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -462,7 +470,6 @@
 				7909A7B42B53593000417C60 /* GradientView.swift in Sources */,
 				7909A7E62B5363C300417C60 /* LimitedArray.swift in Sources */,
 				79A22ECD2BFFE8F600FF13A0 /* RequestHeaderAdapter.swift in Sources */,
-				79BB61BE2C275B20004084C2 /* HomeUtils.swift in Sources */,
 				7909A7EC2B53652D00417C60 /* Publisher+Extension.swift in Sources */,
 				7909A7D92B535EA800417C60 /* MultipleImageCell.swift in Sources */,
 				790AEB5D2B6E6240004A1784 /* HeaderView.swift in Sources */,
@@ -491,6 +498,7 @@
 				7909A7FD2B536E7A00417C60 /* Fonts.swift in Sources */,
 				7969D90C2B895C2800A67963 /* BaseViewController.swift in Sources */,
 				7909A7AC2B53569900417C60 /* AudioSessionManager.swift in Sources */,
+				792C01472C28B891003EA585 /* ClassicQuizCell.swift in Sources */,
 				7909A78F2B53459800417C60 /* HashItem.swift in Sources */,
 				790AEB5B2B6E61DF004A1784 /* BackgroundDecorationView.swift in Sources */,
 				7909A7AA2B5355E400417C60 /* DisplayLink.swift in Sources */,

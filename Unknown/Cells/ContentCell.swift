@@ -13,6 +13,7 @@ final class ContentCell: ImageCell {
     struct ViewModel {
         let title: String
         let previewUrl: URL?
+        let onSelect: Command
     }
     
     private let gradientView = GradientView()

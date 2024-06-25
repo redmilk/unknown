@@ -7,56 +7,8 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BA353384-CB39-47D1-9F39-18CA7B99E5C2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Unknown/Home/HomePresenter.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "onViewDidLoad()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "BA353384-CB39-47D1-9F39-18CA7B99E5C2 - 9a437567d368f25c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Unknown.HomePresenter.onViewDidLoad() -&gt; ()"
-                  moduleName = "Unknown"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ikefir/Desktop/Unknown/Unknown/Home/HomePresenter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "48">
-               </Location>
-               <Location
-                  uuid = "BA353384-CB39-47D1-9F39-18CA7B99E5C2 - 9a437567d368f25c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Unknown.HomePresenter.onViewDidLoad() -&gt; ()"
-                  moduleName = "Unknown"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ikefir/Desktop/Unknown/Unknown/Home/HomePresenter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E9730257-8B18-455A-98D9-881FD18AC2E2"
-            shouldBeEnabled = "Yes"
+            uuid = "2DB45465-7CFD-4EEC-AA41-FF408DBF39F0"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Unknown/Home/HomeViewController.swift"
@@ -66,38 +18,149 @@
             endingLineNumber = "32"
             landmarkName = "update(with:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BB134AA9-4F73-4067-B33E-05AB009E116A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Unknown/HomeCollectionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "update(with:)"
+            landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "E9730257-8B18-455A-98D9-881FD18AC2E2 - b7eff1c87060a1ed"
+                  uuid = "BB134AA9-4F73-4067-B33E-05AB009E116A - 5a325c687e9af1bc"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Unknown.HomeViewController.viewDidAppear(Swift.Bool) -&gt; ()"
+                  symbolName = "Unknown.HomeCollectionView.update(with: Unknown.HomeCollectionView.ViewModel) -&gt; ()"
                   moduleName = "Unknown"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ikefir/Desktop/Unknown/Unknown/Home/HomeViewController.swift"
+                  urlString = "file:///Users/ikefir/Desktop/Unknown/Unknown/HomeCollectionView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32"
-                  offsetFromSymbolStart = "140">
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "288">
                </Location>
                <Location
-                  uuid = "E9730257-8B18-455A-98D9-881FD18AC2E2 - 178cad65bc738f07"
+                  uuid = "BB134AA9-4F73-4067-B33E-05AB009E116A - 932f4a77ec0cc17"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Unknown.HomeViewController.update(with: Unknown.HomeViewController.ViewModel) -&gt; ()"
+                  symbolName = "closure #1 () -&gt; () in Unknown.HomeCollectionView.update(with: Unknown.HomeCollectionView.ViewModel) -&gt; ()"
                   moduleName = "Unknown"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ikefir/Desktop/Unknown/Unknown/Home/HomeViewController.swift"
+                  urlString = "file:///Users/ikefir/Desktop/Unknown/Unknown/HomeCollectionView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32"
-                  offsetFromSymbolStart = "68">
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "196">
+               </Location>
+               <Location
+                  uuid = "BB134AA9-4F73-4067-B33E-05AB009E116A - 98ee3c8e40e49f7a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 () -&gt; () in Unknown.HomeCollectionView.update(with: Unknown.HomeCollectionView.ViewModel) -&gt; ()"
+                  moduleName = "Unknown"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ikefir/Desktop/Unknown/Unknown/HomeCollectionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "20">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F3D3FE2E-0793-4B34-A5AC-69E31BDEA4CA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Unknown/HomeCollectionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "makeDataSource()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "71CCD9CB-E48D-4841-8EC8-F51839E9744F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Unknown/HomeCollectionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "makeDataSource()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D3B29417-B961-45A5-9978-C831197F7D59"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Unknown/HomeCollectionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "makeDataSource()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5477B53F-93AB-4F9A-A19D-8A45EED46DEB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Unknown/HomeCollectionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "makeDataSource()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1B565B95-A14A-4A6A-968C-6179447F6042"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Unknown/HomeCollectionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "makeDataSource()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

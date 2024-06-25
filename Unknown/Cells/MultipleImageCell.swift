@@ -16,6 +16,7 @@ final class MultipleImageCell: UICollectionViewCell {
         let title: String
         let isPreviewed: Bool
         let items: [Item]
+        let onSelect: Command
     }
     
     struct Item: HashItem {

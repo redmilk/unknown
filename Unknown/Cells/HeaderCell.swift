@@ -62,25 +62,6 @@ final class HeaderCell: ImageCell {
     }
     
     private func handleState(with viewModel: ViewModel) {
-        switch viewModel.state {
-        case .empty:
-            configureEmptyGalleryStateAB(viewModel)
-        case .title:
-            [descriptionLabel, playerView, generateButton, gradientImageView, imageView].forEach {
-                $0.removeFromSuperview()
-            }
-            titleLabel.snp.remakeConstraints { make in
-                make.leading.trailing.equalToSuperview().inset(32)
-                make.bottom.equalToSuperview()
-                make.top.equalToSuperview()
-            }
-        default: break
-        }
-    }
-
-    private func configureEmptyGalleryStateAB(
-        _ viewModel: ViewModel
-    ) {
         contentView.addSubview(generateButton)
         generateButton.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
@@ -94,7 +75,7 @@ final class HeaderCell: ImageCell {
         descriptionLabel.font = .systemFont(ofSize: 13)
         titleLabel.text = viewModel.config.title
         descriptionLabel.snp.remakeConstraints { make in
-            make.bottom.equalTo(generateButton.snp.top).offset(-40)
+            //make.bottom.equalTo(generateButton.snp.top).offset(-40)
             make.centerX.equalTo(generateButton.snp.centerX)
             make.height.equalTo(40)
         }

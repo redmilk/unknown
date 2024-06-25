@@ -26,17 +26,19 @@ final class HomeCollectionView: UICollectionView {
         
         enum Kind {
             case header(HeaderCell.ViewModel)
-            case userCollection(MultipleImageCell.ViewModel, onSelect: Command)
-            case style(ContentCell.ViewModel, onSelect: Command)
-            case themePack(ContentCell.ViewModel, onSelect: Command)
+            case horizontalCollection(MultipleImageCell.ViewModel)
+            case verticalDouble(ContentCell.ViewModel)
+            case horizontal(ContentCell.ViewModel)
+            case classicQuiz(ClassicQuizCell.ViewModel)
         }
     }
     
     enum Section: Hashable, CaseIterable {
         case header
-        case userCollections
-        case styles
-        case themePacks
+        case horizontalCollections
+        case verticalDouble
+        case horizontal
+        case classicQuiz
     }
     
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
@@ -54,6 +56,7 @@ final class HomeCollectionView: UICollectionView {
         registerCell(HorizontalScrollCell.self)
         registerCell(MultipleImageCell.self)
         registerCell(ContentCell.self)
+        registerCell(ClassicQuizCell.self)
 
         registerSupplementary(SectionHeaderView.self)
         registerSupplementary(HeaderView.self)
@@ -95,16 +98,20 @@ extension HomeCollectionView {
                     let cell = collectionView.dequeueCell(ofType: HeaderCell.self, for: indexPath)
                     cell.update(with: header)
                     return cell
-                case let .userCollection(vm, _):
+                case let .horizontalCollection(vm):
                     let cell = collectionView.dequeueCell(ofType: MultipleImageCell.self, for: indexPath)
                     cell.update(with: vm)
                     return cell
-                case let .style(vm, _):
+                case let .verticalDouble(vm):
                     let cell = collectionView.dequeueCell(ofType: ContentCell.self, for: indexPath)
                     cell.update(with: vm)
                     return cell
-                case let .themePack(vm, _):
+                case let .horizontal(vm):
                     let cell = collectionView.dequeueCell(ofType: ContentCell.self, for: indexPath)
+                    cell.update(with: vm)
+                    return cell
+                case let .classicQuiz(vm):
+                    let cell = collectionView.dequeueCell(ofType: ClassicQuizCell.self, for: indexPath)
                     cell.update(with: vm)
                     return cell
                 }
@@ -137,12 +144,14 @@ extension HomeCollectionView {
 extension HomeCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch diffable.itemIdentifier(for: indexPath)?.kind {
-        case let .style(_, onSelect):
-            onSelect.perform()
-        case let .themePack(_, onSelect):
-            onSelect.perform()
-        case let .userCollection(_, onSelect):
-            onSelect.perform()
+        case let .verticalDouble(vm):
+            vm.onSelect.perform()
+        case let .horizontal(vm):
+            break//vm.perform()
+        case let .horizontalCollection(vm):
+            break//vm.perform()
+        case let .classicQuiz(vm):
+            break
         default:
             break
         }
@@ -175,12 +184,14 @@ private extension HomeCollectionView {
         switch section {
         case .header:
             return descriptionSection()
-        case .themePacks:
+        case .horizontal:
             return themePacksSection()
-        case .userCollections:
+        case .horizontalCollections:
             return userCollectionsSection()
-        case .styles:
-            return productsSection()
+        case .verticalDouble:
+            return verticalDoubleSection()
+        case .classicQuiz:
+            return verticalSingleSection()
         }
     }
     
@@ -267,10 +278,47 @@ private extension HomeCollectionView {
         return section
     }
     
-    func productsSection() -> NSCollectionLayoutSection {
+    func verticalDoubleSection() -> NSCollectionLayoutSection {
         let itemsInRow: Int = 2
         let widthDimension = NSCollectionLayoutDimension.fractionalWidth(1 / CGFloat(itemsInRow))
         let heightDimension = NSCollectionLayoutDimension.fractionalWidth(1 / CGFloat(itemsInRow) * 1.33)
+
+        // Item
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: widthDimension,
+            heightDimension: heightDimension
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        // Group
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: heightDimension
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: itemsInRow)
+        group.interItemSpacing = .fixed(12)
+        
+        // Section
+        let section = NSCollectionLayoutSection(group: group)
+        let inset = Constants.sectionInset
+        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: inset, bottom: 8, trailing: inset)
+
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: .make(height: Constants.headerHeight),
+            elementKind: HeaderView.reuseIdentifier,
+            alignment: .top
+        )
+        header.pinToVisibleBounds = true
+        header.zIndex = Int.max
+        section.boundarySupplementaryItems = [header]
+
+        return section
+    }
+    
+    func verticalSingleSection() -> NSCollectionLayoutSection {
+        let itemsInRow: Int = 1
+        let widthDimension = NSCollectionLayoutDimension.fractionalWidth(1 / CGFloat(itemsInRow))
+        let heightDimension = NSCollectionLayoutDimension.estimated(150)
 
         // Item
         let itemSize = NSCollectionLayoutSize(
