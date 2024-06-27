@@ -18,6 +18,15 @@ final class HomeCollectionView: UICollectionView {
         let blocks: [Block]
         let onSeeAll: Command
         let onScrolledToIndex: CommandWith<Int>
+        
+        static let initial = ViewModel(
+            blocks: [
+                HomeCollectionView.ViewModel.Block(section: .header, items: [
+                    HomeCollectionView.Item(hash: UUID().hashValue, kind: .header(HeaderCell.ViewModel(state: .loading, title: "Приложение Смайлики", subtitle: "subtitle", buttonTitle: "Generate", contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, isVideo: false, onGenerate: .nop)))])
+            ],
+            onSeeAll: .nop,
+            onScrolledToIndex: .nop
+        )
     }
     
     struct Item: HashItem {
@@ -45,7 +54,7 @@ final class HomeCollectionView: UICollectionView {
     private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
     
     private lazy var diffable: DataSource = makeDataSource()
-    private var viewModel: ViewModel = .initial
+    private var viewModel: ViewModel = ViewModel.initial
     
     private lazy var invalidateLayoutOnce: Void = collectionViewLayout.invalidateLayout()
     
@@ -121,6 +130,10 @@ extension HomeCollectionView {
             switch kind {
             case HeaderView.reuseIdentifier:
                 let header = collectionView.dequeueSupplementary(ofType: HeaderView.self, for: indexPath)
+                switch indexPath.section {
+                case 1: header.update(with: .init(title: "Приложение Смайлики", subtitle: "Цуперское приложение"))
+                case _: break
+                }
                 return header
             default:
                 return nil
@@ -332,7 +345,8 @@ private extension HomeCollectionView {
             widthDimension: .fractionalWidth(1),
             heightDimension: heightDimension
         )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: itemsInRow)
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         // Section
         let section = NSCollectionLayoutSection(group: group)
@@ -347,7 +361,7 @@ private extension HomeCollectionView {
         )
         header.pinToVisibleBounds = true
         header.zIndex = Int.max
-        section.boundarySupplementaryItems = [header]
+        //section.boundarySupplementaryItems = [header]
 
         return section
     }
@@ -360,17 +374,5 @@ private extension HomeCollectionView {
         static let generatingHeaderHeight: CGFloat = UIScreen.main.bounds.height * 0.25
         static let generatingFooterHeight: CGFloat = 60
         static let generatingProcessHeight: CGFloat = 60
-    }
-}
-
-// MARK: - Factory
-
-private extension HomeCollectionView.ViewModel {
-    static var initial: HomeCollectionView.ViewModel {
-        HomeCollectionView.ViewModel(
-            blocks: [],
-            onSeeAll: .nop,
-            onScrolledToIndex: .nop
-        )
     }
 }

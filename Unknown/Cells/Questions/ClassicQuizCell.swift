@@ -25,6 +25,12 @@ final class ClassicQuizCell: UICollectionViewCell {
         let correctAnswer: String
         let answerExplanation: String
         let image: URL?
+        let onAnswerPressed: CommandWith<String>
+        
+        static let initial: ViewModel = .init(
+            state: .default, question: "", asnwers: [], category: "",
+            correctAnswer: "", answerExplanation: "", image: nil, onAnswerPressed: .nop
+        )
     }
     
     private let containerStack = UIStackView()
@@ -33,6 +39,7 @@ final class ClassicQuizCell: UICollectionViewCell {
     private let categoryLabel = UILabel()
     private let explanationLabel = UILabel()
     private let answersStack = UIStackView()
+    private var viewModel: ViewModel = .initial
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,7 +52,9 @@ final class ClassicQuizCell: UICollectionViewCell {
     }
     
     func update(with model: ViewModel) {
-        buildAnswerViews(answers: model.asnwers)
+        print(model.state)
+        self.viewModel = model
+        buildAnswerViews(correct: model.correctAnswer, answers: model.asnwers)
         questionLabel.text = model.question
         categoryLabel.text = model.category
         explanationLabel.text = model.answerExplanation
@@ -87,8 +96,8 @@ final class ClassicQuizCell: UICollectionViewCell {
         ])
     }
     
-    private func buildAnswerViews(answers: [String]) {
-        guard answersStack.arrangedSubviews.isEmpty else { return }
+    private func buildAnswerViews(correct: String, answers: [String]) {
+        answersStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         var pair = [String]()
         answers.forEach { answer in
             pair.append(answer)
@@ -102,11 +111,26 @@ final class ClassicQuizCell: UICollectionViewCell {
                 button.backgroundColor = .blueDark
                 button.titleLabel?.numberOfLines = 0
                 button.setTitle($0, for: .normal)
+                button.titleLabel?.font = .systemFont(ofSize: 15)
+                button.addTarget(self, action: #selector(onAnswerTap(_:)), for: .touchUpInside)
+                if viewModel.state == .correctAnswer {
+                    button.layer.borderWidth = 2
+                    button.layer.borderColor = UIColor.green.cgColor
+                } else if viewModel.state == .wrongAnswer {
+                    button.layer.borderWidth = 2
+                    button.layer.borderColor = UIColor.red.cgColor
+                }
                 stack.addArrangedSubview(button)
             }
             answersStack.addArrangedSubview(stack)
             pair.removeAll()
         }
+    }
+    
+    @objc 
+    private func onAnswerTap(_ sender: UIButton) {
+        guard let text = sender.titleLabel?.text else { return }
+        viewModel.onAnswerPressed.perform(with: text)
     }
     
     private func determineAnswersCountInLine(_ answers: [String]) -> Int {

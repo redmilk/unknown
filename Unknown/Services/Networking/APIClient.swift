@@ -8,6 +8,50 @@
 import Foundation
 import Alamofire
 
+let video = URL(string: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4")!
+
+enum Prompts {
+    static func getClassicQuiz(category: String, answersCount: String, difficulty: String = "") -> String {
+        let quiz = """
+        Generate a JSON object containing 10 unique questions for a quiz game in the category \(category). Each question should have \(answersCount) answers and the only one must be correct while others are wrong. The JSON should have the following structure:
+
+        - Root object with properties:
+          1. `category` (string): the name of the category.
+          2. `questions` (array): an array of question objects.
+
+        Each question object should have the following properties:
+          - `question` (string): the text of the question.
+          - `answers` (array of strings): \(answersCount) possible answers.
+          - `correctAnswer` (string): the correct answer.
+          - `answerExplanation` (string): well detailed explanation of the correct answer and some curious facts.
+
+        Example JSON structure:
+
+        ```json
+        {
+          "category": "Science",
+          "questions": [
+            {
+              "question": "What is the chemical symbol for water?",
+              "answers": ["H2O", "O2", "CO2", "H2SO4", "NaCl", "C6H12O6"],
+              "correctAnswer": "H2O",
+              "answerExplanation": "Water is composed of two hydrogen atoms and one oxygen atom, hence its chemical symbol is H2O."
+            },
+            {
+              "question": "Which planet is known as the Red Planet?",
+              "answers": ["Earth", "Venus", "Mars", "Jupiter", "Saturn", "Neptune"],
+              "correctAnswer": "Mars",
+              "answerExplanation": "Mars is known as the Red Planet due to its reddish appearance, which is caused by iron oxide on its surface."
+            }
+            // Add 8 more questions in a similar format
+          ]
+        }
+
+        """
+        return quiz
+    }
+}
+
 protocol APIClient {
     
 }
@@ -17,7 +61,7 @@ final class APIClientImpl: APIClient {
     static let shared = APIClientImpl()
     private init() { }
     
-    func sendMessage(messages: [Message], completion: @escaping (ClassicQuizDTO?) -> Void) {
+    func sendMessage(messages: [Message], completion: @escaping ([ClassicQuizModel]?) -> Void) {
 
         let url = "https://api.openai.com/v1/chat/completions"
         let openAIMessages = messages.map { OpenAIChatMessage(role: $0.role, content: $0.content) }
@@ -26,7 +70,7 @@ final class APIClientImpl: APIClient {
             messages: openAIMessages,
             response_format: .init(type: "json_object"))
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer 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",
+            "Authorization": "Bearer \(ProcessInfo.processInfo.environment["GPT_API_KEY"]!)",
             "Content-Type": "application/json"
         ]
         
@@ -38,10 +82,12 @@ final class APIClientImpl: APIClient {
                     let jsonString = response.choices.first?.message.content ?? ""
                     if let jsonData = jsonString.data(using: .utf8) {
                         do {
-                            let decoder = JSONDecoder()
-                            let quizQuestion = try decoder.decode(ClassicQuizDTO.self, from: jsonData)
-                            print(quizQuestion)
-                            completion(quizQuestion)
+                            let container = try JSONDecoder().decode(ClassicQuizDTO.self, from: jsonData)
+                            print(jsonString)
+                            let models = container.questions.map {
+                                ClassicQuizModel(dto: $0, category: container.category, answerState: .default)
+                            }
+                            completion(models)
                         } catch let DecodingError.dataCorrupted(context) {
                             print(context)
                         } catch let DecodingError.keyNotFound(key, context) {

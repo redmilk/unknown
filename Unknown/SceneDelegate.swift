@@ -20,9 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         let presenter = HomePresenter()
         let controller = HomeViewController(presenter: presenter)
+        let navigation = UINavigationController(rootViewController: controller)
+        navigation.setNavigationBarHidden(true, animated: false)
         presenter.view = controller
 
-        window?.rootViewController = controller
+        window?.rootViewController = navigation
         window?.makeKeyAndVisible()
     }
 

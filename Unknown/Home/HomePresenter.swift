@@ -5,61 +5,56 @@
 //  Created by Danyl Timofeyev on 03.02.2024.
 //
 
-let video = URL(string: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4")!
-enum Prompts {
-    static let quiz = """
-    Provide 10 unique questions in single JSON, about Swift programming language for a quiz game with six possible answers of this question.
-    
-    Root object with properties:
-            1. category name
-            2. array with question objects with properties like: question, array of answers, right answer string, answer explanation string
-    
-    JSON example:
-    
-    struct Root {
-        let category: String
-        let questions: [QuestionModel]
-    }
-
-        struct QuestionModel: Codable {
-            let question: String
-            let answers: [String]
-            let correctAnswer: String
-            let answerExplanation: String
-        }
-    """
-}
-
 import Foundation
 
 final class HomePresenter: Presenter {
     
     var view: HomeViewControllerIn?
     
+    private var viewModel = HomeViewController.ViewModel(state: .loading, collectionViewModel: .initial)
+    private var classicQuizList: [ClassicQuizModel] = []
+    
     init() {
     }
     
     func viewDidLoad() {
-//        let message = Message(id: UUID(), role: .user, content: Prompts.quiz, createdAt: Date())
-//        APIClientImpl.shared.sendMessage(messages: [message], completion: { [weak self] classicQuiz in
-//            guard let classicQuiz, let self else {
-//                return print("⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️")
-//            }
-//            print("✅✅✅✅✅✅✅✅✅ Questions: \(classicQuiz.questions.count)")
-//            
-//            let collectionModel = self.makeViewModel(classicQuiz: classicQuiz)
-//            self.view?.update(with: .init(collectionViewModel: collectionModel))
-//        })
-        
-        let collectionModel = self.makeViewModel(classicQuiz: HomeUtils.quiz)
-        self.view?.update(with: .init(collectionViewModel: collectionModel))
+        self.view?.update(with: .init(state: .loading, collectionViewModel: .initial))
+        let message = Message(id: UUID(), role: .user, content: Prompts.getClassicQuiz(category: "Deep space", answersCount: "8"), createdAt: Date())
+        APIClientImpl.shared.sendMessage(messages: [message], completion: { [weak self] questions in
+            guard let questions, let self else {
+                return print("⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️")
+            }
+            print("✅✅✅✅✅✅✅✅✅ Questions: \(questions.count)")
+            
+            self.classicQuizList.append(contentsOf: questions)
+            self.viewModel = self.makeViewModel(classicQuizList: questions)
+            self.view?.update(with: viewModel)
+        })
+        /// TEST
+//        let collectionModel = self.makeViewModel(classicQuiz: HomeUtils.quiz)
+//        self.view?.update(with: .init(collectionViewModel: collectionModel))
     }
     
-    func makeViewModel(classicQuiz: ClassicQuizDTO) -> HomeCollectionView.ViewModel {
+    func onGenerateClassicPack(category: String) {
+        let message = Message(id: UUID(), role: .user, content: Prompts.getClassicQuiz(category: category, answersCount: "8"), createdAt: Date())
+        APIClientImpl.shared.sendMessage(messages: [message], completion: { [weak self] questions in
+            guard let questions, let self else {
+                return print("⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️")
+            }
+            print("✅✅✅✅✅✅✅✅✅ Questions: \(questions.count)")
+            
+            self.classicQuizList.append(contentsOf: questions)
+            self.viewModel = self.makeViewModel(classicQuizList: questions)
+            self.view?.update(with: viewModel)
+        })
+    }
+    
+    private func makeViewModel(classicQuizList: [ClassicQuizModel]) -> HomeViewController.ViewModel {
         
         // MARK: - Block 0 - Header
-        let headerConfig = HeaderConfig(title: "Test Title", subtitle: "Test Subtitle", buttonTitle: "Test button", buttonLink: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, headerContentLink: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, isVideoHeader: false)
-        let headerItem1 = HeaderCell.ViewModel(state: .empty, config: headerConfig, onGenerate: nil, hasCollections: false)
+        let headerItem1 = HeaderCell.ViewModel(state: .loaded, title: "Приложение Смайлики", subtitle: "subtitle", buttonTitle: "Generate", contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, isVideo: false, onGenerate: CommandWith(action: { [weak self] category in
+            self?.onGenerateClassicPack(category: category)
+        }))
         let header = HomeCollectionView.ViewModel.Block(section: .header, items: [
             HomeCollectionView.Item(hash: UUID().hashValue, kind: .header(headerItem1))
         ])
@@ -110,15 +105,23 @@ final class HomePresenter: Presenter {
         ])
         
         // MARK: - Block 4 - Classic Quiz
-        let block4Items = classicQuiz.questions.map {
+        let block4Items = classicQuizList.enumerated().map { pair in
             let model = ClassicQuizCell.ViewModel(
                 state: .default,
-                question: $0.question,
-                asnwers: $0.answers, 
-                category: classicQuiz.category,
-                correctAnswer: $0.correctAnswer, 
-                answerExplanation: $0.answerExplanation,
-                image: nil
+                question: pair.element.question,
+                asnwers: pair.element.answers,
+                category: pair.element.category,
+                correctAnswer: pair.element.correctAnswer,
+                answerExplanation: pair.element.answerExplanation,
+                image: nil,
+                onAnswerPressed: CommandWith(action: { [weak self] answer in
+                    guard let self else { return }
+                    let quizModel = self.classicQuizList.first(where: { $0.id == pair.element.id })
+                    let isCorrectAnswer = answer == pair.element.correctAnswer
+                    quizModel?.answerState = AnswerState(isCorrect: isCorrectAnswer)
+                    self.viewModel = self.makeViewModel(classicQuizList: classicQuizList)
+                    self.view?.update(with: self.viewModel)
+                })
             )
             return HomeCollectionView.Item(hash: UUID().hashValue, kind: .classicQuiz(model))
         }
@@ -126,12 +129,22 @@ final class HomePresenter: Presenter {
         let block4 = HomeCollectionView.ViewModel.Block(section: .classicQuiz, items: block4Items)
         
         // MARK: - Result
-        let viewModel = HomeCollectionView.ViewModel(
+        let collectionModel = HomeCollectionView.ViewModel(
             blocks: [header, block4, block3, block2, block1],
             onSeeAll: .nop,
             onScrolledToIndex: .nop
         )
         
+        let viewModel = HomeViewController.ViewModel(state: .loaded, collectionViewModel: collectionModel)
+
         return viewModel
+    }
+    
+    private func onClassicQuizAnswerTap(_ answer: String, correctAnswer: String) {
+        guard answer == correctAnswer else {
+            return
+        }
+        
+        
     }
 }

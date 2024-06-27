@@ -9,6 +9,11 @@ import UIKit
 
 final class HeaderView: NoNibCollectionReusableView {
     
+    struct ViewModel {
+        let title: String
+        let subtitle: String
+    }
+    
     private let headerLabel = UILabel()
     private let titleLabel = UILabel()
 
@@ -18,6 +23,12 @@ final class HeaderView: NoNibCollectionReusableView {
         super.init(frame: frame)
         configureUI()
         configureLayout()
+    }
+    
+    func update(with model: ViewModel) {
+        headerLabel.text = model.title
+        titleLabel.text = model.subtitle
+        
     }
 }
 
@@ -30,8 +41,6 @@ extension HeaderView {
         headerLabel.textColor = .lightGray
         headerLabel.font = UIFont.sfProDisplayMedium(ofSize: 13)
         backgroundColor = .black
-        headerLabel.text = "Section header"
-        titleLabel.text = "Title of section"
     }
     
     private func configureLayout() {

@@ -59,8 +59,14 @@
 		792C01472C28B891003EA585 /* ClassicQuizCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C01462C28B891003EA585 /* ClassicQuizCell.swift */; };
 		79383C522C2ADC7300F1E3CB /* ModelsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79383C512C2ADC7300F1E3CB /* ModelsDTO.swift */; };
 		79383C552C2AF7B900F1E3CB /* HomeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79383C542C2AF7B900F1E3CB /* HomeUtils.swift */; };
+		79383C592C2B0B8900F1E3CB /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79383C582C2B0B8900F1E3CB /* UIApplication+Extension.swift */; };
+		796679052C2B62260079416C /* LoaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796679042C2B62260079416C /* LoaderButton.swift */; };
+		796679082C2B667C0079416C /* CirclesActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796679072C2B667C0079416C /* CirclesActivityIndicator.swift */; };
 		7969D90C2B895C2800A67963 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7969D90B2B895C2800A67963 /* BaseViewController.swift */; };
 		7969D90E2B895C6800A67963 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7969D90D2B895C6800A67963 /* Presenter.swift */; };
+		79785ECE2C2CB05400D4A1C6 /* AnswerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79785ECD2C2CB05400D4A1C6 /* AnswerService.swift */; };
+		79785ED12C2CB14600D4A1C6 /* ClassicQuizModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79785ED02C2CB14600D4A1C6 /* ClassicQuizModel.swift */; };
+		79785ED32C2CBB7800D4A1C6 /* AnswerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79785ED22C2CBB7800D4A1C6 /* AnswerState.swift */; };
 		799F7A432B6E66180080D304 /* reface-assets.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 799F7A402B6E66180080D304 /* reface-assets.stencil */; };
 		799F7A442B6E66180080D304 /* reface-colors.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 799F7A412B6E66180080D304 /* reface-colors.stencil */; };
 		799F7A452B6E66180080D304 /* reface-strings.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 799F7A422B6E66180080D304 /* reface-strings.stencil */; };
@@ -76,9 +82,6 @@
 		79BB61BC2C2759A2004084C2 /* MultipleImagePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB61BB2C2759A2004084C2 /* MultipleImagePreviewCell.swift */; };
 		79EB692C2C0A8386008C055D /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB692B2C0A8386008C055D /* APIRequest.swift */; };
 		79EB692E2C0A83CF008C055D /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB692D2C0A83CF008C055D /* APIError.swift */; };
-		79EB69312C0A9D82008C055D /* ChatGPT in Frameworks */ = {isa = PBXBuildFile; productRef = 79EB69302C0A9D82008C055D /* ChatGPT */; };
-		79EB69332C0A9D82008C055D /* GPT in Frameworks */ = {isa = PBXBuildFile; productRef = 79EB69322C0A9D82008C055D /* GPT */; };
-		79EB69352C0A9D82008C055D /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 79EB69342C0A9D82008C055D /* OpenAI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,8 +135,14 @@
 		792C01462C28B891003EA585 /* ClassicQuizCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicQuizCell.swift; sourceTree = "<group>"; };
 		79383C512C2ADC7300F1E3CB /* ModelsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsDTO.swift; sourceTree = "<group>"; };
 		79383C542C2AF7B900F1E3CB /* HomeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUtils.swift; sourceTree = "<group>"; };
+		79383C582C2B0B8900F1E3CB /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		796679042C2B62260079416C /* LoaderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderButton.swift; sourceTree = "<group>"; };
+		796679072C2B667C0079416C /* CirclesActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesActivityIndicator.swift; sourceTree = "<group>"; };
 		7969D90B2B895C2800A67963 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7969D90D2B895C6800A67963 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		79785ECD2C2CB05400D4A1C6 /* AnswerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerService.swift; sourceTree = "<group>"; };
+		79785ED02C2CB14600D4A1C6 /* ClassicQuizModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicQuizModel.swift; sourceTree = "<group>"; };
+		79785ED22C2CBB7800D4A1C6 /* AnswerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerState.swift; sourceTree = "<group>"; };
 		799F7A402B6E66180080D304 /* reface-assets.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "reface-assets.stencil"; sourceTree = "<group>"; };
 		799F7A412B6E66180080D304 /* reface-colors.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "reface-colors.stencil"; sourceTree = "<group>"; };
 		799F7A422B6E66180080D304 /* reface-strings.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "reface-strings.stencil"; sourceTree = "<group>"; };
@@ -157,15 +166,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7909A7A32B53501400417C60 /* SnapKit in Frameworks */,
-				79EB69352C0A9D82008C055D /* OpenAI in Frameworks */,
 				79A22EC42BFFE32500FF13A0 /* Alamofire in Frameworks */,
 				7909A7A02B534EF200417C60 /* SDWebImageMapKit in Frameworks */,
-				79EB69312C0A9D82008C055D /* ChatGPT in Frameworks */,
 				7909A79E2B534EF200417C60 /* SDWebImage in Frameworks */,
 				7909A7A52B53501400417C60 /* SnapKit-Dynamic in Frameworks */,
 				79A22EC62BFFE32500FF13A0 /* AlamofireDynamic in Frameworks */,
 				799F7A4F2B6E66A20080D304 /* SnapKit in Frameworks */,
-				79EB69332C0A9D82008C055D /* GPT in Frameworks */,
 				799F7A512B6E66A20080D304 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,6 +198,7 @@
 		7909A7752B53431E00417C60 /* Unknown */ = {
 			isa = PBXGroup;
 			children = (
+				796679022C2B62100079416C /* Common */,
 				79A22EC72BFFE35000FF13A0 /* Services */,
 				7969D90F2B895C7300A67963 /* MVP */,
 				799F7A622B6E69690080D304 /* Home */,
@@ -276,6 +283,7 @@
 				7909A7F52B536B2B00417C60 /* CompositionalLayout+Extension.swift */,
 				7909A7F72B536BEC00417C60 /* UIStackView+Extensions.swift */,
 				7909A7F92B536C5F00417C60 /* Collection+Extension.swift */,
+				79383C582C2B0B8900F1E3CB /* UIApplication+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -333,6 +341,32 @@
 			path = ModelsDTO;
 			sourceTree = "<group>";
 		};
+		796679022C2B62100079416C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				79785ECF2C2CB0F100D4A1C6 /* Models */,
+				796679032C2B62160079416C /* Views */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		796679032C2B62160079416C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				796679062C2B66680079416C /* Loader */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		796679062C2B66680079416C /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				796679042C2B62260079416C /* LoaderButton.swift */,
+				796679072C2B667C0079416C /* CirclesActivityIndicator.swift */,
+			);
+			path = Loader;
+			sourceTree = "<group>";
+		};
 		7969D90F2B895C7300A67963 /* MVP */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,6 +374,15 @@
 				7969D90D2B895C6800A67963 /* Presenter.swift */,
 			);
 			path = MVP;
+			sourceTree = "<group>";
+		};
+		79785ECF2C2CB0F100D4A1C6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				79785ED02C2CB14600D4A1C6 /* ClassicQuizModel.swift */,
+				79785ED22C2CBB7800D4A1C6 /* AnswerState.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		799F7A622B6E69690080D304 /* Home */ = {
@@ -356,6 +399,7 @@
 			isa = PBXGroup;
 			children = (
 				79A22EC82BFFE36000FF13A0 /* Networking */,
+				79785ECD2C2CB05400D4A1C6 /* AnswerService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -399,9 +443,6 @@
 				799F7A502B6E66A20080D304 /* SnapKit-Dynamic */,
 				79A22EC32BFFE32500FF13A0 /* Alamofire */,
 				79A22EC52BFFE32500FF13A0 /* AlamofireDynamic */,
-				79EB69302C0A9D82008C055D /* ChatGPT */,
-				79EB69322C0A9D82008C055D /* GPT */,
-				79EB69342C0A9D82008C055D /* OpenAI */,
 			);
 			productName = Unknown;
 			productReference = 7909A7732B53431E00417C60 /* Unknown.app */;
@@ -435,7 +476,6 @@
 				7909A79C2B534EF200417C60 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				7909A7A12B53501400417C60 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				79A22EC22BFFE32500FF13A0 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				79EB692F2C0A9D82008C055D /* XCRemoteSwiftPackageReference "GPTSwift" */,
 			);
 			productRefGroup = 7909A7742B53431E00417C60 /* Products */;
 			projectDirPath = "";
@@ -477,6 +517,7 @@
 				7909A7DD2B53600E00417C60 /* UICollectionView+Extension.swift in Sources */,
 				7909A7B42B53593000417C60 /* GradientView.swift in Sources */,
 				7909A7E62B5363C300417C60 /* LimitedArray.swift in Sources */,
+				79785ED32C2CBB7800D4A1C6 /* AnswerState.swift in Sources */,
 				7909A7EC2B53652D00417C60 /* Publisher+Extension.swift in Sources */,
 				79383C552C2AF7B900F1E3CB /* HomeUtils.swift in Sources */,
 				79383C522C2ADC7300F1E3CB /* ModelsDTO.swift in Sources */,
@@ -490,6 +531,7 @@
 				7909A7DF2B5361C000417C60 /* SectionHeaderView.swift in Sources */,
 				7909A7B22B5358D300417C60 /* ContentCell.swift in Sources */,
 				7909A7FA2B536C5F00417C60 /* Collection+Extension.swift in Sources */,
+				79785ED12C2CB14600D4A1C6 /* ClassicQuizModel.swift in Sources */,
 				7909A7772B53431E00417C60 /* AppDelegate.swift in Sources */,
 				7909A7F82B536BEC00417C60 /* UIStackView+Extensions.swift in Sources */,
 				79A22ED22BFFEF4700FF13A0 /* JSONDecoding.swift in Sources */,
@@ -497,6 +539,7 @@
 				79A22ECA2BFFE8E800FF13A0 /* RequestBuilder.swift in Sources */,
 				7909A7F62B536B2B00417C60 /* CompositionalLayout+Extension.swift in Sources */,
 				79A22ED02BFFE9A400FF13A0 /* Networking.swift in Sources */,
+				796679082C2B667C0079416C /* CirclesActivityIndicator.swift in Sources */,
 				7909A7EA2B53649C00417C60 /* Atomic.swift in Sources */,
 				799F7A642B6E69910080D304 /* HomePresenter.swift in Sources */,
 				7909A78D2B53444400417C60 /* Command.swift in Sources */,
@@ -508,6 +551,7 @@
 				7909A7AC2B53569900417C60 /* AudioSessionManager.swift in Sources */,
 				792C01472C28B891003EA585 /* ClassicQuizCell.swift in Sources */,
 				7909A78F2B53459800417C60 /* HashItem.swift in Sources */,
+				79785ECE2C2CB05400D4A1C6 /* AnswerService.swift in Sources */,
 				790AEB5B2B6E61DF004A1784 /* BackgroundDecorationView.swift in Sources */,
 				7909A7AA2B5355E400417C60 /* DisplayLink.swift in Sources */,
 				7909A7EE2B53657500417C60 /* Array+Extension.swift in Sources */,
@@ -518,9 +562,11 @@
 				79BB61BC2C2759A2004084C2 /* MultipleImagePreviewCell.swift in Sources */,
 				7909A78B2B53441900417C60 /* HomeCollectionView.swift in Sources */,
 				7909A7992B534E7800417C60 /* HeaderCell.swift in Sources */,
+				796679052C2B62260079416C /* LoaderButton.swift in Sources */,
 				7909A7E12B53620400417C60 /* NoNibCollectionReusableView.swift in Sources */,
 				7969D90E2B895C6800A67963 /* Presenter.swift in Sources */,
 				7909A7912B534C6E00417C60 /* LoopingVideoPlayerView.swift in Sources */,
+				79383C592C2B0B8900F1E3CB /* UIApplication+Extension.swift in Sources */,
 				7909A7F42B5369BB00417C60 /* UICollectionReusableView+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,18 +711,19 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4L62DMNVGJ;
+				DEVELOPMENT_TEAM = DSG2Y7UAZ6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Unknown/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kefirtest.Unknown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -692,18 +739,19 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4L62DMNVGJ;
+				DEVELOPMENT_TEAM = DSG2Y7UAZ6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Unknown/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kefirtest.Unknown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -756,16 +804,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.9.1;
-			};
-		};
-		79EB692F2C0A9D82008C055D /* XCRemoteSwiftPackageReference "GPTSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftedMind/GPTSwift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.1;
+				kind = exactVersion;
+				version = 5.9.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -810,21 +850,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 79A22EC22BFFE32500FF13A0 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = AlamofireDynamic;
-		};
-		79EB69302C0A9D82008C055D /* ChatGPT */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 79EB692F2C0A9D82008C055D /* XCRemoteSwiftPackageReference "GPTSwift" */;
-			productName = ChatGPT;
-		};
-		79EB69322C0A9D82008C055D /* GPT */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 79EB692F2C0A9D82008C055D /* XCRemoteSwiftPackageReference "GPTSwift" */;
-			productName = GPT;
-		};
-		79EB69342C0A9D82008C055D /* OpenAI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 79EB692F2C0A9D82008C055D /* XCRemoteSwiftPackageReference "GPTSwift" */;
-			productName = OpenAI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
