@@ -9,6 +9,13 @@ import UIKit.UIButton
 import SnapKit
 
 final class LoaderButton: UIButton {
+    private enum Constants {
+        static let height: CGFloat = 20
+        static let width: CGFloat = 40
+        static let loadindWidth: CGFloat = 20
+        static let title = "➕"
+    }
+    
     private var activityIndicator: UIView!
 
     override init(frame: CGRect) {
@@ -22,17 +29,30 @@ final class LoaderButton: UIButton {
     }
     
     private func configure() {
-        activityIndicator = CirclesActivityIndicatorFactory.make(height: 20)
+        layer.masksToBounds = true
+        translatesAutoresizingMaskIntoConstraints = false
+        setTitle(Constants.title, for: .normal)
+        titleLabel?.font = .systemFont(ofSize: 13, weight: .light)
+        activityIndicator = CirclesActivityIndicatorFactory.make(height: Constants.height)
         contentEdgeInsets = .init(top: 4, left: 8, bottom: 4, right: 8)
+        snp.makeConstraints { make in
+            make.height.equalTo(Constants.height)
+            make.width.equalTo(Constants.width)
+        }
     }
     
     func startLoading() {
+        addSubview(activityIndicator)
         setTitleColor(UIColor.clear, for: .normal)
         isUserInteractionEnabled = false
-        addSubview(activityIndicator)
+        layer.cornerRadius = Constants.height / 2
         activityIndicator.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
-            make.height.width.equalTo(20)
+            make.height.width.equalTo(Constants.height)
+        }
+        snp.remakeConstraints { make in
+            make.height.equalTo(Constants.height)
+            make.width.equalTo(Constants.loadindWidth)
         }
     }
     
@@ -40,5 +60,10 @@ final class LoaderButton: UIButton {
         activityIndicator.removeFromSuperview()
         setTitleColor(UIColor.white, for: .normal)
         isUserInteractionEnabled = true
+        layer.cornerRadius = Constants.height / 2
+        snp.remakeConstraints { make in
+            make.height.equalTo(Constants.height)
+            make.width.equalTo(Constants.width)
+        }
     }
 }

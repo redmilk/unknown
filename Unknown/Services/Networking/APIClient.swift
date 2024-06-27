@@ -13,7 +13,7 @@ let video = URL(string: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4")!
 enum Prompts {
     static func getClassicQuiz(category: String, answersCount: String, difficulty: String = "") -> String {
         let quiz = """
-        Generate a JSON object containing 10 unique questions for a quiz game in the category \(category). Each question should have \(answersCount) answers and the only one must be correct while others are wrong. The JSON should have the following structure:
+        Generate a JSON object containing 2 unique questions for a quiz game in the category \(category). Each question should have \(answersCount) answers and the only one must be correct while others are wrong. The JSON should have the following structure:
 
         - Root object with properties:
           1. `category` (string): the name of the category.

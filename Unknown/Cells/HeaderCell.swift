@@ -17,7 +17,7 @@ final class HeaderCell: ImageCell {
         let state: State
         let title: String
         let subtitle: String
-        let buttonTitle: String
+        let category: String
         let contentURL: URL
         let isVideo: Bool
         let onGenerate: CommandWith<String>?
@@ -25,11 +25,11 @@ final class HeaderCell: ImageCell {
     
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
-    private let textField = UITextField()
     private let gradientImageView = UIImageView()
     private let playerView = LoopingVideoPlayerView(isAlwaysMuted: true)
-    private let containerStack = UIStackView()    
+    private let containerStack = UIStackView()   
     private let generateButton = LoaderButton()
+    private let textField = InsetTextfield(textInsets: .init(top: 2, left: 4, bottom: 2, right: 4))
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,6 +52,7 @@ final class HeaderCell: ImageCell {
         case .loading: generateButton.startLoading()
         case .loaded: generateButton.stopLoading()
         }
+        textField.text = viewModel.category
         titleLabel.text = viewModel.title
         descriptionLabel.text = viewModel.subtitle
         playVideo(viewModel.isVideo, viewModel.contentURL)
@@ -65,24 +66,28 @@ final class HeaderCell: ImageCell {
         generateButton.onTouchUpInside = { [weak self] _ in
             viewModel.onGenerate?.perform(with: self?.textField.text ?? "")
             self?.generateButton.startLoading()
-            self?.textField.text = nil
+            self?.textField.resignFirstResponder()
         }
-        generateButton.setTitle(viewModel.buttonTitle, for: .normal)
         playVideo(viewModel.isVideo, viewModel.contentURL)
     }
     
     private func configureView() {
         containerStack.axis = .vertical
         containerStack.alignment = .center
-        containerStack.spacing = 4
-        textField.textColor = .black
-        textField.borderStyle = .line
+        containerStack.spacing = 2
+        textField.textColor = .white
+        textField.returnKeyType = .done
+        textField.borderStyle = .none
+        textField.backgroundColor = .halfBlack
+        textField.layer.cornerRadius = 8
+        textField.layer.masksToBounds = true
+        textField.font = .systemFont(ofSize: 13, weight: .light)
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
-        titleLabel.font = .systemFont(ofSize: 13)
+        titleLabel.font = .systemFont(ofSize: 20, weight: .black)
         descriptionLabel.textColor = .white
         descriptionLabel.textAlignment = .center
-        descriptionLabel.font = .systemFont(ofSize: 13)
+        descriptionLabel.font = .systemFont(ofSize: 15, weight: .bold)
         descriptionLabel.numberOfLines = 0
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -95,19 +100,21 @@ final class HeaderCell: ImageCell {
     }
     
     private func configureLayout() {
-        contentView.addSubview(playerView)
-        contentView.addSubview(imageView)
-        contentView.addSubview(gradientImageView)
-        contentView.addSubview(containerStack)
+        contentView.addSubviews([
+            playerView,
+            imageView,
+            gradientImageView,
+            containerStack
+        ])
         containerStack.addArrangedSubviews([
             titleLabel,
             descriptionLabel,
             textField,
             generateButton
         ])
-        
         containerStack.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().multipliedBy(1.2)
         }
         imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -118,20 +125,6 @@ final class HeaderCell: ImageCell {
         }
         playerView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-        }
-        descriptionLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(32)
-            make.bottom.equalToSuperview().inset(18)
-        }
-        titleLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(32)
-            make.bottom.equalTo(descriptionLabel.snp.topMargin).offset(-12)
-        }
-        generateButton.snp.makeConstraints { make in
-            make.height.equalTo(25)
-        }
-        textField.snp.makeConstraints { make in
-            make.width.equalToSuperview().multipliedBy(0.8)
         }
     }
     

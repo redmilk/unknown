@@ -22,7 +22,7 @@ final class HomeCollectionView: UICollectionView {
         static let initial = ViewModel(
             blocks: [
                 HomeCollectionView.ViewModel.Block(section: .header, items: [
-                    HomeCollectionView.Item(hash: UUID().hashValue, kind: .header(HeaderCell.ViewModel(state: .loading, title: "Приложение Смайлики", subtitle: "subtitle", buttonTitle: "Generate", contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, isVideo: false, onGenerate: .nop)))])
+                    HomeCollectionView.Item(hash: UUID().hashValue, kind: .header(HeaderCell.ViewModel(state: .loaded, title: "GPT API", subtitle: "Classic Quiz Generator", category: AppConstants.initialCategory, contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, isVideo: false, onGenerate: .nop)))])
             ],
             onSeeAll: .nop,
             onScrolledToIndex: .nop
@@ -258,7 +258,7 @@ private extension HomeCollectionView {
     }
     
     func getMainHeaderHeight() -> CGFloat {
-        UIScreen.main.bounds.width * 3 / 4
+        UIScreen.main.bounds.width * 2 / 4
     }
 
     func userCollectionsSection() -> NSCollectionLayoutSection {

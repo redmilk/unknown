@@ -11,37 +11,26 @@ final class HomePresenter: Presenter {
     
     var view: HomeViewControllerIn?
     
-    private var viewModel = HomeViewController.ViewModel(state: .loading, collectionViewModel: .initial)
+    private var viewModel: HomeViewController.ViewModel = .initial
     private var classicQuizList: [ClassicQuizModel] = []
+    private var classicQuizCategory: String = AppConstants.initialCategory
     
     init() {
     }
     
     func viewDidLoad() {
-        self.view?.update(with: .init(state: .loading, collectionViewModel: .initial))
-        let message = Message(id: UUID(), role: .user, content: Prompts.getClassicQuiz(category: "Deep space", answersCount: "8"), createdAt: Date())
-        APIClientImpl.shared.sendMessage(messages: [message], completion: { [weak self] questions in
-            guard let questions, let self else {
-                return print("⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️")
-            }
-            print("✅✅✅✅✅✅✅✅✅ Questions: \(questions.count)")
-            
-            self.classicQuizList.append(contentsOf: questions)
-            self.viewModel = self.makeViewModel()
-            self.view?.update(with: viewModel)
-        })
-        /// TEST
+        viewModel = makeInitialViewModel()
+        view?.update(with: viewModel)
+//        /// TEST
 //        let collectionModel = self.makeViewModel(classicQuiz: HomeUtils.quiz)
 //        self.view?.update(with: .init(collectionViewModel: collectionModel))
     }
     
     func onGenerateClassicPack(category: String) {
-        let message = Message(id: UUID(), role: .user, content: Prompts.getClassicQuiz(category: category, answersCount: "8"), createdAt: Date())
+        let message = Message(id: UUID(), role: .user, content: Prompts.getClassicQuiz(category: category, answersCount: "4"), createdAt: Date())
         APIClientImpl.shared.sendMessage(messages: [message], completion: { [weak self] questions in
-            guard let questions, let self else {
-                return print("⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️")
-            }
-            print("✅✅✅✅✅✅✅✅✅ Questions: \(questions.count)")
+            guard let questions, let self else { return  }
+            print("✅ Questions: \(questions.count)")
             
             self.classicQuizList.insert(contentsOf: questions, at: 0)
             self.viewModel = self.makeViewModel()
@@ -49,10 +38,29 @@ final class HomePresenter: Presenter {
         })
     }
     
+    private func makeInitialViewModel() -> HomeViewController.ViewModel {
+        let headerItem1 = HeaderCell.ViewModel(state: .loaded, title: "GPT API", subtitle: "Classic Quiz Generator", category: AppConstants.initialCategory, contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, isVideo: false, onGenerate: CommandWith(action: { [weak self] category in
+            self?.onGenerateClassicPack(category: category)
+            self?.classicQuizCategory = category
+        }))
+        let header = HomeCollectionView.ViewModel.Block(section: .header, items: [
+            HomeCollectionView.Item(hash: UUID().hashValue, kind: .header(headerItem1))
+        ])
+        let collectionModel = HomeCollectionView.ViewModel(
+            blocks: [header],
+            onSeeAll: .nop,
+            onScrolledToIndex: .nop
+        )
+        
+        let viewModel = HomeViewController.ViewModel(state: .loaded, collectionViewModel: collectionModel)
+        return viewModel
+    }
+    
     private func makeViewModel() -> HomeViewController.ViewModel {
         // MARK: - Block 0 - Header
-        let headerItem1 = HeaderCell.ViewModel(state: .loaded, title: "Приложение Смайлики", subtitle: "subtitle", buttonTitle: "Generate", contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, isVideo: false, onGenerate: CommandWith(action: { [weak self] category in
+        let headerItem1 = HeaderCell.ViewModel(state: .loaded, title: "GPT API", subtitle: "Classic Quiz Generator", category: AppConstants.initialCategory, contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, isVideo: false, onGenerate: CommandWith(action: { [weak self] category in
             self?.onGenerateClassicPack(category: category)
+            self?.classicQuizCategory = category
         }))
         let header = HomeCollectionView.ViewModel.Block(section: .header, items: [
             HomeCollectionView.Item(hash: UUID().hashValue, kind: .header(headerItem1))
