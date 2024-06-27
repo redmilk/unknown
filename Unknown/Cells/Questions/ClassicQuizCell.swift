@@ -13,8 +13,22 @@ final class ClassicQuizCell: UICollectionViewCell {
     enum State {
         case `default`
         case correctAnswer
-        case wrongAnswer
-        // case answerExplanation
+        case wrongAnswer(String)
+        
+        init(answerState: AnswerState) {
+            switch answerState {
+            case .default: self = .default
+            case .right: self = .correctAnswer
+            case .wrong(let answer): self = .wrongAnswer(answer)
+            }
+        }
+        
+        var isAnswered: Bool {
+            switch self {
+            case .default: return false
+            case _: return true
+            }
+        }
     }
     
     struct ViewModel {
@@ -52,12 +66,12 @@ final class ClassicQuizCell: UICollectionViewCell {
     }
     
     func update(with model: ViewModel) {
-        print(model.state)
         self.viewModel = model
         buildAnswerViews(correct: model.correctAnswer, answers: model.asnwers)
         questionLabel.text = model.question
         categoryLabel.text = model.category
         explanationLabel.text = model.answerExplanation
+        explanationLabel.isHidden = !model.state.isAnswered
     }
     
     private func configureView() {
@@ -107,24 +121,32 @@ final class ClassicQuizCell: UICollectionViewCell {
             stack.distribution = .fillEqually
             stack.spacing = 2
             pair.forEach {
-                let button = UIButton()
-                button.backgroundColor = .blueDark
-                button.titleLabel?.numberOfLines = 0
-                button.setTitle($0, for: .normal)
-                button.titleLabel?.font = .systemFont(ofSize: 15)
-                button.addTarget(self, action: #selector(onAnswerTap(_:)), for: .touchUpInside)
-                if viewModel.state == .correctAnswer {
-                    button.layer.borderWidth = 2
-                    button.layer.borderColor = UIColor.green.cgColor
-                } else if viewModel.state == .wrongAnswer {
-                    button.layer.borderWidth = 2
-                    button.layer.borderColor = UIColor.red.cgColor
-                }
+                let button = makeButton(buttonTitle: $0, correctAnswer: correct)
                 stack.addArrangedSubview(button)
             }
             answersStack.addArrangedSubview(stack)
             pair.removeAll()
         }
+    }
+    
+    private func makeButton(buttonTitle: String, correctAnswer: String) -> UIButton {
+        let button = UIButton()
+        button.backgroundColor = .blueDark
+        button.titleLabel?.numberOfLines = 0
+        button.setTitle(buttonTitle, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 15)
+        button.addTarget(self, action: #selector(onAnswerTap(_:)), for: .touchUpInside)
+        
+        switch viewModel.state {
+        case .correctAnswer where buttonTitle == correctAnswer:
+            button.layer.borderWidth = 2
+            button.layer.borderColor = UIColor.green.cgColor
+        case .wrongAnswer(let givenAnswer) where buttonTitle == givenAnswer:
+            button.layer.borderWidth = 2
+            button.layer.borderColor = UIColor.red.cgColor
+        case _: break
+        }
+        return button
     }
     
     @objc 

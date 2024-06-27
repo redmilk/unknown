@@ -27,7 +27,7 @@ final class HomePresenter: Presenter {
             print("✅✅✅✅✅✅✅✅✅ Questions: \(questions.count)")
             
             self.classicQuizList.append(contentsOf: questions)
-            self.viewModel = self.makeViewModel(classicQuizList: questions)
+            self.viewModel = self.makeViewModel()
             self.view?.update(with: viewModel)
         })
         /// TEST
@@ -43,14 +43,13 @@ final class HomePresenter: Presenter {
             }
             print("✅✅✅✅✅✅✅✅✅ Questions: \(questions.count)")
             
-            self.classicQuizList.append(contentsOf: questions)
-            self.viewModel = self.makeViewModel(classicQuizList: questions)
+            self.classicQuizList.insert(contentsOf: questions, at: 0)
+            self.viewModel = self.makeViewModel()
             self.view?.update(with: viewModel)
         })
     }
     
-    private func makeViewModel(classicQuizList: [ClassicQuizModel]) -> HomeViewController.ViewModel {
-        
+    private func makeViewModel() -> HomeViewController.ViewModel {
         // MARK: - Block 0 - Header
         let headerItem1 = HeaderCell.ViewModel(state: .loaded, title: "Приложение Смайлики", subtitle: "subtitle", buttonTitle: "Generate", contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, isVideo: false, onGenerate: CommandWith(action: { [weak self] category in
             self?.onGenerateClassicPack(category: category)
@@ -107,7 +106,7 @@ final class HomePresenter: Presenter {
         // MARK: - Block 4 - Classic Quiz
         let block4Items = classicQuizList.enumerated().map { pair in
             let model = ClassicQuizCell.ViewModel(
-                state: .default,
+                state: .init(answerState: pair.element.answerState),
                 question: pair.element.question,
                 asnwers: pair.element.answers,
                 category: pair.element.category,
@@ -117,9 +116,8 @@ final class HomePresenter: Presenter {
                 onAnswerPressed: CommandWith(action: { [weak self] answer in
                     guard let self else { return }
                     let quizModel = self.classicQuizList.first(where: { $0.id == pair.element.id })
-                    let isCorrectAnswer = answer == pair.element.correctAnswer
-                    quizModel?.answerState = AnswerState(isCorrect: isCorrectAnswer)
-                    self.viewModel = self.makeViewModel(classicQuizList: classicQuizList)
+                    quizModel?.answerState = AnswerState(answer: answer, correctAnswer: pair.element.correctAnswer)
+                    self.viewModel = self.makeViewModel()
                     self.view?.update(with: self.viewModel)
                 })
             )

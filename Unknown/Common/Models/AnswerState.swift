@@ -10,9 +10,9 @@ import Foundation
 enum AnswerState {
     case `default`
     case right
-    case wrong
+    case wrong(String)
     
-    init(isCorrect: Bool) {
-        self = isCorrect ? .right : .wrong
+    init(answer: String, correctAnswer: String) {
+        self = answer == correctAnswer ? .right : .wrong(answer)
     }
 }
