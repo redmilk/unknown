@@ -8,10 +8,20 @@
 import Foundation
 
 struct ClassicQuizFetchParams {
-    enum Localization: String {
-        case en = "English"
-        case ru = "Russian"
-        case ua = "Ukrainian"
+    enum Localization {
+        case en
+        case ru
+        case ua
+        case other(String)
+        
+        var value: String {
+            switch self {
+            case .en: return "English"
+            case .ru: return "Russian"
+            case .ua: return "Ukrainian"
+            case .other(let language): return language
+            }
+        }
     }
     let categoryName: String
     let answersCount: Int

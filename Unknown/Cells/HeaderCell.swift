@@ -72,7 +72,7 @@ final class HeaderCell: ImageCell {
         case .loaded: generateButton.stopLoading()
         }
         categoryTextfield.text = viewModel.classicQuizFetchParams.categoryName
-        localizationTextField.text = viewModel.classicQuizFetchParams.localization.rawValue
+        localizationTextField.text = viewModel.classicQuizFetchParams.localization.value
         answersCountTextField.text = viewModel.classicQuizFetchParams.answersCount.description
         questionsCountTextField.text = viewModel.classicQuizFetchParams.questionsCount.description
         titleLabel.text = viewModel.title
@@ -91,12 +91,11 @@ final class HeaderCell: ImageCell {
             categoryName: categoryTextfield.text ?? "",
             answersCount: Int(answersCountTextField.text ?? "")!, 
             questionsCount: Int(questionsCountTextField.text ?? "")!,
-            localization: viewModel.classicQuizFetchParams.localization
+            localization: .other(localizationTextField.text ?? "English")
         )
         viewModel.onGenerateClassicQuiz?.perform(with: fetchParams)
         generateButton.startLoading()
-        [questionsCountTextField, categoryTextfield, answersCountTextField, localizationTextField]
-            .forEach { $0.resignFirstResponder() }
+        hideKeyboard()
     }
     
     private func configureView() {
@@ -196,6 +195,11 @@ final class HeaderCell: ImageCell {
         textfield.layer.cornerRadius = 8
         textfield.layer.masksToBounds = true
         textfield.font = .systemFont(ofSize: 13, weight: .light)
+    }
+    
+    private func hideKeyboard() {
+        [questionsCountTextField, categoryTextfield, answersCountTextField, localizationTextField]
+            .forEach { $0.resignFirstResponder() }
     }
     
     private func playVideo(_ isVideo: Bool, _ url: URL?) {
