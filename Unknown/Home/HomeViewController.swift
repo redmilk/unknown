@@ -42,7 +42,7 @@ final class HomeViewController: BaseViewController, HomeViewControllerIn {
     
     func update(with viewModel: ViewModel) {
         collection.update(with: viewModel.collectionViewModel)
-        emptyState.isHidden = true//viewModel.collectionViewModel.blocks.count > 1
+        emptyState.isHidden = viewModel.collectionViewModel.blocks.count > 1
     }
 
     // MARK: - Private
