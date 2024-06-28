@@ -13,7 +13,7 @@ final class LoaderButton: UIButton {
         static let height: CGFloat = 20
         static let width: CGFloat = 40
         static let loadindWidth: CGFloat = 20
-        static let title = "➕"
+        static let title = "+"
     }
     
     private var activityIndicator: UIView!
@@ -32,7 +32,7 @@ final class LoaderButton: UIButton {
         layer.masksToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
         setTitle(Constants.title, for: .normal)
-        titleLabel?.font = .systemFont(ofSize: 13, weight: .light)
+        titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
         activityIndicator = CirclesActivityIndicatorFactory.make(height: Constants.height)
         contentEdgeInsets = .init(top: 4, left: 8, bottom: 4, right: 8)
         snp.makeConstraints { make in

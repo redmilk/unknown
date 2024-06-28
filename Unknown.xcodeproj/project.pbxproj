@@ -82,6 +82,8 @@
 		79A22ED02BFFE9A400FF13A0 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ECF2BFFE9A400FF13A0 /* Networking.swift */; };
 		79A22ED22BFFEF4700FF13A0 /* JSONDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ED12BFFEF4700FF13A0 /* JSONDecoding.swift */; };
 		79A22ED42BFFF5A600FF13A0 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ED32BFFF5A600FF13A0 /* APIClient.swift */; };
+		79A8F89B2C2EFD16006F5855 /* ClassicQuizFetchParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A8F89A2C2EFD16006F5855 /* ClassicQuizFetchParams.swift */; };
+		79A8F89E2C2F0F09006F5855 /* ClassicQuizPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A8F89D2C2F0F09006F5855 /* ClassicQuizPrompt.swift */; };
 		79BB61BC2C2759A2004084C2 /* MultipleImagePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB61BB2C2759A2004084C2 /* MultipleImagePreviewCell.swift */; };
 		79EB692C2C0A8386008C055D /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB692B2C0A8386008C055D /* APIRequest.swift */; };
 		79EB692E2C0A83CF008C055D /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB692D2C0A83CF008C055D /* APIError.swift */; };
@@ -161,6 +163,8 @@
 		79A22ECF2BFFE9A400FF13A0 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		79A22ED12BFFEF4700FF13A0 /* JSONDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoding.swift; sourceTree = "<group>"; };
 		79A22ED32BFFF5A600FF13A0 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		79A8F89A2C2EFD16006F5855 /* ClassicQuizFetchParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicQuizFetchParams.swift; sourceTree = "<group>"; };
+		79A8F89D2C2F0F09006F5855 /* ClassicQuizPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicQuizPrompt.swift; sourceTree = "<group>"; };
 		79BB61BB2C2759A2004084C2 /* MultipleImagePreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleImagePreviewCell.swift; sourceTree = "<group>"; };
 		79EB692B2C0A8386008C055D /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		79EB692D2C0A83CF008C055D /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -350,6 +354,7 @@
 		796679022C2B62100079416C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				79A8F89C2C2F0EE7006F5855 /* Fetching */,
 				7939E3022C2E18BA00A5C480 /* AppConstants.swift */,
 				79785ECF2C2CB0F100D4A1C6 /* Models */,
 				796679032C2B62160079416C /* Views */,
@@ -390,6 +395,7 @@
 			children = (
 				79785ED02C2CB14600D4A1C6 /* ClassicQuizModel.swift */,
 				79785ED22C2CBB7800D4A1C6 /* AnswerState.swift */,
+				79A8F89A2C2EFD16006F5855 /* ClassicQuizFetchParams.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -425,6 +431,14 @@
 				79EB692D2C0A83CF008C055D /* APIError.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		79A8F89C2C2F0EE7006F5855 /* Fetching */ = {
+			isa = PBXGroup;
+			children = (
+				79A8F89D2C2F0F09006F5855 /* ClassicQuizPrompt.swift */,
+			);
+			path = Fetching;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -547,6 +561,7 @@
 				7909A7772B53431E00417C60 /* AppDelegate.swift in Sources */,
 				7909A7F82B536BEC00417C60 /* UIStackView+Extensions.swift in Sources */,
 				79A22ED22BFFEF4700FF13A0 /* JSONDecoding.swift in Sources */,
+				79A8F89B2C2EFD16006F5855 /* ClassicQuizFetchParams.swift in Sources */,
 				7909A7792B53431E00417C60 /* SceneDelegate.swift in Sources */,
 				79A22ECA2BFFE8E800FF13A0 /* RequestBuilder.swift in Sources */,
 				7909A7F62B536B2B00417C60 /* CompositionalLayout+Extension.swift in Sources */,
@@ -560,6 +575,7 @@
 				7909A7B02B53589E00417C60 /* UIView+Extension.swift in Sources */,
 				7909A7FD2B536E7A00417C60 /* Fonts.swift in Sources */,
 				7969D90C2B895C2800A67963 /* BaseViewController.swift in Sources */,
+				79A8F89E2C2F0F09006F5855 /* ClassicQuizPrompt.swift in Sources */,
 				7909A7AC2B53569900417C60 /* AudioSessionManager.swift in Sources */,
 				792C01472C28B891003EA585 /* ClassicQuizCell.swift in Sources */,
 				7909A78F2B53459800417C60 /* HashItem.swift in Sources */,

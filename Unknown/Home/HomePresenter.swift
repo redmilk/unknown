@@ -12,8 +12,8 @@ final class HomePresenter: Presenter {
     var view: HomeViewControllerIn?
     
     private var viewModel: HomeViewController.ViewModel = .initial
+    private var classicQuizFetchParams: ClassicQuizFetchParams = .initial
     private var classicQuizList: [ClassicQuizModel] = []
-    private var classicQuizCategory: String = AppConstants.initialCategory
     
     init() {
     }
@@ -26,12 +26,16 @@ final class HomePresenter: Presenter {
 //        self.view?.update(with: .init(collectionViewModel: collectionModel))
     }
     
-    func onGenerateClassicPack(category: String) {
-        let message = Message(id: UUID(), role: .user, content: Prompts.getClassicQuiz(category: category, answersCount: "4"), createdAt: Date())
+    func onGenerateClassicPack(params: ClassicQuizFetchParams) {
+        let message = Message(
+            id: UUID(),
+            role: .user,
+            content: Prompts.getClassicQuiz(params: params),
+            createdAt: Date()
+        )
         APIClientImpl.shared.sendMessage(messages: [message], completion: { [weak self] questions in
             guard let questions, let self else { return  }
             print("✅ Questions: \(questions.count)")
-            
             self.classicQuizList.insert(contentsOf: questions, at: 0)
             self.viewModel = self.makeViewModel()
             self.view?.update(with: viewModel)
@@ -39,10 +43,18 @@ final class HomePresenter: Presenter {
     }
     
     private func makeInitialViewModel() -> HomeViewController.ViewModel {
-        let headerItem1 = HeaderCell.ViewModel(state: .loaded, title: "GPT API", subtitle: "Classic Quiz Generator", category: AppConstants.initialCategory, contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, isVideo: false, onGenerate: CommandWith(action: { [weak self] category in
-            self?.onGenerateClassicPack(category: category)
-            self?.classicQuizCategory = category
-        }))
+        let headerItem1 = HeaderCell.ViewModel(
+            state: .loaded,
+            title: "Classic Quiz Generator",
+            subtitle: "",
+            contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp"),
+            isVideo: false,
+            classicQuizFetchParams: .initial,
+            onGenerateClassicQuiz: CommandWith(action: { [weak self] fetchParams in
+                self?.onGenerateClassicPack(params: fetchParams)
+                self?.classicQuizFetchParams = fetchParams
+            })
+        )
         let header = HomeCollectionView.ViewModel.Block(section: .header, items: [
             HomeCollectionView.Item(hash: UUID().hashValue, kind: .header(headerItem1))
         ])
@@ -51,17 +63,24 @@ final class HomePresenter: Presenter {
             onSeeAll: .nop,
             onScrolledToIndex: .nop
         )
-        
         let viewModel = HomeViewController.ViewModel(state: .loaded, collectionViewModel: collectionModel)
         return viewModel
     }
     
     private func makeViewModel() -> HomeViewController.ViewModel {
         // MARK: - Block 0 - Header
-        let headerItem1 = HeaderCell.ViewModel(state: .loaded, title: "GPT API", subtitle: "Classic Quiz Generator", category: AppConstants.initialCategory, contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, isVideo: false, onGenerate: CommandWith(action: { [weak self] category in
-            self?.onGenerateClassicPack(category: category)
-            self?.classicQuizCategory = category
-        }))
+        let headerItem1 = HeaderCell.ViewModel(
+            state: .loaded,
+            title: "Classic Quiz Generator",
+            subtitle: "",
+            contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp"),
+            isVideo: false,
+            classicQuizFetchParams: classicQuizFetchParams,
+            onGenerateClassicQuiz: CommandWith(action: { [weak self] fetchParams in
+                self?.onGenerateClassicPack(params: fetchParams)
+                self?.classicQuizFetchParams = fetchParams
+            })
+        )
         let header = HomeCollectionView.ViewModel.Block(section: .header, items: [
             HomeCollectionView.Item(hash: UUID().hashValue, kind: .header(headerItem1))
         ])

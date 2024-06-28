@@ -19,14 +19,7 @@ final class HomeCollectionView: UICollectionView {
         let onSeeAll: Command
         let onScrolledToIndex: CommandWith<Int>
         
-        static let initial = ViewModel(
-            blocks: [
-                HomeCollectionView.ViewModel.Block(section: .header, items: [
-                    HomeCollectionView.Item(hash: UUID().hashValue, kind: .header(HeaderCell.ViewModel(state: .loaded, title: "GPT API", subtitle: "Classic Quiz Generator", category: AppConstants.initialCategory, contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, isVideo: false, onGenerate: .nop)))])
-            ],
-            onSeeAll: .nop,
-            onScrolledToIndex: .nop
-        )
+        static let initial = ViewModel(blocks: [], onSeeAll: .nop, onScrolledToIndex: .nop)
     }
     
     struct Item: HashItem {

@@ -10,48 +10,6 @@ import Alamofire
 
 let video = URL(string: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4")!
 
-enum Prompts {
-    static func getClassicQuiz(category: String, answersCount: String, difficulty: String = "") -> String {
-        let quiz = """
-        Generate a JSON object containing 2 unique questions for a quiz game in the category \(category). Each question should have \(answersCount) answers and the only one must be correct while others are wrong. The JSON should have the following structure:
-
-        - Root object with properties:
-          1. `category` (string): the name of the category.
-          2. `questions` (array): an array of question objects.
-
-        Each question object should have the following properties:
-          - `question` (string): the text of the question.
-          - `answers` (array of strings): \(answersCount) possible answers.
-          - `correctAnswer` (string): the correct answer.
-          - `answerExplanation` (string): well detailed explanation of the correct answer and some curious facts.
-
-        Example JSON structure:
-
-        ```json
-        {
-          "category": "Science",
-          "questions": [
-            {
-              "question": "What is the chemical symbol for water?",
-              "answers": ["H2O", "O2", "CO2", "H2SO4", "NaCl", "C6H12O6"],
-              "correctAnswer": "H2O",
-              "answerExplanation": "Water is composed of two hydrogen atoms and one oxygen atom, hence its chemical symbol is H2O."
-            },
-            {
-              "question": "Which planet is known as the Red Planet?",
-              "answers": ["Earth", "Venus", "Mars", "Jupiter", "Saturn", "Neptune"],
-              "correctAnswer": "Mars",
-              "answerExplanation": "Mars is known as the Red Planet due to its reddish appearance, which is caused by iron oxide on its surface."
-            }
-            // Add 8 more questions in a similar format
-          ]
-        }
-
-        """
-        return quiz
-    }
-}
-
 protocol APIClient {
     
 }
