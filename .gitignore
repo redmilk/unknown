@@ -1,0 +1,53 @@
+## Xcode
+#build/
+#DerivedData/
+#*.hmap
+#*.ipa
+#*.xcuserstate
+
+# User-specific files
+*.xcuserdatad
+#*.xccheckout
+#*.moved-aside
+#*.xcscmblueprint
+
+## Objective-C/Swift specific
+#*.hmap
+#*.ipa
+#*.dSYM.zip
+#*.dSYM
+
+## Bundle artifacts
+#*.ipa
+
+## CocoaPods
+#Pods/
+
+## Carthage
+#Carthage/Build/
+
+## Fastlane
+#fastlane/report.xml
+#fastlane/Preview.html
+#fastlane/screenshots
+
+## Code Injection
+#.bp/
+
+## macOS
+#*.dSYM
+#*.xcworkspace
+#*.xcworkspace/contents.xcworkspacedata
+#*.xcworkspace/xcuserdata
+
+## Swift Package Manager
+#.build/
+#.swiftpm/xcode/
+
+## IDE specific
+#.idea/
+#*.xcodeproj/project.xcworkspace
+#*.xcodeproj/xcuserdata
+
+## Apple specific
+#*.pbxproj
