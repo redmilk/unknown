@@ -17,14 +17,14 @@ enum Prompts {
         The JSON should have the following structure:
 
         - Root object with properties:
-          1. `category` (string): the name of the category.
+          1. `category` (string): the name of the category. Must be in \(params.localization) language.
           2. `questions` (array): an array of question objects.
 
         Each question object should have the following properties:
-          - `question` (string): the text of the question.
-          - `answers` (array of strings): \(params.answersCount) possible answers.
-          - `correctAnswer` (string): the correct answer.
-          - `answerExplanation` (string): well detailed explanation of the correct answer and some curious facts.
+          - `question` (string): the text of the question. Must be in \(params.localization) language.
+          - `answers` (array of strings): \(params.answersCount) possible answers. Must be in \(params.localization) language. No duplicates.
+          - `correctAnswer` (string): the correct answer. Must be in \(params.localization) language.
+          - `answerExplanation` (string): well detailed explanation of the correct answer and some curious facts. Must be in \(params.localization) language.
 
         Example JSON structure:
 

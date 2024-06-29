@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7906445E2C30541A00352F6F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7906445D2C30541A00352F6F /* GoogleService-Info.plist */; };
 		7909A7772B53431E00417C60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7909A7762B53431E00417C60 /* AppDelegate.swift */; };
 		7909A7792B53431E00417C60 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7909A7782B53431E00417C60 /* SceneDelegate.swift */; };
 		7909A77B2B53431E00417C60 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7909A77A2B53431E00417C60 /* HomeViewController.swift */; };
@@ -66,6 +67,8 @@
 		796679082C2B667C0079416C /* CirclesActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796679072C2B667C0079416C /* CirclesActivityIndicator.swift */; };
 		7969D90C2B895C2800A67963 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7969D90B2B895C2800A67963 /* BaseViewController.swift */; };
 		7969D90E2B895C6800A67963 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7969D90D2B895C6800A67963 /* Presenter.swift */; };
+		79752CD42C30B1620034F03D /* AlamofireDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 79A22EC52BFFE32500FF13A0 /* AlamofireDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		79752CD62C30B1630034F03D /* SnapKit-Dynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 7909A7A42B53501400417C60 /* SnapKit-Dynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		79785ECE2C2CB05400D4A1C6 /* AnswerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79785ECD2C2CB05400D4A1C6 /* AnswerService.swift */; };
 		79785ED12C2CB14600D4A1C6 /* ClassicQuizModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79785ED02C2CB14600D4A1C6 /* ClassicQuizModel.swift */; };
 		79785ED32C2CBB7800D4A1C6 /* AnswerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79785ED22C2CBB7800D4A1C6 /* AnswerState.swift */; };
@@ -88,7 +91,23 @@
 		79EB692E2C0A83CF008C055D /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB692D2C0A83CF008C055D /* APIError.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		79752CD52C30B1620034F03D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				79752CD42C30B1620034F03D /* AlamofireDynamic in Embed Frameworks */,
+				79752CD62C30B1630034F03D /* SnapKit-Dynamic in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		7906445D2C30541A00352F6F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7909A7732B53431E00417C60 /* Unknown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unknown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7909A7762B53431E00417C60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7909A7782B53431E00417C60 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -206,10 +225,9 @@
 		7909A7752B53431E00417C60 /* Unknown */ = {
 			isa = PBXGroup;
 			children = (
-				797E09CB2C2F6CFB00F0E074 /* App */,
-				796679022C2B62100079416C /* Common */,
+				797E09CB2C2F6CFB00F0E074 /* Application */,
+				796679022C2B62100079416C /* Source */,
 				797E09CD2C2F6E6D00F0E074 /* Modules */,
-				7909A7FB2B536E6400417C60 /* Resources */,
 			);
 			path = Unknown;
 			sourceTree = "<group>";
@@ -241,7 +259,7 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		7909A7F12B53665800417C60 /* Extension */ = {
+		7909A7F12B53665800417C60 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				7909A7962B534D6500417C60 /* AVPlayer+Extension.swift */,
@@ -253,7 +271,7 @@
 				7909A7F92B536C5F00417C60 /* Collection+Extension.swift */,
 				79383C582C2B0B8900F1E3CB /* UIApplication+Extension.swift */,
 			);
-			path = Extension;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		7909A7FB2B536E6400417C60 /* Resources */ = {
@@ -302,17 +320,15 @@
 			path = ModelsDTO;
 			sourceTree = "<group>";
 		};
-		796679022C2B62100079416C /* Common */ = {
+		796679022C2B62100079416C /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				79A22EC72BFFE35000FF13A0 /* Services */,
-				7909A7F12B53665800417C60 /* Extension */,
 				797E09CC2C2F6E1200F0E074 /* Core */,
-				79A8F89C2C2F0EE7006F5855 /* Fetching */,
+				79A22EC72BFFE35000FF13A0 /* Services */,
 				79785ECF2C2CB0F100D4A1C6 /* Models */,
 				796679032C2B62160079416C /* Views */,
 			);
-			path = Common;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		796679032C2B62160079416C /* Views */ = {
@@ -356,21 +372,24 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		797E09CB2C2F6CFB00F0E074 /* App */ = {
+		797E09CB2C2F6CFB00F0E074 /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				7909A7762B53431E00417C60 /* AppDelegate.swift */,
 				7939E3022C2E18BA00A5C480 /* AppConstants.swift */,
 				7909A7782B53431E00417C60 /* SceneDelegate.swift */,
+				7909A7FB2B536E6400417C60 /* Resources */,
 				7909A7812B53431F00417C60 /* LaunchScreen.storyboard */,
 				7909A7842B53431F00417C60 /* Info.plist */,
+				7906445D2C30541A00352F6F /* GoogleService-Info.plist */,
 			);
-			path = App;
+			path = Application;
 			sourceTree = "<group>";
 		};
 		797E09CC2C2F6E1200F0E074 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				7909A7F12B53665800417C60 /* Extensions */,
 				7969D90F2B895C7300A67963 /* MVP */,
 				7909A7942B534D1F00417C60 /* NoNibView.swift */,
 				7909A78E2B53459800417C60 /* HashItem.swift */,
@@ -410,6 +429,7 @@
 		79A22EC72BFFE35000FF13A0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				79A8F89C2C2F0EE7006F5855 /* Fetching */,
 				79A22EC82BFFE36000FF13A0 /* Networking */,
 				79785ECD2C2CB05400D4A1C6 /* AnswerService.swift */,
 			);
@@ -448,6 +468,7 @@
 				7909A76F2B53431E00417C60 /* Sources */,
 				7909A7702B53431E00417C60 /* Frameworks */,
 				7909A7712B53431E00417C60 /* Resources */,
+				79752CD52C30B1620034F03D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -524,6 +545,7 @@
 				7909A7802B53431F00417C60 /* Assets.xcassets in Resources */,
 				7909A7D02B535B9D00417C60 /* SF-Pro-Display-Medium.otf in Resources */,
 				7909A7CC2B535B9D00417C60 /* SF-Pro-Display-Semibold.otf in Resources */,
+				7906445E2C30541A00352F6F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,7 +757,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = DSG2Y7UAZ6;
+				DEVELOPMENT_TEAM = XC8MJ87UQY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Unknown/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -748,7 +770,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kefirtest.Unknown;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kefir-ios.trivia-arena-io";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -763,7 +785,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = DSG2Y7UAZ6;
+				DEVELOPMENT_TEAM = XC8MJ87UQY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Unknown/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -776,7 +798,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kefirtest.Unknown;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kefir-ios.trivia-arena-io";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
