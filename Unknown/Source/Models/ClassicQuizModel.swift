@@ -17,7 +17,11 @@ final class ClassicQuizModel {
     let correctAnswer: String
     let answerExplanation: String
     
-    init(dto: ClassicQuizQuestionDTO, category: String, answerState: AnswerState) {
+    init(
+        dto: ClassicQuizQuestionDTO,
+        category: String,
+        answerState: AnswerState
+    ) {
         self.id = UUID().uuidString
         self.question = dto.question
         self.category = category
