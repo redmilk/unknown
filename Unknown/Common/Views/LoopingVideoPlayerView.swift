@@ -14,7 +14,6 @@ class LoopingVideoPlayerView: VideoPlayerLayerView {
     let player = AVQueuePlayer()
 
     private let category: AVAudioSession.Category
-    private let volumeSession: PlaybackVolumeSession
     private var asset: AVAsset?
     private var looper: AVPlayerLooper?
     private var cancellable: Set<AnyCancellable> = []
@@ -22,34 +21,21 @@ class LoopingVideoPlayerView: VideoPlayerLayerView {
     private var isAlwaysMuted: Bool
     
     init(
-        volumeSession: PlaybackVolumeSession = .shared,
         _ category: AVAudioSession.Category = .playback,
         restorePlaybackOnBecomeActive: Bool = true,
         isAlwaysMuted: Bool = false
     ) {
         self.category = category
-        self.volumeSession = volumeSession
         self.isAlwaysMuted = isAlwaysMuted
         super.init()
         
         playerLayer.videoGravity = .resizeAspectFill
         playerLayer.player = player
-        
-        volumeSession.isMutedPublisher
-            .sink { [weak self] in
-                guard !isAlwaysMuted else {
-                    self?.player.isMuted = true
-                    return
-                }
-                self?.player.isMuted = $0
-            }
-            .store(in: &cancellable)
                 
         NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)
             .map { _ in }
             .sink { [weak self] in
-                guard self?.wasPlayingBeforeResignActive == true,
-                      restorePlaybackOnBecomeActive
+                guard self?.wasPlayingBeforeResignActive == true
                 else {
                     return
                 }
@@ -72,9 +58,6 @@ class LoopingVideoPlayerView: VideoPlayerLayerView {
         if isAlwaysMuted {
             guard !player.isMuted else { return }
             player.isMuted = true
-        } else {
-            guard volumeSession.isMuted != player.isMuted else { return }
-            player.isMuted = volumeSession.isMuted
         }
     }
     
