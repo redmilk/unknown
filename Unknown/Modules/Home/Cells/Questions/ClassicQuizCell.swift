@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import AVKit
 
 final class ClassicQuizCell: UICollectionViewCell {
     
@@ -39,11 +40,12 @@ final class ClassicQuizCell: UICollectionViewCell {
         let correctAnswer: String
         let answerExplanation: String
         let image: URL?
+        let isLatestAnsweredQuiz: Bool
         let onAnswerPressed: CommandWith<String>
         
         static let initial: ViewModel = .init(
             state: .default, question: "", asnwers: [], category: "",
-            correctAnswer: "", answerExplanation: "", image: nil, onAnswerPressed: .nop
+            correctAnswer: "", answerExplanation: "", image: nil, isLatestAnsweredQuiz: false, onAnswerPressed: .nop
         )
     }
     
@@ -53,6 +55,7 @@ final class ClassicQuizCell: UICollectionViewCell {
     private let categoryLabel = UILabel()
     private let explanationLabel = UILabel()
     private let answersStack = UIStackView()
+    private var synthesizer = AVSpeechSynthesizer()
     private var viewModel: ViewModel = .initial
     
     override init(frame: CGRect) {
@@ -65,6 +68,11 @@ final class ClassicQuizCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        synthesizer.stopSpeaking(at: .immediate)
+    }
+    
     func update(with model: ViewModel) {
         self.viewModel = model
         buildAnswerViews(correct: model.correctAnswer, answers: model.asnwers)
@@ -72,6 +80,8 @@ final class ClassicQuizCell: UICollectionViewCell {
         categoryLabel.text = model.category
         explanationLabel.text = model.answerExplanation
         explanationLabel.isHidden = !model.state.isAnswered
+        answersStack.isUserInteractionEnabled = !model.state.isAnswered
+        speakExplanationIfNeeded(viewModel: model)
     }
     
     private func configureView() {
@@ -108,6 +118,18 @@ final class ClassicQuizCell: UICollectionViewCell {
             answersStack,
             explanationLabel
         ])
+    }
+    
+    private func speakExplanationIfNeeded(viewModel: ViewModel) {
+        guard viewModel.state.isAnswered, viewModel.isLatestAnsweredQuiz else {
+            synthesizer.stopSpeaking(at: .immediate)
+            return
+        }
+        let utterance = AVSpeechUtterance(string: viewModel.answerExplanation)
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.rate = 0.5
+        utterance.pitchMultiplier = 0.5
+        synthesizer.speak(utterance)
     }
     
     private func buildAnswerViews(correct: String, answers: [String]) {

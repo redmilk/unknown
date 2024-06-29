@@ -563,9 +563,9 @@
 		7909A7752B53431E00417C60 /* Unknown */ = {
 			isa = PBXGroup;
 			children = (
-				797E09CB2C2F6CFB00F0E074 /* Application */,
-				796679022C2B62100079416C /* Source */,
 				797E09CD2C2F6E6D00F0E074 /* Modules */,
+				796679022C2B62100079416C /* Source */,
+				797E09CB2C2F6CFB00F0E074 /* Application */,
 			);
 			path = Unknown;
 			sourceTree = "<group>";
@@ -587,12 +587,7 @@
 			children = (
 				792C01482C28C830003EA585 /* Questions */,
 				790AEB592B6E61C7004A1784 /* Supplimentary */,
-				7909A7982B534E7800417C60 /* HeaderCell.swift */,
-				7909A7AD2B5357FD00417C60 /* ProcessingHeaderCell.swift */,
-				7909A7B12B5358D300417C60 /* ContentCell.swift */,
-				7909A7D62B535E5800417C60 /* HorizontalScrollCell.swift */,
-				79BB61BB2C2759A2004084C2 /* MultipleImagePreviewCell.swift */,
-				7909A7D82B535EA800417C60 /* MultipleImageCell.swift */,
+				79E91C5E2C30CB6B0051EA8A /* Samples */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -925,6 +920,19 @@
 				79E91C5D2C30C2D20051EA8A /* SnapKit Tests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		79E91C5E2C30CB6B0051EA8A /* Samples */ = {
+			isa = PBXGroup;
+			children = (
+				7909A7AD2B5357FD00417C60 /* ProcessingHeaderCell.swift */,
+				7909A7B12B5358D300417C60 /* ContentCell.swift */,
+				7909A7D62B535E5800417C60 /* HorizontalScrollCell.swift */,
+				79BB61BB2C2759A2004084C2 /* MultipleImagePreviewCell.swift */,
+				7909A7D82B535EA800417C60 /* MultipleImageCell.swift */,
+				7909A7982B534E7800417C60 /* HeaderCell.swift */,
+			);
+			path = Samples;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -14,8 +14,10 @@ final class HomePresenter: Presenter {
     private var viewModel: HomeViewController.ViewModel = .initial
     private var classicQuizFetchParams: ClassicQuizFetchParams = .initial
     private var classicQuizList: [ClassicQuizModel] = []
+    private var latestAnsweredID: String?
     
-    init() {
+    init() { 
+        // TODO: Add DI
     }
     
     func viewDidLoad() {
@@ -139,11 +141,13 @@ final class HomePresenter: Presenter {
                 category: pair.element.category,
                 correctAnswer: pair.element.correctAnswer,
                 answerExplanation: pair.element.answerExplanation,
-                image: nil,
+                image: nil, 
+                isLatestAnsweredQuiz: latestAnsweredID == pair.element.id,
                 onAnswerPressed: CommandWith(action: { [weak self] answer in
                     guard let self else { return }
                     let quizModel = self.classicQuizList.first(where: { $0.id == pair.element.id })
                     quizModel?.answerState = AnswerState(answer: answer, correctAnswer: pair.element.correctAnswer)
+                    self.latestAnsweredID = quizModel?.id
                     self.viewModel = self.makeViewModel()
                     self.view?.update(with: self.viewModel)
                 })
