@@ -105,9 +105,10 @@ final class HeaderCell: ImageCell {
         configureTextfield(questionsCountTextField)
         containerStack.axis = .vertical
         containerStack.alignment = .center
-        containerStack.spacing = 2
+        containerStack.spacing = 4
         fetchParamsStack.axis = .vertical
         fetchParamsStack.distribution = .equalSpacing
+        fetchParamsStack.spacing = 2
         answersCountTextField.keyboardType = .numberPad
         questionsCountTextField.keyboardType = .numberPad
         titleLabel.textColor = .white
