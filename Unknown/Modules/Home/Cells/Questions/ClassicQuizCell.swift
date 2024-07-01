@@ -128,7 +128,7 @@ final class ClassicQuizCell: UICollectionViewCell {
         let utterance = AVSpeechUtterance(string: viewModel.answerExplanation)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         utterance.rate = 0.5
-        utterance.pitchMultiplier = 0.5
+        utterance.pitchMultiplier = 1
         synthesizer.speak(utterance)
     }
     
