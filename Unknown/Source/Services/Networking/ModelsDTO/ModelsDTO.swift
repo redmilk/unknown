@@ -71,4 +71,5 @@ struct ClassicQuizQuestionDTO: Codable {
     let answers: [String]
     let correctAnswer: String
     let answerExplanation: String
+    let facts: [String]
 }

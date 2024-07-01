@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AnswerState {
+enum AnswerState: Encodable {
     case `default`
     case right
     case wrong(String)

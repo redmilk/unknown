@@ -48,15 +48,19 @@ final class APIClientImpl: APIClient {
                             completion(models)
                         } catch let DecodingError.dataCorrupted(context) {
                             print(context)
+                            completion(nil)
                         } catch let DecodingError.keyNotFound(key, context) {
                             print("Key '\(key)' not found:", context.debugDescription)
                             print("codingPath:", context.codingPath)
+                            completion(nil)
                         } catch let DecodingError.valueNotFound(value, context) {
                             print("Value '\(value)' not found:", context.debugDescription)
                             print("codingPath:", context.codingPath)
+                            completion(nil)
                         } catch let DecodingError.typeMismatch(type, context) {
                             print("Type '\(type)' mismatch:", context.debugDescription)
                             print("codingPath:", context.codingPath)
+                            completion(nil)
                         } catch {
                             print("Failed to decode JSON: \(error.localizedDescription)")
                         }

@@ -16,9 +16,9 @@ struct ClassicQuizFetchParams {
         
         var value: String {
             switch self {
-            case .en: return "English"
-            case .ru: return "Russian"
-            case .ua: return "Ukrainian"
+            case .en: return "Английский"
+            case .ru: return "Русский"
+            case .ua: return "Украинский"
             case .other(let language): return language
             }
         }

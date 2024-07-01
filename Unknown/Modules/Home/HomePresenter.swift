@@ -9,7 +9,7 @@ import Foundation
 
 final class HomePresenter: Presenter {
     
-    var view: HomeViewControllerIn?
+    var view: HomeViewControllerIn!
     
     private var viewModel: HomeViewController.ViewModel = .initial
     private var classicQuizFetchParams: ClassicQuizFetchParams = .initial
@@ -36,11 +36,24 @@ final class HomePresenter: Presenter {
             createdAt: Date()
         )
         APIClientImpl.shared.sendMessage(messages: [message], completion: { [weak self] questions in
-            guard let questions, let self else { return  }
+            guard let self else { return }
+            guard let questions else {
+                DispatchQueue.main.async {
+                    self.viewModel = self.makeViewModel()
+                    self.view.update(with: self.viewModel)
+                }
+                return
+            }
             print("✅ Questions: \(questions.count)")
             self.classicQuizList.insert(contentsOf: questions, at: 0)
             self.viewModel = self.makeViewModel()
-            self.view?.update(with: viewModel)
+            DispatchQueue.main.async {
+                self.view?.update(with:self.viewModel)
+            }
+            
+            DispatchQueue.global(qos: .utility).async {
+                FirestoreClient.shared.uploadClassicQuizModels(questions)
+            }
         })
     }
     
@@ -140,8 +153,9 @@ final class HomePresenter: Presenter {
                 asnwers: pair.element.answers,
                 category: pair.element.category,
                 correctAnswer: pair.element.correctAnswer,
-                answerExplanation: pair.element.answerExplanation,
-                image: nil, 
+                answerExplanation: pair.element.answerExplanation, 
+                curiousFacts: pair.element.facts,
+                image: nil,
                 isLatestAnsweredQuiz: latestAnsweredID == pair.element.id,
                 onAnswerPressed: CommandWith(action: { [weak self] answer in
                     guard let self else { return }

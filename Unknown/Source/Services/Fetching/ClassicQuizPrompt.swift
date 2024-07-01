@@ -25,6 +25,7 @@ enum Prompts {
           - `answers` (array of strings): \(params.answersCount) possible answers. Must be in \(params.localization) language. No duplicates.
           - `correctAnswer` (string): the correct answer. Must be in \(params.localization) language.
           - `answerExplanation` (string): well detailed explanation of the correct answer and some curious facts. Must be in \(params.localization) language.
+          - `facts` (array of strings): 10 interesting facts about answer or question itself.
 
         Example JSON structure:
 

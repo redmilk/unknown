@@ -7,16 +7,64 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseFirestore
+
+extension Encodable {
+    func toDictionary() throws -> [String: Any] {
+        let data = try JSONEncoder().encode(self)
+        let jsonObject = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+        
+        guard let dictionary = jsonObject as? [String: Any] else {
+            throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to convert JSON object to dictionary"])
+        }
+        
+        return dictionary
+    }
+}
 
 final class FirestoreClient {
+    private enum Constraint {
+        /// TODO: - Move to remote config
+        static let pathClassicQuizEnglish = "classic-quiz-english"
+    }
+    
     static let shared = FirestoreClient()
     private init() { }
     
-    func signInAnonym() async throws {
+    private let db = Firestore.firestore()
+    
+    func uploadClassicQuizModels(_ models: [ClassicQuizModel]) {
+        Task {
+            do {
+                try await withThrowingTaskGroup(of: Void.self) { [weak self] group in
+                    guard let self else { return }
+                    for model in models {
+                        group.addTask {
+                            try await self.writeClassicQuiz(model.toDictionary())
+                        }
+                    }
+                    for try await _ in group { }
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func writeClassicQuiz(_ json: [String: Any]) async throws {
+        guard let id = json["id"] as? String else { return }
+        let doc = db.collection("classic-quiz-english").document(id)
+        try await doc.setData(json)
+    }
+    
+    private func signInAnonym() async throws -> Bool{
         let auth = Auth.auth()
         do {
-            let user = try await auth.signInAnonymously()
-            
+            let _ = try await auth.signInAnonymously()
+            return true
+        } catch {
+            print(error.localizedDescription)
+            return false
         }
     }
 }

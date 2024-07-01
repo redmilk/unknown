@@ -39,13 +39,14 @@ final class ClassicQuizCell: UICollectionViewCell {
         let category: String
         let correctAnswer: String
         let answerExplanation: String
+        let curiousFacts: [String]
         let image: URL?
         let isLatestAnsweredQuiz: Bool
         let onAnswerPressed: CommandWith<String>
         
         static let initial: ViewModel = .init(
-            state: .default, question: "", asnwers: [], category: "",
-            correctAnswer: "", answerExplanation: "", image: nil, isLatestAnsweredQuiz: false, onAnswerPressed: .nop
+            state: .default, question: "", asnwers: [], category: "", correctAnswer: "",
+            answerExplanation: "", curiousFacts: [], image: nil, isLatestAnsweredQuiz: false, onAnswerPressed: .nop
         )
     }
     
@@ -55,6 +56,7 @@ final class ClassicQuizCell: UICollectionViewCell {
     private let categoryLabel = UILabel()
     private let explanationLabel = UILabel()
     private let answersStack = UIStackView()
+    private let factsStack = UIStackView()
     private var synthesizer = AVSpeechSynthesizer()
     private var viewModel: ViewModel = .initial
     
@@ -73,32 +75,42 @@ final class ClassicQuizCell: UICollectionViewCell {
         synthesizer.stopSpeaking(at: .immediate)
     }
     
-    func update(with model: ViewModel) {
-        self.viewModel = model
-        buildAnswerViews(correct: model.correctAnswer, answers: model.asnwers)
-        questionLabel.text = model.question
-        categoryLabel.text = model.category
-        explanationLabel.text = model.answerExplanation
-        explanationLabel.isHidden = !model.state.isAnswered
-        answersStack.isUserInteractionEnabled = !model.state.isAnswered
-        speakExplanationIfNeeded(viewModel: model)
+    func update(with viewModel: ViewModel) {
+        self.viewModel = viewModel
+        buildAnswerViews(correct: viewModel.correctAnswer, answers: viewModel.asnwers)
+        questionLabel.text = viewModel.question
+        categoryLabel.text = viewModel.category
+        explanationLabel.text = viewModel.answerExplanation
+        explanationLabel.isHidden = !viewModel.state.isAnswered
+        answersStack.isUserInteractionEnabled = !viewModel.state.isAnswered
+        speakExplanationIfNeeded(viewModel: viewModel)
+        buildCuriousFactLabels(viewModel.curiousFacts)
+        factsStack.isHidden = !viewModel.state.isAnswered
     }
     
     private func configureView() {
+        contentView.backgroundColor = .clear
+        containerStack.backgroundColor = .clear
         clipsToBounds = true
         containerStack.axis = .vertical
-        containerStack.spacing = 0
+        containerStack.spacing = 8
         answersStack.axis = .vertical
         answersStack.spacing = 2
-        questionLabel.textColor = .red
+        factsStack.axis = .vertical
+        factsStack.spacing = 4
+        factsStack.backgroundColor = .halfBlack
+        explanationLabel.backgroundColor = .halfBlack
+        questionLabel.backgroundColor = .halfBlack
+        questionLabel.textColor = .white
         questionLabel.numberOfLines = 0
         questionLabel.textAlignment = .center
-        categoryLabel.textColor = .white
+        categoryLabel.backgroundColor = .halfBlack
+        categoryLabel.textColor = .ultraBlue
         categoryLabel.textAlignment = .center
-        categoryLabel.font = .systemFont(ofSize: 11)
-        explanationLabel.textColor = .gray1
+        categoryLabel.font = Style.Font.tiny
+        explanationLabel.textColor = .white
         explanationLabel.numberOfLines = 0
-        explanationLabel.font = .systemFont(ofSize: 13)
+        explanationLabel.font = Style.Font.small
     }
     
     private func configureLayout() {
@@ -116,7 +128,8 @@ final class ClassicQuizCell: UICollectionViewCell {
             categoryLabel,
             questionLabel,
             answersStack,
-            explanationLabel
+            explanationLabel,
+            factsStack
         ])
     }
     
@@ -129,7 +142,7 @@ final class ClassicQuizCell: UICollectionViewCell {
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         utterance.rate = 0.5
         utterance.pitchMultiplier = 1
-        synthesizer.speak(utterance)
+        //synthesizer.speak(utterance)
     }
     
     private func buildAnswerViews(correct: String, answers: [String]) {
@@ -151,21 +164,40 @@ final class ClassicQuizCell: UICollectionViewCell {
         }
     }
     
+    private func buildCuriousFactLabels(_ facts: [String]) {
+        factsStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        facts.forEach {
+            let label = UILabel()
+            label.text = "▫️ \($0)"
+            label.numberOfLines = 0
+            label.font = Style.Font.small
+            label.textColor = .toolTipLightBlue
+            label.textAlignment = .left
+            factsStack.addArrangedSubview(label)
+        }
+    }
+    
     private func makeButton(buttonTitle: String, correctAnswer: String) -> UIButton {
         let button = UIButton()
-        button.backgroundColor = .blueDark
+        button.backgroundColor = .ultraBlue
         button.titleLabel?.numberOfLines = 0
         button.setTitle(buttonTitle, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 15)
+        button.titleLabel?.font = Style.Font.normal
         button.addTarget(self, action: #selector(onAnswerTap(_:)), for: .touchUpInside)
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = 8
         
         switch viewModel.state {
         case .correctAnswer where buttonTitle == correctAnswer:
             button.layer.borderWidth = 2
-            button.layer.borderColor = UIColor.green.cgColor
+            button.layer.borderColor = UIColor.white.cgColor
+            button.backgroundColor = .green
+            button.setTitleColor(.black, for: .normal)
         case .wrongAnswer(let givenAnswer) where buttonTitle == givenAnswer:
             button.layer.borderWidth = 2
             button.layer.borderColor = UIColor.red.cgColor
+            button.backgroundColor = .halfBlack
+            //button.setTitleColor(.black, for: .normal)
         case _: break
         }
         return button
