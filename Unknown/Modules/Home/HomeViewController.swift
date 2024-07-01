@@ -27,6 +27,7 @@ final class HomeViewController: BaseViewController, HomeViewControllerIn {
     
     private let collection = HomeCollectionView()
     private let emptyState = EmptyStateView(description: "Here is nothing, yet...")
+    private let emitter = ParticleEmitterView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,12 +46,12 @@ final class HomeViewController: BaseViewController, HomeViewControllerIn {
         emptyState.isHidden = viewModel.collectionViewModel.blocks.count > 1
     }
 
-    // MARK: - Private
     private func configureUI() {
-        
+        collection.backgroundColor = .clear
     }
     
     private func configureLayout() {
+        view.addSubview(emitter)
         view.addSubview(collection)
         view.addSubview(emptyState)
   
@@ -58,8 +59,10 @@ final class HomeViewController: BaseViewController, HomeViewControllerIn {
             make.top.equalToSuperview().offset(-view.safeAreaInsets.top)
             make.leading.trailing.bottom.equalToSuperview()
         }
-        
         emptyState.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        emitter.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }

@@ -22,8 +22,8 @@ final class EmptyStateView: NiblessView {
     private func configureUI(_ description: String) {
         isUserInteractionEnabled = false
         descriptionLabel.text = description
-        descriptionLabel.font = .systemFont(ofSize: 15, weight: .light)
-        descriptionLabel.textColor = .lightGray
+        descriptionLabel.font = Style.Font.small
+        descriptionLabel.textColor = .white
         
         if let url = Bundle.main.url(forResource: "searchEmptyResult", withExtension: "gif"),
            let data = try? Data(contentsOf: url) {
