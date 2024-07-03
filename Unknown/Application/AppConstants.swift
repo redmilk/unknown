@@ -14,4 +14,8 @@ enum AppConstants {
         static let initialLocalization = ClassicQuizFetchParams.Localization.en
         static let initialQuestionsCount = 5
     }
+    
+    enum Categories {
+        
+    }
 }

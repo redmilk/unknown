@@ -89,7 +89,7 @@ final class ClassicQuizCell: UICollectionViewCell {
     }
     
     private func configureView() {
-        contentView.backgroundColor = .clear
+        contentView.backgroundColor = .black
         containerStack.backgroundColor = .clear
         clipsToBounds = true
         containerStack.axis = .vertical
@@ -98,13 +98,9 @@ final class ClassicQuizCell: UICollectionViewCell {
         answersStack.spacing = 2
         factsStack.axis = .vertical
         factsStack.spacing = 4
-        factsStack.backgroundColor = .halfBlack
-        explanationLabel.backgroundColor = .halfBlack
-        questionLabel.backgroundColor = .halfBlack
         questionLabel.textColor = .white
         questionLabel.numberOfLines = 0
         questionLabel.textAlignment = .center
-        categoryLabel.backgroundColor = .halfBlack
         categoryLabel.textColor = .ultraBlue
         categoryLabel.textAlignment = .center
         categoryLabel.font = Style.Font.tiny

@@ -1,14 +1,13 @@
 //
-//  HeaderCell.swift
+//  CategoryGeneratorCell.swift
 //  Unknown
 //
-//  Created by Danyl Timofeyev on 13.01.2024.
+//  Created by Danyl Timofeyev on 03.07.2024.
 //
 
 import UIKit
-import SnapKit
 
-final class HeaderCell: ImageCell {
+final class CategoryGeneratorCell: ImageCell {
     enum State {
         case loading
         case loaded
@@ -19,34 +18,31 @@ final class HeaderCell: ImageCell {
         let subtitle: String
         let contentURL: URL?
         let isVideo: Bool
-        let classicQuizFetchParams: ClassicQuizFetchParams
-        let onGenerateClassicQuiz: CommandWith<ClassicQuizFetchParams>?
+        let categoryFetchParams: CategoryFetchParams
+        let onGenerate: CommandWith<CategoryFetchParams>?
         
         static let initial = ViewModel(
             state: .loaded, title: "", subtitle: "", contentURL: nil,
-            isVideo: false, classicQuizFetchParams: .initial, onGenerateClassicQuiz: .nop
+            isVideo: false, categoryFetchParams: .initial, onGenerate: .nop
         )
     }
     
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
-    private let answersCountTitleLabel = UILabel()
+    private let categoriesCountLabel = UILabel()
     private let categoryNameTitleLabel = UILabel()
     private let localizationLabel = UILabel()
-    private let questionsCountLabel = UILabel()
+    private let subCategoriesCountLabel = UILabel()
     private let gradientImageView = UIImageView()
     private let playerView = LoopingVideoPlayerView(isAlwaysMuted: true)
-    private let containerStack = UIStackView()   
-    private let fetchParamsStack = UIStackView()
-    private let categoryStack = UIStackView()
-    private let answersCountStack = UIStackView()
-    private let localizationStack = UIStackView()
-    private let questionsCountStack = UIStackView()
+    private let headerLabelsStack = UIStackView()
+    private let labelsStack = UIStackView()
+    private let textFieldsStack = UIStackView()
     private let generateButton = LoaderButton()
     private let categoryTextfield = InsetTextfield(textInsets: .init(top: 2, left: 4, bottom: 2, right: 4))
-    private let answersCountTextField = InsetTextfield(textInsets: .init(top: 2, left: 4, bottom: 2, right: 4))
+    private let categoriesCountTextField = InsetTextfield(textInsets: .init(top: 2, left: 4, bottom: 2, right: 4))
     private let localizationTextField = InsetTextfield(textInsets: .init(top: 2, left: 4, bottom: 2, right: 4))
-    private let questionsCountTextField = InsetTextfield(textInsets: .init(top: 2, left: 4, bottom: 2, right: 4))
+    private let subcategoriesCountTextField = InsetTextfield(textInsets: .init(top: 2, left: 4, bottom: 2, right: 4))
     private var viewModel: ViewModel = .initial
 
     override init(frame: CGRect) {
@@ -71,47 +67,49 @@ final class HeaderCell: ImageCell {
         case .loading: generateButton.startLoading()
         case .loaded: generateButton.stopLoading()
         }
-        categoryTextfield.text = viewModel.classicQuizFetchParams.categoryName
-        localizationTextField.text = viewModel.classicQuizFetchParams.localization.value
-        answersCountTextField.text = viewModel.classicQuizFetchParams.answersCount.description
-        questionsCountTextField.text = viewModel.classicQuizFetchParams.questionsCount.description
+        categoryTextfield.text = viewModel.categoryFetchParams.rootCategory
+        localizationTextField.text = nil
+        categoriesCountTextField.text = viewModel.categoryFetchParams.numberOfCategories.description
+        subcategoriesCountTextField.text = viewModel.categoryFetchParams.numberOfSubCategories.description
         titleLabel.text = viewModel.title
         descriptionLabel.text = viewModel.subtitle
         playVideo(viewModel.isVideo, viewModel.contentURL)
         titleLabel.text = viewModel.title
         descriptionLabel.text = viewModel.subtitle
         generateButton.onTouchUpInside = { [weak self] _ in
-            self?.onGenerateClassicQuiz()
+            self?.onGenerateCategories()
         }
         playVideo(viewModel.isVideo, viewModel.contentURL)
     }
     
-    private func onGenerateClassicQuiz() {
-        let fetchParams = ClassicQuizFetchParams(
-            categoryName: categoryTextfield.text ?? "",
-            answersCount: Int(answersCountTextField.text ?? "")!, 
-            questionsCount: Int(questionsCountTextField.text ?? "")!,
-            localization: .other(localizationTextField.text ?? "English")
+    private func onGenerateCategories() {
+        let fetchParams = CategoryFetchParams(
+            numberOfCategories: Int(categoriesCountTextField.text ?? "")!,
+            numberOfSubCategories: Int(subcategoriesCountTextField.text ?? "")!,
+            rootCategory: categoryTextfield.text ?? ""
         )
-        viewModel.onGenerateClassicQuiz?.perform(with: fetchParams)
+        viewModel.onGenerate?.perform(with: fetchParams)
         generateButton.startLoading()
         hideKeyboard()
     }
     
     private func configureView() {
         configureTextfield(categoryTextfield)
-        configureTextfield(answersCountTextField)
+        configureTextfield(categoriesCountTextField)
         configureTextfield(localizationTextField)
-        configureTextfield(questionsCountTextField)
-        containerStack.axis = .vertical
-        containerStack.alignment = .center
-        containerStack.spacing = 4
-        fetchParamsStack.axis = .vertical
-        fetchParamsStack.distribution = .equalSpacing
-        fetchParamsStack.spacing = 2
-        answersCountTextField.keyboardType = .numberPad
-        questionsCountTextField.keyboardType = .numberPad
-        titleLabel.textColor = .white
+        configureTextfield(subcategoriesCountTextField)
+        labelsStack.distribution = .fillEqually
+        labelsStack.spacing = 4
+        labelsStack.axis = .vertical
+        textFieldsStack.distribution = .fillEqually
+        textFieldsStack.spacing = 0
+        textFieldsStack.axis = .vertical
+        headerLabelsStack.axis = .vertical
+        headerLabelsStack.alignment = .center
+        headerLabelsStack.spacing = 2
+        categoriesCountTextField.keyboardType = .numberPad
+        subcategoriesCountTextField.keyboardType = .numberPad
+        titleLabel.textColor = .black
         titleLabel.textAlignment = .center
         titleLabel.font = .systemFont(ofSize: 20, weight: .black)
         descriptionLabel.textColor = .white
@@ -126,24 +124,16 @@ final class HeaderCell: ImageCell {
         generateButton.titleLabel?.font = .systemFont(ofSize: 13)
         generateButton.layer.cornerRadius = 12
         generateButton.layer.masksToBounds = true
-        answersCountStack.axis = .horizontal
-        answersCountStack.distribution = .fillEqually
-        categoryStack.axis = .horizontal
-        categoryStack.distribution = .fillEqually
-        localizationStack.axis = .horizontal
-        localizationStack.distribution = .fillEqually
-        questionsCountStack.axis = .horizontal
-        questionsCountStack.distribution = .fillEqually
-        answersCountTitleLabel.text = "Answers"
-        answersCountTitleLabel.textColor = .white
-        answersCountTitleLabel.font = .systemFont(ofSize: 13)
-        questionsCountLabel.text = "Questions"
-        questionsCountLabel.textColor = .white
-        questionsCountLabel.font = .systemFont(ofSize: 13)
+        categoriesCountLabel.text = "Categories"
+        categoriesCountLabel.textColor = .white
+        categoriesCountLabel.font = .systemFont(ofSize: 13)
+        subCategoriesCountLabel.text = "Sub-categories"
+        subCategoriesCountLabel.textColor = .white
+        subCategoriesCountLabel.font = .systemFont(ofSize: 13)
         localizationLabel.text = "Language"
         localizationLabel.textColor = .white
         localizationLabel.font = .systemFont(ofSize: 13)
-        categoryNameTitleLabel.text = "Category"
+        categoryNameTitleLabel.text = "Root Category"
         categoryNameTitleLabel.textColor = .white
         categoryNameTitleLabel.font = .systemFont(ofSize: 13)
     }
@@ -153,28 +143,39 @@ final class HeaderCell: ImageCell {
             playerView,
             imageView,
             gradientImageView,
-            containerStack
-        ])
-        containerStack.addArrangedSubviews([
-            titleLabel,
-            descriptionLabel,
-            fetchParamsStack,
+            headerLabelsStack,
+            labelsStack,
+            textFieldsStack,
             generateButton
         ])
-        fetchParamsStack.addArrangedSubviews([
-            categoryStack,
-            answersCountStack,
-            localizationStack,
-            questionsCountStack
+        headerLabelsStack.addArrangedSubviews([
+            titleLabel,
+            descriptionLabel,
         ])
-        categoryStack.addArrangedSubviews([categoryNameTitleLabel, categoryTextfield])
-        answersCountStack.addArrangedSubviews([answersCountTitleLabel, answersCountTextField])
-        localizationStack.addArrangedSubviews([localizationLabel, localizationTextField])
-        questionsCountStack.addArrangedSubviews([questionsCountLabel, questionsCountTextField])
+        labelsStack.addArrangedSubviews([
+            categoryNameTitleLabel,
+            categoriesCountLabel,
+            subCategoriesCountLabel,
+            localizationLabel,
+        ])
+        textFieldsStack.addArrangedSubviews([
+            categoryTextfield,
+            categoriesCountTextField,
+            subcategoriesCountTextField,
+            localizationTextField,
+        ])
         
-        containerStack.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().multipliedBy(1.2)
+        labelsStack.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalTo(headerLabelsStack.snp.bottom)
+        }
+        textFieldsStack.snp.makeConstraints { make in
+            make.leading.equalTo(labelsStack.snp.trailing)
+            make.top.equalTo(labelsStack.snp.top)
+        }
+        
+        headerLabelsStack.snp.makeConstraints { make in
+            make.top.centerX.equalToSuperview()
         }
         imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -186,6 +187,11 @@ final class HeaderCell: ImageCell {
         playerView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        generateButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(textFieldsStack.snp.bottom)
+        }
     }
     
     private func configureTextfield(_ textfield: UITextField) {
@@ -195,11 +201,11 @@ final class HeaderCell: ImageCell {
         textfield.backgroundColor = .halfBlack
         textfield.layer.cornerRadius = 8
         textfield.layer.masksToBounds = true
-        textfield.font = .systemFont(ofSize: 13, weight: .light)
+        textfield.font = .systemFont(ofSize: 13)
     }
     
     private func hideKeyboard() {
-        [questionsCountTextField, categoryTextfield, answersCountTextField, localizationTextField]
+        [categoriesCountTextField, categoryTextfield, subcategoriesCountTextField, localizationTextField]
             .forEach { $0.resignFirstResponder() }
     }
     
@@ -223,4 +229,3 @@ final class HeaderCell: ImageCell {
         playerView.player.play()
     }
 }
-
