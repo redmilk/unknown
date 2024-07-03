@@ -8,6 +8,9 @@
 import Foundation
 
 enum Prompts {
+    
+    // MARK: - Classic Quiz
+    
     static func getClassicQuiz(params: ClassicQuizFetchParams) -> String {
         let quiz = """
         Generate a JSON object containing \(params.questionsCount) unique questions for a quiz game in the category \(params.categoryName). 
@@ -25,7 +28,7 @@ enum Prompts {
           - `answers` (array of strings): \(params.answersCount) possible answers. Must be in \(params.localization) language. No duplicates.
           - `correctAnswer` (string): the correct answer. Must be in \(params.localization) language.
           - `answerExplanation` (string): well detailed explanation of the correct answer and some curious facts. Must be in \(params.localization) language.
-          - `facts` (array of strings): 10 interesting facts about answer or question itself.
+          - `facts` (array of strings): A few interesting facts about answer or question itself.
 
         Example JSON structure:
 
@@ -52,4 +55,42 @@ enum Prompts {
         """
         return quiz
     }
+    
+    // MARK: - Categories
+    
+    static func getCategories(params: CategoryFetchParams) -> String {
+        let categories = """
+        Generate a JSON object containing categories and sub-categories based on the following parameters:
+
+        \(params.numberOfCategories): The number of top-level categories by given root category \(params.rootCategory).
+        \(params.rootCategory): The root category name.
+        \(params.numberOfSubCategories): The number of sub-categories each top-level category should have.
+        
+        Example of The JSON structure:
+
+        {
+          "categories": [
+            {
+              "title": "Movies",
+              "subCategories": [
+                { "title": "Horror Movies" },
+                { "title": "Sci-Fi Movies" },
+                ...
+              ]
+            },
+            {
+              "name": "iOS SDK",
+              "subCategories": [
+                { "name": "UICollectionView" },
+                { "name": "Combine" },
+                ...
+              ]
+            },
+            ...
+          ]
+        }
+        """
+        return categories
+    }
+
 }
