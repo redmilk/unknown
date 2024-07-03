@@ -57,19 +57,3 @@ struct Message: Codable {
     let content: String
     let createdAt: Date
 }
-
-// MARK: - Classic Quiz Response
-
-struct ClassicQuizDTO: Codable {
-    let category: String
-    let questions: [ClassicQuizQuestionDTO]
-}
-
-// MARK: - Question
-struct ClassicQuizQuestionDTO: Codable {
-    let question: String
-    let answers: [String]
-    let correctAnswer: String
-    let answerExplanation: String
-    let facts: [String]
-}

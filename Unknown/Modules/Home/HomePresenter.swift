@@ -35,7 +35,7 @@ final class HomePresenter: Presenter {
             content: Prompts.getClassicQuiz(params: params),
             createdAt: Date()
         )
-        APIClientImpl.shared.sendMessage(messages: [message], completion: { [weak self] questions in
+        APIClientImpl.shared.getClassicQuizModels(messages: [message], completion: { [weak self] questions in
             guard let self else { return }
             guard let questions else {
                 DispatchQueue.main.async {
@@ -51,10 +51,38 @@ final class HomePresenter: Presenter {
                 self.view?.update(with:self.viewModel)
             }
             
-            DispatchQueue.global(qos: .utility).async {
+            DispatchQueue.global(qos: .default).async {
                 FirestoreClient.shared.uploadClassicQuizModels(questions)
             }
         })
+    }
+    
+    private func onGenerateCategories() {
+        let params = CategoryFetchParams(numberOfCategories: 10, numberOfSubCategories: 10, rootCategory: "Cars")
+        let message = Message(
+            id: UUID(),
+            role: .user,
+            content: Prompts.getCategories(params: params),
+            createdAt: Date()
+        )
+        
+        APIClientImpl.shared.getCategories(
+            messages: [message],
+            completion: { [weak self] root in
+                guard let root else { return }
+                root.categories.forEach { category in
+                    category.subCategories.forEach { subCategory in
+                        let params = ClassicQuizFetchParams(
+                            categoryName: subCategory.title,
+                            answersCount: 4,
+                            questionsCount: 2,
+                            localization: .en
+                        )
+                        self?.onGenerateClassicPack(params: params)
+                    }
+                }
+            }
+        )
     }
     
     private func makeInitialViewModel() -> HomeViewController.ViewModel {
@@ -92,7 +120,8 @@ final class HomePresenter: Presenter {
             isVideo: false,
             classicQuizFetchParams: classicQuizFetchParams,
             onGenerateClassicQuiz: CommandWith(action: { [weak self] fetchParams in
-                self?.onGenerateClassicPack(params: fetchParams)
+                //self?.onGenerateClassicPack(params: fetchParams)
+                self?.onGenerateCategories()
                 self?.classicQuizFetchParams = fetchParams
             })
         )
