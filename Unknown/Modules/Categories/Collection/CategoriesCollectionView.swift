@@ -1,13 +1,13 @@
 //
-//  HomeCollectionView.swift
+//  CategoriesCollectionView.swift
 //  Unknown
 //
-//  Created by Danyl Timofeyev on 13.01.2024.
+//  Created by Danyl Timofeyev on 03.07.2024.
 //
 
-import UIKit
+import UIKit.UICollectionView
 
-final class HomeCollectionView: UICollectionView {
+final class CategoriesCollectionView: UICollectionView {
     
     struct ViewModel {
         struct Block {
@@ -16,10 +16,8 @@ final class HomeCollectionView: UICollectionView {
         }
         
         let blocks: [Block]
-        let onSeeAll: Command
-        let onScrolledToIndex: CommandWith<Int>
         
-        static let initial = ViewModel(blocks: [], onSeeAll: .nop, onScrolledToIndex: .nop)
+        static let initial = ViewModel(blocks: [])
     }
     
     struct Item: HashItem {
@@ -27,7 +25,7 @@ final class HomeCollectionView: UICollectionView {
         let kind: Kind
         
         enum Kind {
-            case header(HeaderCell.ViewModel)
+            case header(ClassicGeneratorCell.ViewModel)
             case horizontalCollection(MultipleImageCell.ViewModel)
             case verticalDouble(ContentCell.ViewModel)
             case horizontal(ContentCell.ViewModel)
@@ -54,7 +52,7 @@ final class HomeCollectionView: UICollectionView {
     init() {
         super.init(frame: .zero, collectionViewLayout: UICollectionViewLayout())
         
-        registerCell(HeaderCell.self)
+        registerCell(ClassicGeneratorCell.self)
         registerCell(HorizontalScrollCell.self)
         registerCell(MultipleImageCell.self)
         registerCell(ContentCell.self)
@@ -90,14 +88,14 @@ final class HomeCollectionView: UICollectionView {
 
 // MARK: - Data source
 
-extension HomeCollectionView {
+extension CategoriesCollectionView {
     private func makeDataSource() -> DataSource {
         let dataSource = DataSource(
             collectionView: self,
             cellProvider: { collectionView, indexPath, item in
                 switch item.kind {
                 case let .header(header):
-                    let cell = collectionView.dequeueCell(ofType: HeaderCell.self, for: indexPath)
+                    let cell = collectionView.dequeueCell(ofType: ClassicGeneratorCell.self, for: indexPath)
                     cell.update(with: header)
                     return cell
                 case let .horizontalCollection(vm):
@@ -147,7 +145,7 @@ extension HomeCollectionView {
 
 // MARK: - UICollectionView Delegate
 
-extension HomeCollectionView: UICollectionViewDelegate {
+extension CategoriesCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch diffable.itemIdentifier(for: indexPath)?.kind {
         case let .verticalDouble(vm):
@@ -166,7 +164,7 @@ extension HomeCollectionView: UICollectionViewDelegate {
 
 // MARK: - Layout
 
-private extension HomeCollectionView {
+private extension CategoriesCollectionView {
     func makeLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout(
             sectionProvider: { [weak self] section, environment in

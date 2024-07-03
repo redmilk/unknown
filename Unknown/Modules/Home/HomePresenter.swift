@@ -13,6 +13,7 @@ final class HomePresenter: Presenter {
     
     private var viewModel: HomeViewController.ViewModel = .initial
     private var classicQuizFetchParams: ClassicQuizFetchParams = .initial
+    private var categoriesFetchParams: CategoryFetchParams = .initial
     private var classicQuizList: [ClassicQuizModel] = []
     private var latestAnsweredID: String?
     
@@ -86,23 +87,9 @@ final class HomePresenter: Presenter {
     }
     
     private func makeInitialViewModel() -> HomeViewController.ViewModel {
-        let headerItem1 = HeaderCell.ViewModel(
-            state: .loaded,
-            title: "Classic Quiz Generator",
-            subtitle: "",
-            contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp"),
-            isVideo: false,
-            classicQuizFetchParams: .initial,
-            onGenerateClassicQuiz: CommandWith(action: { [weak self] fetchParams in
-                self?.onGenerateClassicPack(params: fetchParams)
-                self?.classicQuizFetchParams = fetchParams
-            })
-        )
-        let header = HomeCollectionView.ViewModel.Block(section: .header, items: [
-            HomeCollectionView.Item(hash: UUID().hashValue, kind: .header(headerItem1))
-        ])
+        let headerBlock = makeHeaderBlock(isInitial: true)
         let collectionModel = HomeCollectionView.ViewModel(
-            blocks: [header],
+            blocks: [headerBlock],
             onSeeAll: .nop,
             onScrolledToIndex: .nop
         )
@@ -112,22 +99,7 @@ final class HomePresenter: Presenter {
     
     private func makeViewModel() -> HomeViewController.ViewModel {
         // MARK: - Block 0 - Header
-        let headerItem1 = HeaderCell.ViewModel(
-            state: .loaded,
-            title: "Classic Quiz Generator",
-            subtitle: "",
-            contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp"),
-            isVideo: false,
-            classicQuizFetchParams: classicQuizFetchParams,
-            onGenerateClassicQuiz: CommandWith(action: { [weak self] fetchParams in
-                //self?.onGenerateClassicPack(params: fetchParams)
-                self?.onGenerateCategories()
-                self?.classicQuizFetchParams = fetchParams
-            })
-        )
-        let header = HomeCollectionView.ViewModel.Block(section: .header, items: [
-            HomeCollectionView.Item(hash: UUID().hashValue, kind: .header(headerItem1))
-        ])
+        let headerBlock = makeHeaderBlock(isInitial: false)
         
         // MARK: - Block 1
         let block1Model = ContentCell.ViewModel(title: "Test", previewUrl: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!, onSelect: .nop)
@@ -202,7 +174,7 @@ final class HomePresenter: Presenter {
         
         // MARK: - Result
         let collectionModel = HomeCollectionView.ViewModel(
-            blocks: [header, block4, block3, block2, block1],
+            blocks: [headerBlock, block4, block3, block2, block1],
             onSeeAll: .nop,
             onScrolledToIndex: .nop
         )
@@ -210,6 +182,38 @@ final class HomePresenter: Presenter {
         let viewModel = HomeViewController.ViewModel(state: .loaded, collectionViewModel: collectionModel)
 
         return viewModel
+    }
+    
+    private func makeHeaderBlock(isInitial: Bool) -> HomeCollectionView.ViewModel.Block {
+        let classicGenerator = ClassicGeneratorCell.ViewModel(
+            state: .loaded,
+            title: "Classic Quiz Generator",
+            subtitle: "",
+            contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp"),
+            isVideo: false,
+            classicQuizFetchParams: isInitial ? .initial : classicQuizFetchParams,
+            onGenerateClassicQuiz: CommandWith(action: { [weak self] fetchParams in
+                self?.onGenerateClassicPack(params: fetchParams)
+                self?.classicQuizFetchParams = fetchParams
+            })
+        )
+        let categoriesGenerator = CategoryGeneratorCell.ViewModel(
+            state: .loaded,
+            title: "Categories Generator",
+            subtitle: "",
+            contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp"),
+            isVideo: false,
+            categoryFetchParams: isInitial ? .initial : categoriesFetchParams,
+            onGenerate: CommandWith(action: { [weak self] fetchParams in
+                self?.onGenerateCategories()
+                self?.categoriesFetchParams = fetchParams
+            })
+        )
+        let header = HomeCollectionView.ViewModel.Block(section: .header, items: [
+            HomeCollectionView.Item(hash: UUID().hashValue, kind: .classicGenerator(classicGenerator)),
+            HomeCollectionView.Item(hash: UUID().hashValue, kind: .categoriesGenerator(categoriesGenerator))
+        ])
+        return header
     }
     
     private func onClassicQuizAnswerTap(_ answer: String, correctAnswer: String) {

@@ -50,10 +50,6 @@ final class LoaderButton: UIButton {
             make.centerX.centerY.equalToSuperview()
             make.height.width.equalTo(Constants.height)
         }
-        snp.remakeConstraints { make in
-            make.height.equalTo(Constants.height)
-            make.width.equalTo(Constants.loadindWidth)
-        }
     }
     
     func stopLoading() {
@@ -61,9 +57,5 @@ final class LoaderButton: UIButton {
         setTitleColor(UIColor.white, for: .normal)
         isUserInteractionEnabled = true
         layer.cornerRadius = Constants.height / 2
-        snp.remakeConstraints { make in
-            make.height.equalTo(Constants.height)
-            make.width.equalTo(Constants.width)
-        }
     }
 }
