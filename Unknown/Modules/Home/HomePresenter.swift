@@ -189,8 +189,8 @@ final class HomePresenter: Presenter {
             state: .loaded,
             title: "Classic Quiz Generator",
             subtitle: "",
-            contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp"),
-            isVideo: false,
+            contentURL: URL(string: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"),
+            isVideo: true,
             classicQuizFetchParams: isInitial ? .initial : classicQuizFetchParams,
             onGenerateClassicQuiz: CommandWith(action: { [weak self] fetchParams in
                 self?.onGenerateClassicPack(params: fetchParams)
@@ -201,8 +201,8 @@ final class HomePresenter: Presenter {
             state: .loaded,
             title: "Categories Generator",
             subtitle: "",
-            contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp"),
-            isVideo: false,
+            contentURL: URL(string: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"),
+            isVideo: true,
             categoryFetchParams: isInitial ? .initial : categoriesFetchParams,
             onGenerate: CommandWith(action: { [weak self] fetchParams in
                 self?.onGenerateCategories()
