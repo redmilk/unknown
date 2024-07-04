@@ -1,13 +1,13 @@
 //
-//  HeaderView.swift
+//  RootCategoryCell.swift
 //  Unknown
 //
-//  Created by Danyl Timofeyev on 03.02.2024.
+//  Created by Danyl Timofeyev on 04.07.2024.
 //
 
 import UIKit
 
-final class HeaderView: NoNibCollectionReusableView {
+final class RootCategoryCell: UICollectionViewCell {
     
     struct ViewModel {
         let title: String
@@ -25,9 +25,13 @@ final class HeaderView: NoNibCollectionReusableView {
         configureLayout()
     }
     
-    func update(with model: ViewModel) {
-        headerLabel.text = model.title
-        titleLabel.text = model.subtitle
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func update(with viewModel: ViewModel) {
+        headerLabel.text = viewModel.title
+        titleLabel.text = viewModel.subtitle
         
     }
     

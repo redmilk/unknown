@@ -60,10 +60,8 @@ final class FirestoreClient {
                     guard let self else { return }
                     
                     root.categories.forEach { category in
-                        category.subCategories.forEach { sub in
-                            Task {
-                                try await self.writeSubCategory(category: category.title, subCategory: sub.title)
-                            }
+                        Task {
+                            try await self.writeSubCategory(category: "Cars", subCategory: category.title)
                         }
                     }
                     for try await _ in group { }

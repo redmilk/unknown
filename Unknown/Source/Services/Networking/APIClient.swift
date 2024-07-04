@@ -19,7 +19,7 @@ final class APIClientImpl: APIClient {
     static let shared = APIClientImpl()
     private init() { }
     
-    func getCategories(messages: [Message], completion: @escaping (CategoryRootDTO?) -> Void) {
+    func getCategories(messages: [Message], completion: @escaping (CategoryRootModel?) -> Void) {
         let url = "https://api.openai.com/v1/chat/completions"
         let openAIMessages = messages.map { OpenAIChatMessage(role: $0.role, content: $0.content) }
         let body = OpenAIChatBody(
@@ -41,10 +41,11 @@ final class APIClientImpl: APIClient {
                     if let jsonData = jsonString.data(using: .utf8) {
                         do {
                             let container = try JSONDecoder().decode(CategoryRootDTO.self, from: jsonData)
-                            FirestoreClient.shared.uploadCategoryRoot(container)
+                            //FirestoreClient.shared.uploadCategoryRoot(container)
                             print(jsonString)
                             print(container.categories.count)
-                            completion(container)
+                            completion(CategoryRootModel(dto: container))
+                            
                         } catch let error {
                             self?.checkIfDecodingError(error)
                             completion(nil)

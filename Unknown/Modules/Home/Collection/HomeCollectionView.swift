@@ -31,13 +31,15 @@ final class HomeCollectionView: UICollectionView {
             case categoriesGenerator(CategoryGeneratorCell.ViewModel)
             case horizontalCollection(MultipleImageCell.ViewModel)
             case verticalDouble(ContentCell.ViewModel)
-            case horizontal(ContentCell.ViewModel)
+            case categoryRoot(RootCategoryCell.ViewModel)
+            case subcategory(ContentCell.ViewModel)
             case classicQuiz(ClassicQuizCell.ViewModel)
         }
     }
     
     enum Section: Hashable, CaseIterable {
-        case header
+        case generators
+        case categories
         case horizontalCollections
         case verticalDouble
         case horizontal
@@ -57,6 +59,8 @@ final class HomeCollectionView: UICollectionView {
         
         registerCell(ClassicGeneratorCell.self)
         registerCell(CategoryGeneratorCell.self)
+        registerCell(RootCategoryCell.self)
+        registerCell(CategoryCell.self)
         registerCell(HorizontalScrollCell.self)
         registerCell(MultipleImageCell.self)
         registerCell(ContentCell.self)
@@ -114,7 +118,11 @@ extension HomeCollectionView {
                     let cell = collectionView.dequeueCell(ofType: ContentCell.self, for: indexPath)
                     cell.update(with: vm)
                     return cell
-                case let .horizontal(vm):
+                case let .categoryRoot(vm):
+                    let cell = collectionView.dequeueCell(ofType: RootCategoryCell.self, for: indexPath)
+                    cell.update(with: vm)
+                    return cell
+                case let .subcategory(vm):
                     let cell = collectionView.dequeueCell(ofType: ContentCell.self, for: indexPath)
                     cell.update(with: vm)
                     return cell
@@ -158,7 +166,7 @@ extension HomeCollectionView: UICollectionViewDelegate {
         switch diffable.itemIdentifier(for: indexPath)?.kind {
         case let .verticalDouble(vm):
             vm.onSelect.perform()
-        case let .horizontal(vm):
+        case let .subcategory(vm):
             break//vm.perform()
         case let .horizontalCollection(vm):
             break//vm.perform()
@@ -194,8 +202,10 @@ private extension HomeCollectionView {
             return nil
         }
         switch section {
-        case .header:
+        case .generators:
             return descriptionSection()
+        case .categories:
+            return horizontalSection()
         case .horizontal:
             return horizontalSection()
         case .horizontalCollections:

@@ -8,14 +8,11 @@
 import Foundation
 
 struct CategoryRootDTO: Decodable {
+    let rootCategory: String
+    let description: String
     let categories: [CategoryDTO]
 }
 
 struct CategoryDTO: Decodable {
-    let title: String
-    let subCategories: [SubCategoryDTO]
-}
-
-struct SubCategoryDTO: Decodable {
     let title: String
 }

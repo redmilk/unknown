@@ -60,35 +60,28 @@ enum Prompts {
     
     static func getCategories(params: CategoryFetchParams) -> String {
         let categories = """
-        Generate a JSON object containing categories and sub-categories based on the following parameters:
-
-        \(params.numberOfCategories): The number of top-level categories by given root category \(params.rootCategory).
-        \(params.rootCategory): The root category name.
-        \(params.numberOfSubCategories): The number of sub-categories each top-level category should have.
+        Generate a JSON object containing \(params.numberOfCategories) categories for Quiz Game based on this topic "\(params.rootCategory)"
         
+        
+        Example: Given category: "Movies"
         Example of The JSON structure:
 
         {
+          "rootCategory": \(params.rootCategory),
+          "description": ""Questions about famous historical plots, key characters, notable directors, and accurate portrayals of historical moments. Prepare to prove your expertise on everything from ancient civilizations to modern historical dramas, and see how well you know the cinematic representations of our world's history!""
           "categories": [
             {
-              "title": "Movies",
-              "subCategories": [
-                { "title": "Horror Movies" },
-                { "title": "Sci-Fi Movies" },
-                ...
-              ]
+              "title": "Horror Movies"
             },
             {
-              "name": "iOS SDK",
-              "subCategories": [
-                { "name": "UICollectionView" },
-                { "name": "Combine" },
-                ...
-              ]
+              "title": "Historical Movies"
             },
             ...
           ]
         }
+        
+        
+        
         """
         return categories
     }

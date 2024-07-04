@@ -63,6 +63,7 @@
 		79111BE22C325DCA005320F0 /* SDWebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 79E91C1B2C30C2C40051EA8A /* SDWebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		79111BE52C32803E005320F0 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79111BE42C32803E005320F0 /* Styling.swift */; };
 		79111BE72C32857E005320F0 /* ParticleEmitterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79111BE62C32857E005320F0 /* ParticleEmitterView.swift */; };
+		7920FF032C373AA90037A6E1 /* RootCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7920FF022C373AA90037A6E1 /* RootCategoryCell.swift */; };
 		792C01472C28B891003EA585 /* ClassicQuizCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C01462C28B891003EA585 /* ClassicQuizCell.swift */; };
 		79383C522C2ADC7300F1E3CB /* OpenAIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79383C512C2ADC7300F1E3CB /* OpenAIDTO.swift */; };
 		79383C592C2B0B8900F1E3CB /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79383C582C2B0B8900F1E3CB /* UIApplication+Extension.swift */; };
@@ -505,6 +506,7 @@
 		79111BD42C325D93005320F0 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = "../../Downloads/SDWebImage-master/SDWebImage.xcodeproj"; sourceTree = "<group>"; };
 		79111BE42C32803E005320F0 /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
 		79111BE62C32857E005320F0 /* ParticleEmitterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleEmitterView.swift; sourceTree = "<group>"; };
+		7920FF022C373AA90037A6E1 /* RootCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCategoryCell.swift; sourceTree = "<group>"; };
 		792C01462C28B891003EA585 /* ClassicQuizCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicQuizCell.swift; sourceTree = "<group>"; };
 		79383C512C2ADC7300F1E3CB /* OpenAIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIDTO.swift; sourceTree = "<group>"; };
 		79383C582C2B0B8900F1E3CB /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
@@ -695,6 +697,7 @@
 				7909A7982B534E7800417C60 /* ClassicGeneratorCell.swift */,
 				790ADB8D2C35DFCB00E1F4D0 /* CategoryGeneratorCell.swift */,
 				792C01462C28B891003EA585 /* ClassicQuizCell.swift */,
+				7920FF022C373AA90037A6E1 /* RootCategoryCell.swift */,
 			);
 			path = Questions;
 			sourceTree = "<group>";
@@ -1522,6 +1525,7 @@
 				7909A7972B534D6500417C60 /* AVPlayer+Extension.swift in Sources */,
 				7909A7DF2B5361C000417C60 /* SectionHeaderView.swift in Sources */,
 				7909A7B22B5358D300417C60 /* ContentCell.swift in Sources */,
+				7920FF032C373AA90037A6E1 /* RootCategoryCell.swift in Sources */,
 				7939E3012C2E169100A5C480 /* InsetTextfield.swift in Sources */,
 				7909A7FA2B536C5F00417C60 /* Collection+Extension.swift in Sources */,
 				79785ED12C2CB14600D4A1C6 /* ClassicQuizModel.swift in Sources */,

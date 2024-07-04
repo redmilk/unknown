@@ -15,6 +15,7 @@ final class HomePresenter: Presenter {
     private var classicQuizFetchParams: ClassicQuizFetchParams = .initial
     private var categoriesFetchParams: CategoryFetchParams = .initial
     private var classicQuizList: [ClassicQuizModel] = []
+    private var categoriesList: [CategoryRootModel] = []
     private var latestAnsweredID: String?
     
     init() { 
@@ -59,7 +60,7 @@ final class HomePresenter: Presenter {
     }
     
     private func onGenerateCategories() {
-        let params = CategoryFetchParams(numberOfCategories: 10, numberOfSubCategories: 10, rootCategory: "Cars")
+        let params = CategoryFetchParams(numberOfCategories: 10, rootCategory: "Cars")
         let message = Message(
             id: UUID(),
             role: .user,
@@ -69,19 +70,11 @@ final class HomePresenter: Presenter {
         
         APIClientImpl.shared.getCategories(
             messages: [message],
-            completion: { [weak self] root in
-                guard let root else { return }
-                root.categories.forEach { category in
-                    category.subCategories.forEach { subCategory in
-                        let params = ClassicQuizFetchParams(
-                            categoryName: subCategory.title,
-                            answersCount: 4,
-                            questionsCount: 2,
-                            localization: .en
-                        )
-                        self?.onGenerateClassicPack(params: params)
-                    }
-                }
+            completion: { [weak self] categoryRoot in
+                guard let self, let categoryRoot else { return }
+                self.categoriesList.append(categoryRoot)
+                self.viewModel = self.makeViewModel()
+                self.view?.update(with: self.viewModel)
             }
         )
     }
@@ -113,10 +106,10 @@ final class HomePresenter: Presenter {
         // MARK: - Block 2
         let block2Model = block1Model
         let block2 = HomeCollectionView.ViewModel.Block(section: .horizontal, items: [
-            HomeCollectionView.Item(hash: UUID().hashValue, kind: .horizontal(block2Model)),
-            HomeCollectionView.Item(hash: UUID().hashValue, kind: .horizontal(block2Model)),
-            HomeCollectionView.Item(hash: UUID().hashValue, kind: .horizontal(block2Model)),
-            HomeCollectionView.Item(hash: UUID().hashValue, kind: .horizontal(block2Model)),
+            HomeCollectionView.Item(hash: UUID().hashValue, kind: .subcategory(block2Model)),
+            HomeCollectionView.Item(hash: UUID().hashValue, kind: .subcategory(block2Model)),
+            HomeCollectionView.Item(hash: UUID().hashValue, kind: .subcategory(block2Model)),
+            HomeCollectionView.Item(hash: UUID().hashValue, kind: .subcategory(block2Model)),
         ])
         
         // MARK: - Block 3
@@ -172,9 +165,14 @@ final class HomePresenter: Presenter {
 
         let block4 = HomeCollectionView.ViewModel.Block(section: .classicQuiz, items: block4Items)
         
+        let categories = makeCategoriesBlock()
+        var blocks = [headerBlock, block4, block3, block2, block1]
+        if let categories {
+            blocks.insert(contentsOf: blocks, at: 1)
+        }
         // MARK: - Result
         let collectionModel = HomeCollectionView.ViewModel(
-            blocks: [headerBlock, block4, block3, block2, block1],
+            blocks: blocks,
             onSeeAll: .nop,
             onScrolledToIndex: .nop
         )
@@ -209,11 +207,30 @@ final class HomePresenter: Presenter {
                 self?.categoriesFetchParams = fetchParams
             })
         )
-        let header = HomeCollectionView.ViewModel.Block(section: .header, items: [
+        let header = HomeCollectionView.ViewModel.Block(section: .generators, items: [
             HomeCollectionView.Item(hash: UUID().hashValue, kind: .classicGenerator(classicGenerator)),
             HomeCollectionView.Item(hash: UUID().hashValue, kind: .categoriesGenerator(categoriesGenerator))
         ])
         return header
+    }
+    
+    private func makeCategoriesBlock() -> HomeCollectionView.ViewModel.Block? {
+        guard !categoriesList.isEmpty else { return nil }
+        var items: [HomeCollectionView.Item] = []
+        
+        categoriesList.forEach { rootCategory in
+            let titleItem = HomeCollectionView.Item(
+                hash: UUID().hashValue,
+                kind: .categoryRoot(.init(title: rootCategory.title, subtitle: "rootCategory.description"))
+            )
+            var items = rootCategory.subCategories.map { subCategory in
+                let viewModel = ContentCell.ViewModel(title: subCategory.title, previewUrl: nil, onSelect: .nop)
+                return HomeCollectionView.Item(hash: UUID().hashValue, kind: .subcategory(viewModel))
+            }
+            items.append(titleItem)
+            items.append(contentsOf: items)
+        }
+        return HomeCollectionView.ViewModel.Block(section: .categories, items: items)
     }
     
     private func onClassicQuizAnswerTap(_ answer: String, correctAnswer: String) {
