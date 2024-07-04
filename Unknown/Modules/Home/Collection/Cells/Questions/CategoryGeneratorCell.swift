@@ -70,7 +70,7 @@ final class CategoryGeneratorCell: ImageCell {
         categoryTextfield.text = viewModel.categoryFetchParams.rootCategory
         localizationTextField.text = nil
         categoriesCountTextField.text = viewModel.categoryFetchParams.numberOfCategories.description
-        subcategoriesCountTextField.text = viewModel.categoryFetchParams.numberOfSubCategories.description
+        subcategoriesCountTextField.text = nil//viewModel.categoryFetchParams.numberOfSubCategories.description
         titleLabel.text = viewModel.title
         descriptionLabel.text = viewModel.subtitle
         playVideo(viewModel.isVideo, viewModel.contentURL)
@@ -85,7 +85,6 @@ final class CategoryGeneratorCell: ImageCell {
     private func onGenerateCategories() {
         let fetchParams = CategoryFetchParams(
             numberOfCategories: Int(categoriesCountTextField.text ?? "")!,
-            numberOfSubCategories: Int(subcategoriesCountTextField.text ?? "")!,
             rootCategory: categoryTextfield.text ?? ""
         )
         viewModel.onGenerate?.perform(with: fetchParams)
