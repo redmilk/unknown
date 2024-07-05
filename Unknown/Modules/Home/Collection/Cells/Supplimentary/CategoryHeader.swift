@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RootCategoryCell: UICollectionViewCell {
+final class CategoryHeader: NoNibCollectionReusableView {
     
     struct ViewModel {
         let title: String
@@ -25,13 +25,9 @@ final class RootCategoryCell: UICollectionViewCell {
         configureLayout()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func update(with viewModel: ViewModel) {
-        headerLabel.text = viewModel.title
-        titleLabel.text = viewModel.subtitle
+    func update(with model: ViewModel) {
+        headerLabel.text = model.title
+        titleLabel.text = model.subtitle
         
     }
     
