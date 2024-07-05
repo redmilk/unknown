@@ -16,10 +16,12 @@ final class HomeCollectionView: UICollectionView {
         }
         
         let blocks: [Block]
+        
+        let getTitleForSectionAtIndexPath: ((IndexPath) -> String)?
         let onSeeAll: Command
         let onScrolledToIndex: CommandWith<Int>
         
-        static let initial = ViewModel(blocks: [], onSeeAll: .nop, onScrolledToIndex: .nop)
+        static let initial = ViewModel(blocks: [], getTitleForSectionAtIndexPath: nil, onSeeAll: .nop, onScrolledToIndex: .nop)
     }
     
     struct Item: HashItem {
@@ -31,19 +33,23 @@ final class HomeCollectionView: UICollectionView {
             case categoriesGenerator(CategoryGeneratorCell.ViewModel)
             case horizontalCollection(MultipleImageCell.ViewModel)
             case verticalDouble(ContentCell.ViewModel)
-            case categoryRoot(RootCategoryCell.ViewModel)
             case subcategory(ContentCell.ViewModel)
             case classicQuiz(ClassicQuizCell.ViewModel)
         }
     }
     
-    enum Section: Hashable, CaseIterable {
-        case generators
-        case categories
-        case horizontalCollections
-        case verticalDouble
-        case horizontal
-        case classicQuiz
+    struct Section: HashItem {
+        let hash: Int
+        let kind: Kind
+        
+        enum Kind {
+            case generators
+            case categoriesSection
+            case horizontalCollections
+            case verticalDouble
+            case horizontalSection
+            case classicQuiz
+        }
     }
     
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
@@ -59,13 +65,13 @@ final class HomeCollectionView: UICollectionView {
         
         registerCell(ClassicGeneratorCell.self)
         registerCell(CategoryGeneratorCell.self)
-        registerCell(RootCategoryCell.self)
         registerCell(CategoryCell.self)
         registerCell(HorizontalScrollCell.self)
         registerCell(MultipleImageCell.self)
         registerCell(ContentCell.self)
         registerCell(ClassicQuizCell.self)
 
+        registerSupplementary(CategoryHeader.self)
         registerSupplementary(SectionHeaderView.self)
         registerSupplementary(HeaderView.self)
 
@@ -118,10 +124,6 @@ extension HomeCollectionView {
                     let cell = collectionView.dequeueCell(ofType: ContentCell.self, for: indexPath)
                     cell.update(with: vm)
                     return cell
-                case let .categoryRoot(vm):
-                    let cell = collectionView.dequeueCell(ofType: RootCategoryCell.self, for: indexPath)
-                    cell.update(with: vm)
-                    return cell
                 case let .subcategory(vm):
                     let cell = collectionView.dequeueCell(ofType: ContentCell.self, for: indexPath)
                     cell.update(with: vm)
@@ -138,10 +140,15 @@ extension HomeCollectionView {
             case HeaderView.reuseIdentifier:
                 let header = collectionView.dequeueSupplementary(ofType: HeaderView.self, for: indexPath)
                 switch indexPath.section {
-                case 1: header.update(with: .init(title: "Приложение Смайлики", subtitle: "Цуперское приложение"))
                 case _: break
                 }
                 return header
+            case CategoryHeader.reuseIdentifier:
+                let header = collectionView.dequeueSupplementary(ofType: CategoryHeader.self, for: indexPath)
+                let title = self.viewModel.getTitleForSectionAtIndexPath?(indexPath)
+                header.update(with: .init(title: title ?? "-", subtitle: ""))
+                return header
+
             default:
                 return nil
             }
@@ -201,12 +208,12 @@ private extension HomeCollectionView {
         guard let section = diffable.snapshot().sectionIdentifiers[safe: sectionIndex] else {
             return nil
         }
-        switch section {
+        switch section.kind {
         case .generators:
             return descriptionSection()
-        case .categories:
-            return horizontalSection()
-        case .horizontal:
+        case .categoriesSection:
+            return categoriesSection()
+        case .horizontalSection:
             return horizontalSection()
         case .horizontalCollections:
             return userCollectionsSection()
@@ -251,6 +258,53 @@ private extension HomeCollectionView {
 
         return section
     }
+    
+    func categoriesSection() -> NSCollectionLayoutSection {
+        // Item
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0 / 4.0)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        // Group
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(200)
+        )
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        
+        // Column Group
+        let columnGroupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0 / 3.0),
+            heightDimension: .absolute(200)
+        )
+        let columnGroup = NSCollectionLayoutGroup.horizontal(layoutSize: columnGroupSize, subitems: [group])
+        columnGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        
+        // Section
+        let section = NSCollectionLayoutSection(group: columnGroup)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        section.orthogonalScrollingBehavior = .continuous
+
+        // Header (optional)
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(30)
+        )
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: CategoryHeader.reuseIdentifier,
+            alignment: .top
+        )
+        header.pinToVisibleBounds = true
+        header.zIndex = Int.max
+        section.boundarySupplementaryItems = [header]
+
+        return section
+    }
+
     
     func descriptionSection() -> NSCollectionLayoutSection {
         // Item
