@@ -126,18 +126,6 @@ final class HomePresenter: Presenter {
             ]
         )
         
-//        // MARK: - Block 2
-        let block2Model = block1Model
-        let block2 = HomeCollectionView.ViewModel.Block(
-            section: .init(hash: UUID().hashValue, kind: .horizontalSection),
-            items: [
-                HomeCollectionView.Item(hash: UUID().hashValue, kind: .subcategory(block2Model)),
-                HomeCollectionView.Item(hash: UUID().hashValue, kind: .subcategory(block2Model)),
-                HomeCollectionView.Item(hash: UUID().hashValue, kind: .subcategory(block2Model)),
-                HomeCollectionView.Item(hash: UUID().hashValue, kind: .subcategory(block2Model)),
-            ]
-        )
-        
         // MARK: - Block 3
         let block3Model = MultipleImageCell.ViewModel(
             title: "Test title",
@@ -198,7 +186,7 @@ final class HomePresenter: Presenter {
         )
         
         let categories = makeCategoriesBlock()
-        var blocks = [headerBlock, block4, block3, block2, block1]
+        var blocks = [headerBlock, block4, block3, block1]
         blocks.insert(contentsOf: categories, at: 1)
         // MARK: - Result
         let collectionModel = HomeCollectionView.ViewModel(
@@ -228,7 +216,7 @@ final class HomePresenter: Presenter {
                 self?.classicQuizFetchParams = fetchParams
             })
         )
-        let categoriesGenerator = CategoryGeneratorCell.ViewModel(
+        let categoriesGenerator = CategoriesGeneratorCell.ViewModel(
             state: .loaded,
             title: "Categories Generator",
             subtitle: "",
@@ -255,9 +243,8 @@ final class HomePresenter: Presenter {
         var blocks: [HomeCollectionView.ViewModel.Block] = []
         categoriesList.forEach { category in
             let items = category.subCategories.map { subCategory in
-                let viewModel = ContentCell.ViewModel(title: subCategory.title, previewUrl: nil, onSelect: .nop)
+                let viewModel = SubCategoryCell.ViewModel(title: subCategory.title)
                 return HomeCollectionView.Item(hash: UUID().hashValue, kind: .subcategory(viewModel))
-                
             }
             let block = HomeCollectionView.ViewModel.Block(
                 section: .init(hash: UUID().hashValue, kind: .categoriesSection),

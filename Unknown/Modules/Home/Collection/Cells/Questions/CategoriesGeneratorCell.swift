@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CategoryGeneratorCell: ImageCell {
+final class CategoriesGeneratorCell: ImageCell {
     enum State {
         case loading
         case loaded

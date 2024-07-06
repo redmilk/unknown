@@ -30,10 +30,10 @@ final class HomeCollectionView: UICollectionView {
         
         enum Kind {
             case classicGenerator(ClassicGeneratorCell.ViewModel)
-            case categoriesGenerator(CategoryGeneratorCell.ViewModel)
+            case categoriesGenerator(CategoriesGeneratorCell.ViewModel)
             case horizontalCollection(MultipleImageCell.ViewModel)
             case verticalDouble(ContentCell.ViewModel)
-            case subcategory(ContentCell.ViewModel)
+            case subcategory(SubCategoryCell.ViewModel)
             case classicQuiz(ClassicQuizCell.ViewModel)
         }
     }
@@ -64,12 +64,13 @@ final class HomeCollectionView: UICollectionView {
         super.init(frame: .zero, collectionViewLayout: UICollectionViewLayout())
         
         registerCell(ClassicGeneratorCell.self)
-        registerCell(CategoryGeneratorCell.self)
+        registerCell(CategoriesGeneratorCell.self)
         registerCell(CategoryCell.self)
         registerCell(HorizontalScrollCell.self)
         registerCell(MultipleImageCell.self)
         registerCell(ContentCell.self)
         registerCell(ClassicQuizCell.self)
+        registerCell(SubCategoryCell.self)
 
         registerSupplementary(CategoryHeader.self)
         registerSupplementary(SectionHeaderView.self)
@@ -113,7 +114,7 @@ extension HomeCollectionView {
                     cell.update(with: vm)
                     return cell
                 case let .categoriesGenerator(vm):
-                    let cell = collectionView.dequeueCell(ofType: CategoryGeneratorCell.self, for: indexPath)
+                    let cell = collectionView.dequeueCell(ofType: CategoriesGeneratorCell.self, for: indexPath)
                     cell.update(with: vm)
                     return cell
                 case let .horizontalCollection(vm):
@@ -125,7 +126,7 @@ extension HomeCollectionView {
                     cell.update(with: vm)
                     return cell
                 case let .subcategory(vm):
-                    let cell = collectionView.dequeueCell(ofType: ContentCell.self, for: indexPath)
+                    let cell = collectionView.dequeueCell(ofType: SubCategoryCell.self, for: indexPath)
                     cell.update(with: vm)
                     return cell
                 case let .classicQuiz(vm):
@@ -263,7 +264,7 @@ private extension HomeCollectionView {
         // Item
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0 / 4.0)
+            heightDimension: .fractionalHeight(1.0 / 5.0)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
@@ -273,7 +274,7 @@ private extension HomeCollectionView {
             heightDimension: .absolute(200)
         )
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 2, trailing: 2)
         
         // Column Group
         let columnGroupSize = NSCollectionLayoutSize(
@@ -291,7 +292,7 @@ private extension HomeCollectionView {
         // Header (optional)
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(30)
+            heightDimension: .absolute(20)
         )
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
