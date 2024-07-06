@@ -50,7 +50,7 @@
 		7909A7F82B536BEC00417C60 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7909A7F72B536BEC00417C60 /* UIStackView+Extensions.swift */; };
 		7909A7FA2B536C5F00417C60 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7909A7F92B536C5F00417C60 /* Collection+Extension.swift */; };
 		7909A7FD2B536E7A00417C60 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7909A7FC2B536E7A00417C60 /* Fonts.swift */; };
-		790ADB8E2C35DFCB00E1F4D0 /* CategoryGeneratorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790ADB8D2C35DFCB00E1F4D0 /* CategoryGeneratorCell.swift */; };
+		790ADB8E2C35DFCB00E1F4D0 /* CategoriesGeneratorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790ADB8D2C35DFCB00E1F4D0 /* CategoriesGeneratorCell.swift */; };
 		790AEB5B2B6E61DF004A1784 /* BackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790AEB5A2B6E61DF004A1784 /* BackgroundDecorationView.swift */; };
 		790AEB5D2B6E6240004A1784 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790AEB5C2B6E6240004A1784 /* HeaderView.swift */; };
 		79111B962C31D0EF005320F0 /* FirestoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79111B952C31D0EF005320F0 /* FirestoreClient.swift */; };
@@ -64,6 +64,7 @@
 		79111BE52C32803E005320F0 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79111BE42C32803E005320F0 /* Styling.swift */; };
 		79111BE72C32857E005320F0 /* ParticleEmitterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79111BE62C32857E005320F0 /* ParticleEmitterView.swift */; };
 		7920FF032C373AA90037A6E1 /* CategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7920FF022C373AA90037A6E1 /* CategoryHeader.swift */; };
+		7920FF412C388A150037A6E1 /* SubCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7920FF402C388A150037A6E1 /* SubCategoryCell.swift */; };
 		792C01472C28B891003EA585 /* ClassicQuizCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C01462C28B891003EA585 /* ClassicQuizCell.swift */; };
 		79383C522C2ADC7300F1E3CB /* OpenAIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79383C512C2ADC7300F1E3CB /* OpenAIDTO.swift */; };
 		79383C592C2B0B8900F1E3CB /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79383C582C2B0B8900F1E3CB /* UIApplication+Extension.swift */; };
@@ -499,7 +500,7 @@
 		7909A7F72B536BEC00417C60 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
 		7909A7F92B536C5F00417C60 /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		7909A7FC2B536E7A00417C60 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		790ADB8D2C35DFCB00E1F4D0 /* CategoryGeneratorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryGeneratorCell.swift; sourceTree = "<group>"; };
+		790ADB8D2C35DFCB00E1F4D0 /* CategoriesGeneratorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesGeneratorCell.swift; sourceTree = "<group>"; };
 		790AEB5A2B6E61DF004A1784 /* BackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDecorationView.swift; sourceTree = "<group>"; };
 		790AEB5C2B6E6240004A1784 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		79111B952C31D0EF005320F0 /* FirestoreClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreClient.swift; sourceTree = "<group>"; };
@@ -507,6 +508,7 @@
 		79111BE42C32803E005320F0 /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
 		79111BE62C32857E005320F0 /* ParticleEmitterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleEmitterView.swift; sourceTree = "<group>"; };
 		7920FF022C373AA90037A6E1 /* CategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHeader.swift; sourceTree = "<group>"; };
+		7920FF402C388A150037A6E1 /* SubCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryCell.swift; sourceTree = "<group>"; };
 		792C01462C28B891003EA585 /* ClassicQuizCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicQuizCell.swift; sourceTree = "<group>"; };
 		79383C512C2ADC7300F1E3CB /* OpenAIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIDTO.swift; sourceTree = "<group>"; };
 		79383C582C2B0B8900F1E3CB /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
@@ -696,8 +698,9 @@
 			isa = PBXGroup;
 			children = (
 				7909A7982B534E7800417C60 /* ClassicGeneratorCell.swift */,
-				790ADB8D2C35DFCB00E1F4D0 /* CategoryGeneratorCell.swift */,
+				790ADB8D2C35DFCB00E1F4D0 /* CategoriesGeneratorCell.swift */,
 				792C01462C28B891003EA585 /* ClassicQuizCell.swift */,
+				7920FF402C388A150037A6E1 /* SubCategoryCell.swift */,
 			);
 			path = Questions;
 			sourceTree = "<group>";
@@ -1537,7 +1540,7 @@
 				7909A7792B53431E00417C60 /* SceneDelegate.swift in Sources */,
 				79A22ECA2BFFE8E800FF13A0 /* RequestBuilder.swift in Sources */,
 				7909A7F62B536B2B00417C60 /* CompositionalLayout+Extension.swift in Sources */,
-				790ADB8E2C35DFCB00E1F4D0 /* CategoryGeneratorCell.swift in Sources */,
+				790ADB8E2C35DFCB00E1F4D0 /* CategoriesGeneratorCell.swift in Sources */,
 				79A22ED02BFFE9A400FF13A0 /* Networking.swift in Sources */,
 				796679082C2B667C0079416C /* CirclesActivityIndicator.swift in Sources */,
 				7998762F2C348931001CE073 /* CategoryModel.swift in Sources */,
@@ -1566,6 +1569,7 @@
 				79EB692E2C0A83CF008C055D /* APIError.swift in Sources */,
 				7909A7AE2B5357FD00417C60 /* ProcessingHeaderCell.swift in Sources */,
 				7998762B2C3488D1001CE073 /* CategoryFetchParams.swift in Sources */,
+				7920FF412C388A150037A6E1 /* SubCategoryCell.swift in Sources */,
 				79BB61BC2C2759A2004084C2 /* MultipleImagePreviewCell.swift in Sources */,
 				799876732C35ACFF001CE073 /* CategoriesPresenter.swift in Sources */,
 				799876702C35AB2D001CE073 /* CategoriesViewController.swift in Sources */,
