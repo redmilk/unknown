@@ -30,6 +30,17 @@ final class HomePresenter: Presenter {
 //        self.view?.update(with: .init(collectionViewModel: collectionModel))
     }
     
+    func onGenerateImageForQuestion(_ question: String) async -> String? {
+        let result = await APIClientImpl.shared.requestDalleImages(prompt: question, imageCount: 1, imageSize: "256x256")
+        switch result {
+        case .success(let urls): 
+            return urls.first
+        case .failure(let error):
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
     func onGenerateClassicPack(params: ClassicQuizFetchParams) {
         let message = Message(
             id: UUID(),
@@ -175,6 +186,16 @@ final class HomePresenter: Presenter {
                     self.latestAnsweredID = quizModel?.id
                     self.viewModel = self.makeViewModel()
                     self.view?.update(with: self.viewModel)
+                }), 
+                onGenerateImage: CommandWith(action: { [weak self] indexPath in
+                    guard let self else { return }
+                    Task {
+                        guard var quizModel = self.classicQuizList.first(where: { $0.id == pair.element.id }) else { return }
+                        let imageURLString = await self.onGenerateImageForQuestion(quizModel.question) ?? ""
+                        quizModel.imageURL = URL(string: imageURLString)
+                        self.viewModel = self.makeViewModel()
+                        self.view?.update(with: self.viewModel)
+                    }
                 })
             )
             return HomeCollectionView.Item(hash: UUID().hashValue, kind: .classicQuiz(model))

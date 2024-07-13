@@ -43,10 +43,11 @@ final class ClassicQuizCell: UICollectionViewCell {
         let image: URL?
         let isLatestAnsweredQuiz: Bool
         let onAnswerPressed: CommandWith<String>
+        let onGenerateImage: CommandWith<IndexPath>
         
         static let initial: ViewModel = .init(
             state: .default, question: "", asnwers: [], category: "", correctAnswer: "",
-            answerExplanation: "", curiousFacts: [], image: nil, isLatestAnsweredQuiz: false, onAnswerPressed: .nop
+            answerExplanation: "", curiousFacts: [], image: nil, isLatestAnsweredQuiz: false, onAnswerPressed: .nop, onGenerateImage: .nop
         )
     }
     
@@ -86,6 +87,8 @@ final class ClassicQuizCell: UICollectionViewCell {
         speakExplanationIfNeeded(viewModel: viewModel)
         buildCuriousFactLabels(viewModel.curiousFacts)
         factsStack.isHidden = !viewModel.state.isAnswered
+        
+        imageView.sd_setImage(with: viewModel.image)
     }
     
     private func configureView() {
