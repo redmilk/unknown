@@ -98,6 +98,11 @@
 		79A8F89B2C2EFD16006F5855 /* ClassicQuizFetchParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A8F89A2C2EFD16006F5855 /* ClassicQuizFetchParams.swift */; };
 		79A8F89E2C2F0F09006F5855 /* PromptsGPT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A8F89D2C2F0F09006F5855 /* PromptsGPT.swift */; };
 		79BB61BC2C2759A2004084C2 /* MultipleImagePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB61BB2C2759A2004084C2 /* MultipleImagePreviewCell.swift */; };
+		79C94D1B2C3AE547000DE756 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C94D1A2C3AE547000DE756 /* Logger.swift */; };
+		79C94D1E2C3B0148000DE756 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C94D1D2C3B0148000DE756 /* Coordinator.swift */; };
+		79C94D202C3B02B5000DE756 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C94D1F2C3B02B5000DE756 /* HomeCoordinator.swift */; };
+		79C94D222C3B0449000DE756 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C94D212C3B0449000DE756 /* MainTabBarController.swift */; };
+		79C94D242C3B0518000DE756 /* NavigationControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C94D232C3B0518000DE756 /* NavigationControllerFactory.swift */; };
 		79E91BD32C30BB5F0051EA8A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E91BBF2C30BB2D0051EA8A /* Alamofire.framework */; };
 		79E91BD42C30BB6E0051EA8A /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E91BAE2C30BB1D0051EA8A /* SnapKit.framework */; };
 		79E91BD52C30BB800051EA8A /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 79E91BBF2C30BB2D0051EA8A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -546,6 +551,13 @@
 		79A8F89A2C2EFD16006F5855 /* ClassicQuizFetchParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicQuizFetchParams.swift; sourceTree = "<group>"; };
 		79A8F89D2C2F0F09006F5855 /* PromptsGPT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsGPT.swift; sourceTree = "<group>"; };
 		79BB61BB2C2759A2004084C2 /* MultipleImagePreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleImagePreviewCell.swift; sourceTree = "<group>"; };
+		79C94D162C3ADBDC000DE756 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		79C94D182C3AE466000DE756 /* MyOldCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOldCoordinator.swift; sourceTree = "<group>"; };
+		79C94D1A2C3AE547000DE756 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		79C94D1D2C3B0148000DE756 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		79C94D1F2C3B02B5000DE756 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		79C94D212C3B0449000DE756 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		79C94D232C3B0518000DE756 /* NavigationControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerFactory.swift; sourceTree = "<group>"; };
 		79E91BA82C30BB1D0051EA8A /* SnapKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SnapKit.xcodeproj; path = "../../Downloads/SnapKit-develop/SnapKit.xcodeproj"; sourceTree = "<group>"; };
 		79E91BB12C30BB2C0051EA8A /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "../../Downloads/Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
 		79E91BE72C30C2C40051EA8A /* SnapKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SnapKit.xcodeproj; path = "../../Downloads/SnapKit-develop/SnapKit.xcodeproj"; sourceTree = "<group>"; };
@@ -798,6 +810,7 @@
 				7909A7E92B53649C00417C60 /* Atomic.swift */,
 				7909A7EB2B53652D00417C60 /* Publisher+Extension.swift */,
 				7909A7ED2B53657500417C60 /* Array+Extension.swift */,
+				79C94D1A2C3AE547000DE756 /* Logger.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -807,6 +820,7 @@
 			children = (
 				799876712C35ACD3001CE073 /* Categories */,
 				799F7A622B6E69690080D304 /* Home */,
+				79C94D212C3B0449000DE756 /* MainTabBarController.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -834,7 +848,10 @@
 		7998766C2C35A74E001CE073 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				79C94D1C2C3AFED3000DE756 /* Old */,
 				7998766D2C35A76F001CE073 /* AppCoordinator.swift */,
+				79C94D1D2C3B0148000DE756 /* Coordinator.swift */,
+				79C94D232C3B0518000DE756 /* NavigationControllerFactory.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -872,6 +889,7 @@
 			children = (
 				7909A77A2B53431E00417C60 /* HomeViewController.swift */,
 				799F7A632B6E69910080D304 /* HomePresenter.swift */,
+				79C94D1F2C3B02B5000DE756 /* HomeCoordinator.swift */,
 				799876772C35ADE9001CE073 /* Collection */,
 			);
 			path = Home;
@@ -908,6 +926,15 @@
 				79A8F89D2C2F0F09006F5855 /* PromptsGPT.swift */,
 			);
 			path = Fetching;
+			sourceTree = "<group>";
+		};
+		79C94D1C2C3AFED3000DE756 /* Old */ = {
+			isa = PBXGroup;
+			children = (
+				79C94D162C3ADBDC000DE756 /* Coordinator.swift */,
+				79C94D182C3AE466000DE756 /* MyOldCoordinator.swift */,
+			);
+			path = Old;
 			sourceTree = "<group>";
 		};
 		79E91BA92C30BB1D0051EA8A /* Products */ = {
@@ -1542,6 +1569,7 @@
 				7909A7F62B536B2B00417C60 /* CompositionalLayout+Extension.swift in Sources */,
 				790ADB8E2C35DFCB00E1F4D0 /* CategoriesGeneratorCell.swift in Sources */,
 				79A22ED02BFFE9A400FF13A0 /* Networking.swift in Sources */,
+				79C94D202C3B02B5000DE756 /* HomeCoordinator.swift in Sources */,
 				796679082C2B667C0079416C /* CirclesActivityIndicator.swift in Sources */,
 				7998762F2C348931001CE073 /* CategoryModel.swift in Sources */,
 				79111BE72C32857E005320F0 /* ParticleEmitterView.swift in Sources */,
@@ -1562,6 +1590,7 @@
 				799876752C35AD34001CE073 /* CategoriesCollectionView.swift in Sources */,
 				79111B962C31D0EF005320F0 /* FirestoreClient.swift in Sources */,
 				7909A7AA2B5355E400417C60 /* DisplayLink.swift in Sources */,
+				79C94D1E2C3B0148000DE756 /* Coordinator.swift in Sources */,
 				7909A7EE2B53657500417C60 /* Array+Extension.swift in Sources */,
 				799876272C3487C6001CE073 /* ClassicQuizDTO.swift in Sources */,
 				7909A7952B534D1F00417C60 /* NoNibView.swift in Sources */,
@@ -1570,6 +1599,7 @@
 				7909A7AE2B5357FD00417C60 /* ProcessingHeaderCell.swift in Sources */,
 				7998762B2C3488D1001CE073 /* CategoryFetchParams.swift in Sources */,
 				7920FF412C388A150037A6E1 /* SubCategoryCell.swift in Sources */,
+				79C94D242C3B0518000DE756 /* NavigationControllerFactory.swift in Sources */,
 				79BB61BC2C2759A2004084C2 /* MultipleImagePreviewCell.swift in Sources */,
 				799876732C35ACFF001CE073 /* CategoriesPresenter.swift in Sources */,
 				799876702C35AB2D001CE073 /* CategoriesViewController.swift in Sources */,
@@ -1578,6 +1608,8 @@
 				796679052C2B62260079416C /* LoaderButton.swift in Sources */,
 				7909A7E12B53620400417C60 /* NoNibCollectionReusableView.swift in Sources */,
 				79111BE52C32803E005320F0 /* Styling.swift in Sources */,
+				79C94D222C3B0449000DE756 /* MainTabBarController.swift in Sources */,
+				79C94D1B2C3AE547000DE756 /* Logger.swift in Sources */,
 				7969D90E2B895C6800A67963 /* Presenter.swift in Sources */,
 				7909A7912B534C6E00417C60 /* LoopingVideoPlayerView.swift in Sources */,
 				79383C592C2B0B8900F1E3CB /* UIApplication+Extension.swift in Sources */,

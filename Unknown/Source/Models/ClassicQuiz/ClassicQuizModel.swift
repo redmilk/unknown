@@ -11,6 +11,7 @@ final class ClassicQuizModel: Encodable {
     var answerState: AnswerState
     
     let id: String
+    var imageURL: URL?
     let question: String
     let category: String
     let answers: [String]
@@ -21,9 +22,11 @@ final class ClassicQuizModel: Encodable {
     init(
         dto: ClassicQuizQuestionDTO,
         category: String,
+        imageURL: URL?,
         answerState: AnswerState
     ) {
         self.id = UUID().uuidString
+        self.imageURL = imageURL
         self.question = dto.question
         self.category = category
         self.answers = dto.answers
