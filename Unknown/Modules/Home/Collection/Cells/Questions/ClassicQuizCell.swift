@@ -43,11 +43,10 @@ final class ClassicQuizCell: UICollectionViewCell {
         let image: URL?
         let isLatestAnsweredQuiz: Bool
         let onAnswerPressed: CommandWith<String>
-        let onGenerateImage: CommandWith<IndexPath>
         
         static let initial: ViewModel = .init(
             state: .default, question: "", asnwers: [], category: "", correctAnswer: "",
-            answerExplanation: "", curiousFacts: [], image: nil, isLatestAnsweredQuiz: false, onAnswerPressed: .nop, onGenerateImage: .nop
+            answerExplanation: "", curiousFacts: [], image: nil, isLatestAnsweredQuiz: false, onAnswerPressed: .nop
         )
     }
     
@@ -87,7 +86,7 @@ final class ClassicQuizCell: UICollectionViewCell {
         speakExplanationIfNeeded(viewModel: viewModel)
         buildCuriousFactLabels(viewModel.curiousFacts)
         factsStack.isHidden = !viewModel.state.isAnswered
-        
+        imageView.isHidden = viewModel.image == nil
         imageView.sd_setImage(with: viewModel.image)
     }
     
@@ -110,13 +109,14 @@ final class ClassicQuizCell: UICollectionViewCell {
         explanationLabel.textColor = .white
         explanationLabel.numberOfLines = 0
         explanationLabel.font = Style.Font.small
+        imageView.makeRounded(12)
     }
     
     private func configureLayout() {
-        contentView.addSubview(imageView)
-        imageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        //contentView.addSubview()
+//        imageView.snp.makeConstraints { make in
+//            make.edges.equalToSuperview()
+//        }
         
         contentView.addSubview(containerStack)
         containerStack.snp.makeConstraints { make in
@@ -124,6 +124,7 @@ final class ClassicQuizCell: UICollectionViewCell {
         }
         
         containerStack.addArrangedSubviews([
+            imageView,
             categoryLabel,
             questionLabel,
             answersStack,

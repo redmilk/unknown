@@ -95,6 +95,10 @@
 		79A22ED02BFFE9A400FF13A0 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ECF2BFFE9A400FF13A0 /* Networking.swift */; };
 		79A22ED22BFFEF4700FF13A0 /* JSONDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ED12BFFEF4700FF13A0 /* JSONDecoding.swift */; };
 		79A22ED42BFFF5A600FF13A0 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ED32BFFF5A600FF13A0 /* APIClient.swift */; };
+		79A44FB52C4699E700787482 /* ImageGeneratorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A44FB42C4699E700787482 /* ImageGeneratorCell.swift */; };
+		79A44FB72C469AC000787482 /* DalleImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A44FB62C469AC000787482 /* DalleImageRequest.swift */; };
+		79A44FB92C469AEB00787482 /* DalleImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A44FB82C469AEB00787482 /* DalleImageDTO.swift */; };
+		79A44FBB2C46A11800787482 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A44FBA2C46A11800787482 /* ImageModel.swift */; };
 		79A8F89B2C2EFD16006F5855 /* ClassicQuizFetchParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A8F89A2C2EFD16006F5855 /* ClassicQuizFetchParams.swift */; };
 		79A8F89E2C2F0F09006F5855 /* PromptsGPT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A8F89D2C2F0F09006F5855 /* PromptsGPT.swift */; };
 		79BB61BC2C2759A2004084C2 /* MultipleImagePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB61BB2C2759A2004084C2 /* MultipleImagePreviewCell.swift */; };
@@ -548,6 +552,10 @@
 		79A22ECF2BFFE9A400FF13A0 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		79A22ED12BFFEF4700FF13A0 /* JSONDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoding.swift; sourceTree = "<group>"; };
 		79A22ED32BFFF5A600FF13A0 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		79A44FB42C4699E700787482 /* ImageGeneratorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGeneratorCell.swift; sourceTree = "<group>"; };
+		79A44FB62C469AC000787482 /* DalleImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DalleImageRequest.swift; sourceTree = "<group>"; };
+		79A44FB82C469AEB00787482 /* DalleImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DalleImageDTO.swift; sourceTree = "<group>"; };
+		79A44FBA2C46A11800787482 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		79A8F89A2C2EFD16006F5855 /* ClassicQuizFetchParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicQuizFetchParams.swift; sourceTree = "<group>"; };
 		79A8F89D2C2F0F09006F5855 /* PromptsGPT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsGPT.swift; sourceTree = "<group>"; };
 		79BB61BB2C2759A2004084C2 /* MultipleImagePreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleImagePreviewCell.swift; sourceTree = "<group>"; };
@@ -713,6 +721,7 @@
 				790ADB8D2C35DFCB00E1F4D0 /* CategoriesGeneratorCell.swift */,
 				792C01462C28B891003EA585 /* ClassicQuizCell.swift */,
 				7920FF402C388A150037A6E1 /* SubCategoryCell.swift */,
+				79A44FB42C4699E700787482 /* ImageGeneratorCell.swift */,
 			);
 			path = Questions;
 			sourceTree = "<group>";
@@ -772,6 +781,7 @@
 		79785ECF2C2CB0F100D4A1C6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				79A44FBC2C46A12300787482 /* ImageGenerator */,
 				79383C512C2ADC7300F1E3CB /* OpenAIDTO.swift */,
 				79785ED22C2CBB7800D4A1C6 /* AnswerState.swift */,
 				7998762D2C348904001CE073 /* Category */,
@@ -918,6 +928,16 @@
 				79111B952C31D0EF005320F0 /* FirestoreClient.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		79A44FBC2C46A12300787482 /* ImageGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				79A44FB82C469AEB00787482 /* DalleImageDTO.swift */,
+				79A44FB62C469AC000787482 /* DalleImageRequest.swift */,
+				79A44FBA2C46A11800787482 /* ImageModel.swift */,
+			);
+			path = ImageGenerator;
 			sourceTree = "<group>";
 		};
 		79A8F89C2C2F0EE7006F5855 /* Fetching */ = {
@@ -1540,9 +1560,11 @@
 				7909A7DD2B53600E00417C60 /* UICollectionView+Extension.swift in Sources */,
 				7909A7B42B53593000417C60 /* GradientView.swift in Sources */,
 				7998766E2C35A76F001CE073 /* AppCoordinator.swift in Sources */,
+				79A44FB72C469AC000787482 /* DalleImageRequest.swift in Sources */,
 				7909A7E62B5363C300417C60 /* LimitedArray.swift in Sources */,
 				79785ED32C2CBB7800D4A1C6 /* AnswerState.swift in Sources */,
 				7939E3052C2E20AF00A5C480 /* EmptyStateView.swift in Sources */,
+				79A44FB92C469AEB00787482 /* DalleImageDTO.swift in Sources */,
 				7909A7EC2B53652D00417C60 /* Publisher+Extension.swift in Sources */,
 				79383C522C2ADC7300F1E3CB /* OpenAIDTO.swift in Sources */,
 				7909A7D92B535EA800417C60 /* MultipleImageCell.swift in Sources */,
@@ -1584,6 +1606,7 @@
 				79A8F89E2C2F0F09006F5855 /* PromptsGPT.swift in Sources */,
 				792C01472C28B891003EA585 /* ClassicQuizCell.swift in Sources */,
 				799876292C3487DE001CE073 /* CategoryDTO.swift in Sources */,
+				79A44FB52C4699E700787482 /* ImageGeneratorCell.swift in Sources */,
 				7909A78F2B53459800417C60 /* HashItem.swift in Sources */,
 				79785ECE2C2CB05400D4A1C6 /* AnswerService.swift in Sources */,
 				790AEB5B2B6E61DF004A1784 /* BackgroundDecorationView.swift in Sources */,
@@ -1610,6 +1633,7 @@
 				79111BE52C32803E005320F0 /* Styling.swift in Sources */,
 				79C94D222C3B0449000DE756 /* MainTabBarController.swift in Sources */,
 				79C94D1B2C3AE547000DE756 /* Logger.swift in Sources */,
+				79A44FBB2C46A11800787482 /* ImageModel.swift in Sources */,
 				7969D90E2B895C6800A67963 /* Presenter.swift in Sources */,
 				7909A7912B534C6E00417C60 /* LoopingVideoPlayerView.swift in Sources */,
 				79383C592C2B0B8900F1E3CB /* UIApplication+Extension.swift in Sources */,

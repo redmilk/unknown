@@ -12,10 +12,15 @@ final class HomePresenter: Presenter {
     var view: HomeViewControllerIn!
     
     private var viewModel: HomeViewController.ViewModel = .initial
+    
     private var classicQuizFetchParams: ClassicQuizFetchParams = .initial
     private var categoriesFetchParams: CategoryFetchParams = .initial
+    private var imageFetchParams: DalleImageFetchParams = .initial
+    
     private var classicQuizList: [ClassicQuizModel] = []
     private var categoriesList: [CategoryRootModel] = []
+    private var imageList: [ImageModel] = []
+    
     private var latestAnsweredID: String?
     
     init() { 
@@ -30,18 +35,21 @@ final class HomePresenter: Presenter {
 //        self.view?.update(with: .init(collectionViewModel: collectionModel))
     }
     
-    func onGenerateImageForQuestion(_ question: String) async -> String? {
-        let result = await APIClientImpl.shared.requestDalleImages(prompt: question, imageCount: 1, imageSize: "256x256")
-        switch result {
-        case .success(let urls): 
-            return urls.first
-        case .failure(let error):
-            print(error.localizedDescription)
-            return nil
+    func onGenerateImage(params: DalleImageFetchParams) {
+        imageFetchParams = params
+        Task {
+            let result = await APIClientImpl.shared.getImage(params: params)
+            switch result {
+            case .success(let model):
+                imageList.append(model)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
     
     func onGenerateClassicPack(params: ClassicQuizFetchParams) {
+        classicQuizFetchParams = params
         let message = Message(
             id: UUID(),
             role: .user,
@@ -70,11 +78,8 @@ final class HomePresenter: Presenter {
         })
     }
     
-    private func onGenerateCategories() {
-        let params = CategoryFetchParams(
-            numberOfCategories: categoriesFetchParams.numberOfCategories,
-            rootCategory: categoriesFetchParams.rootCategory
-        )
+    private func onGenerateCategories(params: CategoryFetchParams) {
+        categoriesFetchParams = params
         let message = Message(
             id: UUID(),
             role: .user,
@@ -177,7 +182,7 @@ final class HomePresenter: Presenter {
                 correctAnswer: pair.element.correctAnswer,
                 answerExplanation: pair.element.answerExplanation, 
                 curiousFacts: pair.element.facts,
-                image: nil,
+                image: pair.element.imageURL,
                 isLatestAnsweredQuiz: latestAnsweredID == pair.element.id,
                 onAnswerPressed: CommandWith(action: { [weak self] answer in
                     guard let self else { return }
@@ -186,16 +191,6 @@ final class HomePresenter: Presenter {
                     self.latestAnsweredID = quizModel?.id
                     self.viewModel = self.makeViewModel()
                     self.view?.update(with: self.viewModel)
-                }), 
-                onGenerateImage: CommandWith(action: { [weak self] indexPath in
-                    guard let self else { return }
-                    Task {
-                        guard var quizModel = self.classicQuizList.first(where: { $0.id == pair.element.id }) else { return }
-                        let imageURLString = await self.onGenerateImageForQuestion(quizModel.question) ?? ""
-                        quizModel.imageURL = URL(string: imageURLString)
-                        self.viewModel = self.makeViewModel()
-                        self.view?.update(with: self.viewModel)
-                    }
                 })
             )
             return HomeCollectionView.Item(hash: UUID().hashValue, kind: .classicQuiz(model))
@@ -234,7 +229,6 @@ final class HomePresenter: Presenter {
             classicQuizFetchParams: isInitial ? .initial : classicQuizFetchParams,
             onGenerateClassicQuiz: CommandWith(action: { [weak self] fetchParams in
                 self?.onGenerateClassicPack(params: fetchParams)
-                self?.classicQuizFetchParams = fetchParams
             })
         )
         let categoriesGenerator = CategoriesGeneratorCell.ViewModel(
@@ -245,10 +239,21 @@ final class HomePresenter: Presenter {
             isVideo: true,
             categoryFetchParams: isInitial ? .initial : categoriesFetchParams,
             onGenerate: CommandWith(action: { [weak self] fetchParams in
-                self?.onGenerateCategories()
-                self?.categoriesFetchParams = fetchParams
+                self?.onGenerateCategories(params: fetchParams)
             })
         )
+        let imageGenerator = ImageGeneratorCell.ViewModel(
+            state: .loaded,
+            title: "Image generator",
+            subtitle: "",
+            contentURL: URL(string: "https://www.gstatic.com/webp/gallery/1.webp")!,
+            isVideo: false,
+            imageFetchParams: isInitial ? .initial : imageFetchParams,
+            onGenerate: CommandWith(action: { [weak self] fetchParams in
+                self?.onGenerateImage(params: fetchParams)
+            })
+        )
+        
         let header = HomeCollectionView.ViewModel.Block(
             section: .init(hash: UUID().hashValue, kind: .generators),
             items: [
@@ -280,7 +285,5 @@ final class HomePresenter: Presenter {
         guard answer == correctAnswer else {
             return
         }
-        
-        
     }
 }

@@ -19,46 +19,32 @@ enum DalleImageError: Error {
     case noImageData
 }
 
-struct DalleImageRequest: Encodable {
-    let prompt: String
-    let n: Int
-    let size: String
-}
-
-struct DalleImageResponse: Decodable {
-    struct Data: Decodable {
-        let url: String
-    }
-    let data: [Data]
-}
-
 final class APIClientImpl: APIClient {
     
     static let shared = APIClientImpl()
     private init() { }
 
-    func requestDalleImages(prompt: String, imageCount: Int, imageSize: String) async -> Result<[String], DalleImageError> {
+    func getImage(params: DalleImageFetchParams) async -> Result<ImageModel, DalleImageError> {
         let url = "https://api.openai.com/v1/images/generations"
-        let body = DalleImageRequest(prompt: prompt, n: imageCount, size: imageSize)
+        let body = DalleImageFetchParams(prompt: params.prompt, n: params.n, size: params.size)
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(ProcessInfo.processInfo.environment["GPT_API_KEY"]!)",
             "Content-Type": "application/json"
         ]
-
+        
         let dataRequest = AF.request(url, method: .post, parameters: body, encoder: .json, headers: headers)
         
         return await withCheckedContinuation { continuation in
             dataRequest
                 .validate()
-                .responseDecodable(of: DalleImageResponse.self) { response in
+                .responseDecodable(of: DalleImageDTO.self) { response in
                     switch response.result {
                     case .success(let response):
-                        let imageUrls = response.data.map { $0.url }
-                        if !imageUrls.isEmpty {
-                            continuation.resume(returning: .success(imageUrls))
-                        } else {
-                            continuation.resume(returning: .failure(.noImageData))
+                        guard !response.data.isEmpty else {
+                            return continuation.resume(returning: .failure(.noImageData))
                         }
+                        let model = ImageModel(dto: response)
+                        continuation.resume(returning: .success(model))
                     case .failure(let error):
                         print("Error requesting DALL-E images: \(error.localizedDescription)")
                         continuation.resume(returning: .failure(.networkError(error)))

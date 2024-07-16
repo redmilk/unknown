@@ -85,5 +85,12 @@ enum Prompts {
         """
         return categories
     }
+    
+    static func getImage(prompt: String) -> String {
+        let prompt = """
+        Make image with given details: \(prompt).
+        """
+        return prompt
+    }
 
 }
