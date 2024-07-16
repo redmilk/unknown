@@ -31,6 +31,7 @@ final class HomeCollectionView: UICollectionView {
         enum Kind {
             case classicGenerator(ClassicGeneratorCell.ViewModel)
             case categoriesGenerator(CategoriesGeneratorCell.ViewModel)
+            case imageGenerator(ImageGeneratorCell.ViewModel)
             case horizontalCollection(MultipleImageCell.ViewModel)
             case verticalDouble(ContentCell.ViewModel)
             case subcategory(SubCategoryCell.ViewModel)
@@ -65,6 +66,7 @@ final class HomeCollectionView: UICollectionView {
         
         registerCell(ClassicGeneratorCell.self)
         registerCell(CategoriesGeneratorCell.self)
+        registerCell(ImageGeneratorCell.self)
         registerCell(CategoryCell.self)
         registerCell(HorizontalScrollCell.self)
         registerCell(MultipleImageCell.self)
@@ -115,6 +117,10 @@ extension HomeCollectionView {
                     return cell
                 case let .categoriesGenerator(vm):
                     let cell = collectionView.dequeueCell(ofType: CategoriesGeneratorCell.self, for: indexPath)
+                    cell.update(with: vm)
+                    return cell
+                case let .imageGenerator(vm):
+                    let cell = collectionView.dequeueCell(ofType: ImageGeneratorCell.self, for: indexPath)
                     cell.update(with: vm)
                     return cell
                 case let .horizontalCollection(vm):
