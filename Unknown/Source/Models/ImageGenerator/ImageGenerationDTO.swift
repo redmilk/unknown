@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DalleImageDTO: Decodable {
+struct ImageGenerationDTO: Decodable {
     struct Data: Decodable {
         let url: String
     }

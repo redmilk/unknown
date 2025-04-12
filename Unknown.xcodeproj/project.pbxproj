@@ -71,6 +71,7 @@
 		7939E3012C2E169100A5C480 /* InsetTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7939E3002C2E169100A5C480 /* InsetTextfield.swift */; };
 		7939E3032C2E18BA00A5C480 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7939E3022C2E18BA00A5C480 /* AppConstants.swift */; };
 		7939E3052C2E20AF00A5C480 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7939E3042C2E20AF00A5C480 /* EmptyStateView.swift */; };
+		7963CDCB2DAACC7A009CFF6D /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7963CDCA2DAACC69009CFF6D /* Label.swift */; };
 		796679052C2B62260079416C /* LoaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796679042C2B62260079416C /* LoaderButton.swift */; };
 		796679082C2B667C0079416C /* CirclesActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796679072C2B667C0079416C /* CirclesActivityIndicator.swift */; };
 		7969D90C2B895C2800A67963 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7969D90B2B895C2800A67963 /* BaseViewController.swift */; };
@@ -97,8 +98,8 @@
 		79A22ED42BFFF5A600FF13A0 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A22ED32BFFF5A600FF13A0 /* APIClient.swift */; };
 		79A44FB52C4699E700787482 /* ImageGeneratorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A44FB42C4699E700787482 /* ImageGeneratorCell.swift */; };
 		79A44FB72C469AC000787482 /* DalleImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A44FB62C469AC000787482 /* DalleImageRequest.swift */; };
-		79A44FB92C469AEB00787482 /* DalleImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A44FB82C469AEB00787482 /* DalleImageDTO.swift */; };
-		79A44FBB2C46A11800787482 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A44FBA2C46A11800787482 /* ImageModel.swift */; };
+		79A44FB92C469AEB00787482 /* ImageGenerationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A44FB82C469AEB00787482 /* ImageGenerationDTO.swift */; };
+		79A44FBB2C46A11800787482 /* ImageGenerationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A44FBA2C46A11800787482 /* ImageGenerationModel.swift */; };
 		79A8F89B2C2EFD16006F5855 /* ClassicQuizFetchParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A8F89A2C2EFD16006F5855 /* ClassicQuizFetchParams.swift */; };
 		79A8F89E2C2F0F09006F5855 /* PromptsGPT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A8F89D2C2F0F09006F5855 /* PromptsGPT.swift */; };
 		79BB61BC2C2759A2004084C2 /* MultipleImagePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB61BB2C2759A2004084C2 /* MultipleImagePreviewCell.swift */; };
@@ -524,6 +525,7 @@
 		7939E3002C2E169100A5C480 /* InsetTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetTextfield.swift; sourceTree = "<group>"; };
 		7939E3022C2E18BA00A5C480 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		7939E3042C2E20AF00A5C480 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		7963CDCA2DAACC69009CFF6D /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		796679042C2B62260079416C /* LoaderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderButton.swift; sourceTree = "<group>"; };
 		796679072C2B667C0079416C /* CirclesActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesActivityIndicator.swift; sourceTree = "<group>"; };
 		7969D90B2B895C2800A67963 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -554,8 +556,8 @@
 		79A22ED32BFFF5A600FF13A0 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		79A44FB42C4699E700787482 /* ImageGeneratorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGeneratorCell.swift; sourceTree = "<group>"; };
 		79A44FB62C469AC000787482 /* DalleImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DalleImageRequest.swift; sourceTree = "<group>"; };
-		79A44FB82C469AEB00787482 /* DalleImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DalleImageDTO.swift; sourceTree = "<group>"; };
-		79A44FBA2C46A11800787482 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		79A44FB82C469AEB00787482 /* ImageGenerationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationDTO.swift; sourceTree = "<group>"; };
+		79A44FBA2C46A11800787482 /* ImageGenerationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationModel.swift; sourceTree = "<group>"; };
 		79A8F89A2C2EFD16006F5855 /* ClassicQuizFetchParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicQuizFetchParams.swift; sourceTree = "<group>"; };
 		79A8F89D2C2F0F09006F5855 /* PromptsGPT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsGPT.swift; sourceTree = "<group>"; };
 		79BB61BB2C2759A2004084C2 /* MultipleImagePreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleImagePreviewCell.swift; sourceTree = "<group>"; };
@@ -733,9 +735,18 @@
 			path = ModelsDTO;
 			sourceTree = "<group>";
 		};
+		7963CD972DAACC58009CFF6D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7963CDCA2DAACC69009CFF6D /* Label.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		796679022C2B62100079416C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				7963CD972DAACC58009CFF6D /* UI */,
 				7998766C2C35A74E001CE073 /* Navigation */,
 				79785ECF2C2CB0F100D4A1C6 /* Models */,
 				79111BE32C327FF7005320F0 /* Styling */,
@@ -933,9 +944,9 @@
 		79A44FBC2C46A12300787482 /* ImageGenerator */ = {
 			isa = PBXGroup;
 			children = (
-				79A44FB82C469AEB00787482 /* DalleImageDTO.swift */,
+				79A44FB82C469AEB00787482 /* ImageGenerationDTO.swift */,
 				79A44FB62C469AC000787482 /* DalleImageRequest.swift */,
-				79A44FBA2C46A11800787482 /* ImageModel.swift */,
+				79A44FBA2C46A11800787482 /* ImageGenerationModel.swift */,
 			);
 			path = ImageGenerator;
 			sourceTree = "<group>";
@@ -1564,7 +1575,7 @@
 				7909A7E62B5363C300417C60 /* LimitedArray.swift in Sources */,
 				79785ED32C2CBB7800D4A1C6 /* AnswerState.swift in Sources */,
 				7939E3052C2E20AF00A5C480 /* EmptyStateView.swift in Sources */,
-				79A44FB92C469AEB00787482 /* DalleImageDTO.swift in Sources */,
+				79A44FB92C469AEB00787482 /* ImageGenerationDTO.swift in Sources */,
 				7909A7EC2B53652D00417C60 /* Publisher+Extension.swift in Sources */,
 				79383C522C2ADC7300F1E3CB /* OpenAIDTO.swift in Sources */,
 				7909A7D92B535EA800417C60 /* MultipleImageCell.swift in Sources */,
@@ -1627,13 +1638,14 @@
 				799876732C35ACFF001CE073 /* CategoriesPresenter.swift in Sources */,
 				799876702C35AB2D001CE073 /* CategoriesViewController.swift in Sources */,
 				7909A78B2B53441900417C60 /* HomeCollectionView.swift in Sources */,
+				7963CDCB2DAACC7A009CFF6D /* Label.swift in Sources */,
 				7909A7992B534E7800417C60 /* ClassicGeneratorCell.swift in Sources */,
 				796679052C2B62260079416C /* LoaderButton.swift in Sources */,
 				7909A7E12B53620400417C60 /* NoNibCollectionReusableView.swift in Sources */,
 				79111BE52C32803E005320F0 /* Styling.swift in Sources */,
 				79C94D222C3B0449000DE756 /* MainTabBarController.swift in Sources */,
 				79C94D1B2C3AE547000DE756 /* Logger.swift in Sources */,
-				79A44FBB2C46A11800787482 /* ImageModel.swift in Sources */,
+				79A44FBB2C46A11800787482 /* ImageGenerationModel.swift in Sources */,
 				7969D90E2B895C6800A67963 /* Presenter.swift in Sources */,
 				7909A7912B534C6E00417C60 /* LoopingVideoPlayerView.swift in Sources */,
 				79383C592C2B0B8900F1E3CB /* UIApplication+Extension.swift in Sources */,

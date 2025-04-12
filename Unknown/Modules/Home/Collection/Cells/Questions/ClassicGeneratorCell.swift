@@ -30,10 +30,10 @@ final class ClassicGeneratorCell: ImageCell {
     
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
-    private let answersCountTitleLabel = UILabel()
-    private let categoryNameTitleLabel = UILabel()
-    private let localizationLabel = UILabel()
-    private let questionsCountLabel = UILabel()
+    private let answersCountTitleLabel = DefaultLabel()
+    private let categoryNameTitleLabel = DefaultLabel()
+    private let localizationLabel = DefaultLabel()
+    private let questionsCountLabel = DefaultLabel()
     private let gradientImageView = UIImageView()
     private let playerView = LoopingVideoPlayerView(isAlwaysMuted: true)
     private let headerLabelsStack = UIStackView()
@@ -127,17 +127,9 @@ final class ClassicGeneratorCell: ImageCell {
         generateButton.layer.cornerRadius = 12
         generateButton.layer.masksToBounds = true
         answersCountTitleLabel.text = "Answers"
-        answersCountTitleLabel.textColor = .white
-        answersCountTitleLabel.font = .systemFont(ofSize: 13)
         questionsCountLabel.text = "Questions"
-        questionsCountLabel.textColor = .white
-        questionsCountLabel.font = .systemFont(ofSize: 13)
         localizationLabel.text = "Language"
-        localizationLabel.textColor = .white
-        localizationLabel.font = .systemFont(ofSize: 13)
         categoryNameTitleLabel.text = "Category"
-        categoryNameTitleLabel.textColor = .white
-        categoryNameTitleLabel.font = .systemFont(ofSize: 13)
     }
     
     private func configureLayout() {

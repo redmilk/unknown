@@ -18,8 +18,8 @@ final class ImageGeneratorCell: ImageCell {
         let subtitle: String
         let contentURL: URL?
         let isVideo: Bool
-        let imageFetchParams: DalleImageFetchParams
-        let onGenerate: CommandWith<DalleImageFetchParams>?
+        let imageFetchParams: ImageGenerationFetchParams
+        let onGenerate: CommandWith<ImageGenerationFetchParams>?
         
         static let initial = ViewModel(
             state: .loaded, title: "", subtitle: "", contentURL: nil,
@@ -29,14 +29,23 @@ final class ImageGeneratorCell: ImageCell {
     
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
-    private let promptLabel = UILabel()
+    private let promptLabel = DefaultLabel()
     private let gradientImageView = UIImageView()
     private let playerView = LoopingVideoPlayerView(isAlwaysMuted: true)
     private let headerLabelsStack = UIStackView()
     private let labelsStack = UIStackView()
     private let textFieldsStack = UIStackView()
     private let generateButton = LoaderButton()
-    private let promptTextfield = InsetTextfield(textInsets: .init(top: 2, left: 4, bottom: 2, right: 4))
+    private let promptTextfield = InsetTextfield()
+    private let subjectTextfield = InsetTextfield()
+    private let settingTextfield = InsetTextfield()
+    private let styleTextfield = InsetTextfield()
+    private let moodTextfield = InsetTextfield()
+    private let colorsTextfield = InsetTextfield()
+    private let detailsTextfield = InsetTextfield()
+    private let orientationTextfield = InsetTextfield()
+
+
     private var viewModel: ViewModel = .initial
 
     override init(frame: CGRect) {
@@ -61,6 +70,7 @@ final class ImageGeneratorCell: ImageCell {
         case .loading: generateButton.startLoading()
         case .loaded: generateButton.stopLoading()
         }
+        promptLabel.text = "Prompt"
         promptTextfield.text = viewModel.imageFetchParams.prompt
         titleLabel.text = viewModel.title
         descriptionLabel.text = viewModel.subtitle
@@ -75,7 +85,7 @@ final class ImageGeneratorCell: ImageCell {
     
     private func onGenerateImage() {
         guard let prompt = promptTextfield.text else { return }
-        let fetchParams = DalleImageFetchParams(prompt: prompt, n: 1, size: "1024x1024")
+        let fetchParams = ImageGenerationFetchParams(model: "dall-e-2", style: "natural", quality: "standard", prompt: prompt, n: 2, size: "256x256")
         viewModel.onGenerate?.perform(with: fetchParams)
         generateButton.startLoading()
         hideKeyboard()

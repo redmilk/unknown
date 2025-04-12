@@ -26,8 +26,8 @@ enum Prompts {
         Each question object should have the following properties:
           - `question` (string): the text of the question. Must be in \(params.localization) language.
           - `answers` (array of strings): \(params.answersCount) possible answers. Must be in \(params.localization) language. No duplicates.
-          - `correctAnswer` (string): the correct answer. Must be in \(params.localization) language.
-          - `answerExplanation` (string): well detailed explanation of the correct answer and some curious facts. Must be in \(params.localization) language.
+          - `correct_answer` (string): the correct answer. Must be in \(params.localization) language.
+          - `answer_explanation` (string): well detailed explanation of the correct answer and some curious facts. Must be in \(params.localization) language.
           - `facts` (array of strings): A few interesting facts about answer or question itself.
 
         Example JSON structure:
@@ -39,19 +39,18 @@ enum Prompts {
             {
               "question": "What is the chemical symbol for water?",
               "answers": ["H2O", "O2", "CO2", "H2SO4", "NaCl", "C6H12O6"],
-              "correctAnswer": "H2O",
-              "answerExplanation": "Water is composed of two hydrogen atoms and one oxygen atom, hence its chemical symbol is H2O."
+              "correct_answer": "H2O",
+              "answer_explanation": "Water is composed of two hydrogen atoms and one oxygen atom, hence its chemical symbol is H2O."
             },
             {
               "question": "Which planet is known as the Red Planet?",
               "answers": ["Earth", "Venus", "Mars", "Jupiter", "Saturn", "Neptune"],
-              "correctAnswer": "Mars",
-              "answerExplanation": "Mars is known as the Red Planet due to its reddish appearance, which is caused by iron oxide on its surface."
+              "correct_answer": "Mars",
+              "answer_explanation": "Mars is known as the Red Planet due to its reddish appearance, which is caused by iron oxide on its surface."
             }
             // Add 8 more questions in a similar format
           ]
         }
-
         """
         return quiz
     }

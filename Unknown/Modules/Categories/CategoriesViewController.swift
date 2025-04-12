@@ -8,5 +8,5 @@
 import UIKit.UIViewController
 
 final class CategoriesViewController: UIViewController {
-    
+    private let collection = CategoriesCollectionView()
 }

@@ -7,10 +7,13 @@
 
 import Foundation
 
-struct DalleImageFetchParams: Encodable {
+struct ImageGenerationFetchParams: Encodable {
+    let model: String
+    let style: String
+    let quality: String
     let prompt: String
     let n: Int
     let size: String
     
-    static let initial = DalleImageFetchParams(prompt: "", n: 1, size: "")
+    static let initial = ImageGenerationFetchParams(model: "", style: "", quality: "", prompt: "prompt", n: 1, size: "")
 }

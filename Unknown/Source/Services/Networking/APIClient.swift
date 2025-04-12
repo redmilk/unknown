@@ -24,26 +24,25 @@ final class APIClientImpl: APIClient {
     static let shared = APIClientImpl()
     private init() { }
 
-    func getImage(params: DalleImageFetchParams) async -> Result<ImageModel, DalleImageError> {
+    func getImage(params: ImageGenerationFetchParams) async -> Result<ImageGenerationModel, DalleImageError> {
         let url = "https://api.openai.com/v1/images/generations"
-        let body = DalleImageFetchParams(prompt: params.prompt, n: params.n, size: params.size)
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(ProcessInfo.processInfo.environment["GPT_API_KEY"]!)",
             "Content-Type": "application/json"
         ]
         
-        let dataRequest = AF.request(url, method: .post, parameters: body, encoder: .json, headers: headers)
+        let dataRequest = AF.request(url, method: .post, parameters: params, encoder: .json, headers: headers)
         
         return await withCheckedContinuation { continuation in
             dataRequest
                 .validate()
-                .responseDecodable(of: DalleImageDTO.self) { response in
+                .responseDecodable(of: ImageGenerationDTO.self) { response in
                     switch response.result {
                     case .success(let response):
                         guard !response.data.isEmpty else {
                             return continuation.resume(returning: .failure(.noImageData))
                         }
-                        let model = ImageModel(dto: response)
+                        let model = ImageGenerationModel(dto: response)
                         continuation.resume(returning: .success(model))
                     case .failure(let error):
                         print("Error requesting DALL-E images: \(error.localizedDescription)")
@@ -111,6 +110,7 @@ final class APIClientImpl: APIClient {
                 switch response.result {
                 case .success(let response):
                     let jsonString = response.choices.first?.message.content ?? ""
+                    print(jsonString)
                     if let jsonData = jsonString.data(using: .utf8) {
                         do {
                             let container = try JSONDecoder().decode(ClassicQuizDTO.self, from: jsonData)

@@ -21,4 +21,12 @@ struct ClassicQuizQuestionDTO: Codable {
     let correctAnswer: String
     let answerExplanation: String
     let facts: [String]
+    
+    enum CodingKeys: String, CodingKey {
+        case question
+        case answers
+        case facts
+        case correctAnswer = "correct_answer"
+        case answerExplanation = "answer_explanation"
+    }
 }

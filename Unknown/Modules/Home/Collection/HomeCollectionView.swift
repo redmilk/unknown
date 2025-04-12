@@ -32,10 +32,12 @@ final class HomeCollectionView: UICollectionView {
             case classicGenerator(ClassicGeneratorCell.ViewModel)
             case categoriesGenerator(CategoriesGeneratorCell.ViewModel)
             case imageGenerator(ImageGeneratorCell.ViewModel)
-            case horizontalCollection(MultipleImageCell.ViewModel)
-            case verticalDouble(ContentCell.ViewModel)
+            case imageResult(ContentCell.ViewModel)
             case subcategory(SubCategoryCell.ViewModel)
             case classicQuiz(ClassicQuizCell.ViewModel)
+            // samples
+            case horizontalCollection(MultipleImageCell.ViewModel)
+            case verticalDouble(ContentCell.ViewModel)
         }
     }
     
@@ -46,10 +48,11 @@ final class HomeCollectionView: UICollectionView {
         enum Kind {
             case generators
             case categoriesSection
+            case classicQuiz
+            case imageGenerations
             case horizontalCollections
             case verticalDouble
             case horizontalSection
-            case classicQuiz
         }
     }
     
@@ -121,6 +124,10 @@ extension HomeCollectionView {
                     return cell
                 case let .imageGenerator(vm):
                     let cell = collectionView.dequeueCell(ofType: ImageGeneratorCell.self, for: indexPath)
+                    cell.update(with: vm)
+                    return cell
+                case let .imageResult(vm):
+                    let cell = collectionView.dequeueCell(ofType: ContentCell.self, for: indexPath)
                     cell.update(with: vm)
                     return cell
                 case let .horizontalCollection(vm):
@@ -228,7 +235,46 @@ private extension HomeCollectionView {
             return verticalDoubleSection()
         case .classicQuiz:
             return verticalSingleSection()
+        case .imageGenerations:
+            return imageGenerationsSection()
         }
+    }
+    
+    func imageGenerationsSection() -> NSCollectionLayoutSection {
+        let widthDimension = NSCollectionLayoutDimension.fractionalWidth(1)
+        let heightDimension = NSCollectionLayoutDimension.estimated(150)
+
+        // Item
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: widthDimension,
+            heightDimension: heightDimension
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        // Group
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: heightDimension
+        )
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        // Section
+        let section = NSCollectionLayoutSection(group: group)
+        let inset = Constants.sectionInset
+        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: inset, bottom: 8, trailing: inset)
+        section.interGroupSpacing = 20
+
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: .make(height: Constants.headerHeight),
+            elementKind: HeaderView.reuseIdentifier,
+            alignment: .top
+        )
+        header.pinToVisibleBounds = true
+        header.zIndex = Int.max
+        section.boundarySupplementaryItems = [header]
+
+        return section
     }
     
     func horizontalSection() -> NSCollectionLayoutSection {

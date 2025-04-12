@@ -15,11 +15,11 @@ final class HomePresenter: Presenter {
     
     private var classicQuizFetchParams: ClassicQuizFetchParams = .initial
     private var categoriesFetchParams: CategoryFetchParams = .initial
-    private var imageFetchParams: DalleImageFetchParams = .initial
+    private var imageFetchParams: ImageGenerationFetchParams = .initial
     
     private var classicQuizList: [ClassicQuizModel] = []
     private var categoriesList: [CategoryRootModel] = []
-    private var imageList: [ImageModel] = []
+    private var imageGenerationList: [ImageGenerationModel] = []
     
     private var latestAnsweredID: String?
     
@@ -35,13 +35,17 @@ final class HomePresenter: Presenter {
 //        self.view?.update(with: .init(collectionViewModel: collectionModel))
     }
     
-    func onGenerateImage(params: DalleImageFetchParams) {
+    func onGenerateImage(params: ImageGenerationFetchParams) {
         imageFetchParams = params
         Task {
             let result = await APIClientImpl.shared.getImage(params: params)
             switch result {
             case .success(let model):
-                imageList.append(model)
+                imageGenerationList.append(model)
+                self.viewModel = self.makeViewModel()
+                DispatchQueue.main.async {
+                    self.view?.update(with: self.viewModel)
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -69,7 +73,7 @@ final class HomePresenter: Presenter {
             self.classicQuizList.insert(contentsOf: questions, at: 0)
             self.viewModel = self.makeViewModel()
             DispatchQueue.main.async {
-                self.view?.update(with:self.viewModel)
+                self.view?.update(with: self.viewModel)
             }
             
             DispatchQueue.global(qos: .default).async {
@@ -202,8 +206,11 @@ final class HomePresenter: Presenter {
         )
         
         let categories = makeCategoriesBlock()
+        let imageGenerationResult = makeImageGenerationsBlock()
+        
         var blocks = [headerBlock, block4, block3, block1]
         blocks.insert(contentsOf: categories, at: 1)
+        blocks.insert(contentsOf: imageGenerationResult, at: 1)
         // MARK: - Result
         let collectionModel = HomeCollectionView.ViewModel(
             blocks: blocks, 
@@ -257,6 +264,7 @@ final class HomePresenter: Presenter {
         let header = HomeCollectionView.ViewModel.Block(
             section: .init(hash: UUID().hashValue, kind: .generators),
             items: [
+                HomeCollectionView.Item(hash: UUID().hashValue, kind: .imageGenerator(imageGenerator)),
                 HomeCollectionView.Item(hash: UUID().hashValue, kind: .classicGenerator(classicGenerator)),
                 HomeCollectionView.Item(hash: UUID().hashValue, kind: .categoriesGenerator(categoriesGenerator))
             ]
@@ -277,6 +285,24 @@ final class HomePresenter: Presenter {
                 items: items
             )
             blocks.append(block)
+        }
+        return blocks
+    }
+    
+    private func makeImageGenerationsBlock() -> [HomeCollectionView.ViewModel.Block] {
+        let items = imageGenerationList.map {
+            let subItems = $0.imageURLs.map {
+                print($0)
+                let vm = ContentCell.ViewModel(title: "", previewUrl: $0, onSelect: .nop)
+                return HomeCollectionView.Item(hash: UUID().hashValue, kind: .imageResult(vm))
+            }
+            return subItems
+        }
+        let blocks = items.map {
+            return HomeCollectionView.ViewModel.Block(
+                section: .init(hash: UUID().hashValue, kind: .imageGenerations),
+                items: $0
+            )
         }
         return blocks
     }

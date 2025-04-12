@@ -13,13 +13,14 @@ protocol HomeViewControllerIn {
 }
 
 final class HomeViewController: BaseViewController, HomeViewControllerIn {
-    enum State {
-        case empty
-        case loading
-        case loaded
-    }
     
     struct ViewModel {
+        enum State {
+            case empty
+            case loading
+            case loaded
+        }
+        
         let state: State
         let collectionViewModel: HomeCollectionView.ViewModel
         static let initial = ViewModel(state: .empty, collectionViewModel: .initial)

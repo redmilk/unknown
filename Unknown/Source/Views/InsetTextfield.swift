@@ -14,7 +14,7 @@ final class InsetTextfield: UITextField {
         }
     }
     
-    init(textInsets: UIEdgeInsets) {
+    init(textInsets: UIEdgeInsets = UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)) {
         self.textInsets = textInsets
         super.init(frame: .zero)
     }

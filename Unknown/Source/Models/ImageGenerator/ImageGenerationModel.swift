@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct ImageModel {
+struct ImageGenerationModel {
     var imageURLs: [URL] = []
  
-    init(dto: DalleImageDTO) {
+    init(dto: ImageGenerationDTO) {
         dto.data.forEach { data in
             imageURLs.append(URL(string: data.url)!)
         }
