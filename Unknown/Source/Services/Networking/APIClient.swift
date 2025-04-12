@@ -27,7 +27,7 @@ final class APIClientImpl: APIClient {
     func getImage(params: ImageGenerationFetchParams) async -> Result<ImageGenerationModel, DalleImageError> {
         let url = "https://api.openai.com/v1/images/generations"
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(ProcessInfo.processInfo.environment["GPT_API_KEY"]!)",
+            "Authorization": "Bearer \(apiKey)",
             "Content-Type": "application/json"
         ]
         
@@ -60,7 +60,7 @@ final class APIClientImpl: APIClient {
             messages: openAIMessages,
             response_format: .init(type: "json_object"))
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(ProcessInfo.processInfo.environment["GPT_API_KEY"]!)",
+            "Authorization": "Bearer \(apiKey)",
             "Content-Type": "application/json"
         ]
         
@@ -100,7 +100,7 @@ final class APIClientImpl: APIClient {
             messages: openAIMessages,
             response_format: .init(type: "json_object"))
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(ProcessInfo.processInfo.environment["GPT_API_KEY"]!)",
+            "Authorization": "Bearer \(apiKey)",
             "Content-Type": "application/json"
         ]
         

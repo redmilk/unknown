@@ -72,11 +72,13 @@
 		7939E3032C2E18BA00A5C480 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7939E3022C2E18BA00A5C480 /* AppConstants.swift */; };
 		7939E3052C2E20AF00A5C480 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7939E3042C2E20AF00A5C480 /* EmptyStateView.swift */; };
 		7963CDCB2DAACC7A009CFF6D /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7963CDCA2DAACC69009CFF6D /* Label.swift */; };
+		7963CDCD2DAAD512009CFF6D /* RemoteConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7963CDCC2DAAD508009CFF6D /* RemoteConfigService.swift */; };
+		7963CDD22DAADBC2009CFF6D /* RemoteConfigModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7963CDD12DAADBB9009CFF6D /* RemoteConfigModels.swift */; };
+		7963CDD42DAADC8F009CFF6D /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7963CDD32DAADC8F009CFF6D /* FirebaseRemoteConfigSwift */; };
 		796679052C2B62260079416C /* LoaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796679042C2B62260079416C /* LoaderButton.swift */; };
 		796679082C2B667C0079416C /* CirclesActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796679072C2B667C0079416C /* CirclesActivityIndicator.swift */; };
 		7969D90C2B895C2800A67963 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7969D90B2B895C2800A67963 /* BaseViewController.swift */; };
 		7969D90E2B895C6800A67963 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7969D90D2B895C6800A67963 /* Presenter.swift */; };
-		79785ECE2C2CB05400D4A1C6 /* AnswerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79785ECD2C2CB05400D4A1C6 /* AnswerService.swift */; };
 		79785ED12C2CB14600D4A1C6 /* ClassicQuizModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79785ED02C2CB14600D4A1C6 /* ClassicQuizModel.swift */; };
 		79785ED32C2CBB7800D4A1C6 /* AnswerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79785ED22C2CBB7800D4A1C6 /* AnswerState.swift */; };
 		799876272C3487C6001CE073 /* ClassicQuizDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799876262C3487C6001CE073 /* ClassicQuizDTO.swift */; };
@@ -526,11 +528,12 @@
 		7939E3022C2E18BA00A5C480 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		7939E3042C2E20AF00A5C480 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		7963CDCA2DAACC69009CFF6D /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		7963CDCC2DAAD508009CFF6D /* RemoteConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigService.swift; sourceTree = "<group>"; };
+		7963CDD12DAADBB9009CFF6D /* RemoteConfigModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigModels.swift; sourceTree = "<group>"; };
 		796679042C2B62260079416C /* LoaderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderButton.swift; sourceTree = "<group>"; };
 		796679072C2B667C0079416C /* CirclesActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesActivityIndicator.swift; sourceTree = "<group>"; };
 		7969D90B2B895C2800A67963 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7969D90D2B895C6800A67963 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
-		79785ECD2C2CB05400D4A1C6 /* AnswerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerService.swift; sourceTree = "<group>"; };
 		79785ED02C2CB14600D4A1C6 /* ClassicQuizModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicQuizModel.swift; sourceTree = "<group>"; };
 		79785ED22C2CBB7800D4A1C6 /* AnswerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerState.swift; sourceTree = "<group>"; };
 		799876262C3487C6001CE073 /* ClassicQuizDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicQuizDTO.swift; sourceTree = "<group>"; };
@@ -589,6 +592,7 @@
 				79111BE12C325DBE005320F0 /* SDWebImage.framework in Frameworks */,
 				79E91BD42C30BB6E0051EA8A /* SnapKit.framework in Frameworks */,
 				79111BCD2C325A23005320F0 /* FirebaseCrashlytics in Frameworks */,
+				7963CDD42DAADC8F009CFF6D /* FirebaseRemoteConfigSwift in Frameworks */,
 				79111BD12C325A23005320F0 /* FirebaseRemoteConfig in Frameworks */,
 				79E91BD32C30BB5F0051EA8A /* Alamofire.framework in Frameworks */,
 				79111BD32C325A23005320F0 /* FirebaseStorage in Frameworks */,
@@ -741,6 +745,15 @@
 				7963CDCA2DAACC69009CFF6D /* Label.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		7963CDCE2DAAD9CF009CFF6D /* RemoteConfig */ = {
+			isa = PBXGroup;
+			children = (
+				7963CDD12DAADBB9009CFF6D /* RemoteConfigModels.swift */,
+				7963CDCC2DAAD508009CFF6D /* RemoteConfigService.swift */,
+			);
+			path = RemoteConfig;
 			sourceTree = "<group>";
 		};
 		796679022C2B62100079416C /* Source */ = {
@@ -919,9 +932,9 @@
 		79A22EC72BFFE35000FF13A0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7963CDCE2DAAD9CF009CFF6D /* RemoteConfig */,
 				79A8F89C2C2F0EE7006F5855 /* Fetching */,
 				79A22EC82BFFE36000FF13A0 /* Networking */,
-				79785ECD2C2CB05400D4A1C6 /* AnswerService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1124,6 +1137,7 @@
 				79111BCE2C325A23005320F0 /* FirebaseFirestoreSwift */,
 				79111BD02C325A23005320F0 /* FirebaseRemoteConfig */,
 				79111BD22C325A23005320F0 /* FirebaseStorage */,
+				7963CDD32DAADC8F009CFF6D /* FirebaseRemoteConfigSwift */,
 			);
 			productName = Unknown;
 			productReference = 7909A7732B53431E00417C60 /* Unknown.app */;
@@ -1601,6 +1615,7 @@
 				79A22ECA2BFFE8E800FF13A0 /* RequestBuilder.swift in Sources */,
 				7909A7F62B536B2B00417C60 /* CompositionalLayout+Extension.swift in Sources */,
 				790ADB8E2C35DFCB00E1F4D0 /* CategoriesGeneratorCell.swift in Sources */,
+				7963CDD22DAADBC2009CFF6D /* RemoteConfigModels.swift in Sources */,
 				79A22ED02BFFE9A400FF13A0 /* Networking.swift in Sources */,
 				79C94D202C3B02B5000DE756 /* HomeCoordinator.swift in Sources */,
 				796679082C2B667C0079416C /* CirclesActivityIndicator.swift in Sources */,
@@ -1609,6 +1624,7 @@
 				7909A7EA2B53649C00417C60 /* Atomic.swift in Sources */,
 				799F7A642B6E69910080D304 /* HomePresenter.swift in Sources */,
 				7909A78D2B53444400417C60 /* Command.swift in Sources */,
+				7963CDCD2DAAD512009CFF6D /* RemoteConfigService.swift in Sources */,
 				7909A7D72B535E5800417C60 /* HorizontalScrollCell.swift in Sources */,
 				7909A79B2B534E9E00417C60 /* ImageCell.swift in Sources */,
 				7909A7B02B53589E00417C60 /* UIView+Extension.swift in Sources */,
@@ -1619,7 +1635,6 @@
 				799876292C3487DE001CE073 /* CategoryDTO.swift in Sources */,
 				79A44FB52C4699E700787482 /* ImageGeneratorCell.swift in Sources */,
 				7909A78F2B53459800417C60 /* HashItem.swift in Sources */,
-				79785ECE2C2CB05400D4A1C6 /* AnswerService.swift in Sources */,
 				790AEB5B2B6E61DF004A1784 /* BackgroundDecorationView.swift in Sources */,
 				799876752C35AD34001CE073 /* CategoriesCollectionView.swift in Sources */,
 				79111B962C31D0EF005320F0 /* FirestoreClient.swift in Sources */,
@@ -1901,6 +1916,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 79111BC92C325A23005320F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		7963CDD32DAADC8F009CFF6D /* FirebaseRemoteConfigSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79111BC92C325A23005320F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfigSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

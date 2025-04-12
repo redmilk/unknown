@@ -7,6 +7,8 @@
 
 import UIKit
 
+var apiKey: String = "-"
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -25,7 +27,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         presenter.view = controller
 
         window?.rootViewController = navigation
-        window?.makeKeyAndVisible()
+        
+        Task {
+            do {
+                let settings = try await RemoteConfigService.shared.fetchSettings()
+                apiKey = settings.key
+                await MainActor.run {
+                    window?.makeKeyAndVisible()
+                }
+            } catch let error as RemoteConfigService.ConfigError {
+                print(error.description)
+            }
+        }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
