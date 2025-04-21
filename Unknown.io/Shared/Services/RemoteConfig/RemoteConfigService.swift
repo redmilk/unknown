@@ -7,11 +7,11 @@
 
 import FirebaseCore
 import FirebaseRemoteConfig
-import FirebaseRemoteConfigSwift
+//import FirebaseRemoteConfigSwift
 
 final class RemoteConfigService {
     
-    enum ConfigError: Error {
+    enum RemoteConfigError: Error {
         case fetchSettingsError
         case encodeError
         case decodingError
@@ -41,19 +41,19 @@ final class RemoteConfigService {
     func fetchSettings() async throws -> RemoteConfigDTO.Settings {
         let status = try await remoteConfig.fetchAndActivate()
         guard status != .error else {
-            throw ConfigError.fetchSettingsError
+            throw RemoteConfigError.fetchSettingsError
         }
         
-        let jsonString = remoteConfig["global_settings"].stringValue ?? ""
+        let jsonString = remoteConfig["global_settings"].stringValue
         guard let data = jsonString.data(using: .utf8) else {
-            throw ConfigError.encodeError
+            throw RemoteConfigError.encodeError
         }
         
         do {
             let settings = try JSONDecoder().decode(RemoteConfigDTO.Settings.self, from: data)
             return settings
         } catch {
-            throw ConfigError.decodingError
+            throw RemoteConfigError.decodingError
         }
     }
 }

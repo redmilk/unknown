@@ -19,6 +19,8 @@ enum DalleImageError: Error {
     case noImageData
 }
 
+var apiKey = ""
+
 final class APIClientImpl: APIClient {
     
     static let shared = APIClientImpl()

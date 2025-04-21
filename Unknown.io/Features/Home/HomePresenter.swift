@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class HomePresenter: Presenter {
+final class HomeViewModel {
     
     var view: HomeViewControllerIn!
     
@@ -24,7 +24,7 @@ final class HomePresenter: Presenter {
     private var latestAnsweredID: String?
     
     init() { 
-        // TODO: Add DI
+       
     }
     
     func viewDidLoad() {

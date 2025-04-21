@@ -27,6 +27,7 @@ final class ParticleEmitterView: UIView {
         cell.scale = 0.02
         cell.scaleRange = 0.02 / 2
         cell.contents = particleImage.cgImage
+        cell.alphaRange = 0.7
         return cell
     }
     

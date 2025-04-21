@@ -6,7 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2AC0E5A2E2906B40981FFE36 /* Pods_Unknown_io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 441D13C0B35209404C543005 /* Pods_Unknown_io.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		14D8F893AD7348535E558CEB /* Pods-Unknown.io.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unknown.io.debug.xcconfig"; path = "Target Support Files/Pods-Unknown.io/Pods-Unknown.io.debug.xcconfig"; sourceTree = "<group>"; };
+		441D13C0B35209404C543005 /* Pods_Unknown_io.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Unknown_io.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		49C4F94436E69D07651D65CF /* Pods-Unknown.io.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unknown.io.release.xcconfig"; path = "Target Support Files/Pods-Unknown.io/Pods-Unknown.io.release.xcconfig"; sourceTree = "<group>"; };
 		7963CE972DAC33E5009CFF6D /* Unknown.io.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unknown.io.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -14,8 +21,8 @@
 		7963CF992DAC36C4009CFF6D /* Exceptions for "Unknown.io" folder in "Unknown.io" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Source/Navigation/Old/Coordinator.swift,
-				Source/Navigation/Old/MyOldCoordinator.swift,
+				Shared/Navigation/Old/Coordinator.swift,
+				Shared/Navigation/Old/MyOldCoordinator.swift,
 			);
 			target = 7963CE962DAC33E5009CFF6D /* Unknown.io */;
 		};
@@ -37,17 +44,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AC0E5A2E2906B40981FFE36 /* Pods_Unknown_io.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		547FD85F885B678216B2C967 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				441D13C0B35209404C543005 /* Pods_Unknown_io.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7963CE8E2DAC33E5009CFF6D = {
 			isa = PBXGroup;
 			children = (
 				7963CE992DAC33E5009CFF6D /* Unknown.io */,
 				7963CE982DAC33E5009CFF6D /* Products */,
+				A8950D23D95699CE23B2AC82 /* Pods */,
+				547FD85F885B678216B2C967 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,6 +77,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A8950D23D95699CE23B2AC82 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				14D8F893AD7348535E558CEB /* Pods-Unknown.io.debug.xcconfig */,
+				49C4F94436E69D07651D65CF /* Pods-Unknown.io.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -66,9 +93,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7963CEA52DAC33E6009CFF6D /* Build configuration list for PBXNativeTarget "Unknown.io" */;
 			buildPhases = (
+				8256F588772D07442B966075 /* [CP] Check Pods Manifest.lock */,
 				7963CE932DAC33E5009CFF6D /* Sources */,
 				7963CE942DAC33E5009CFF6D /* Frameworks */,
 				7963CE952DAC33E5009CFF6D /* Resources */,
+				A8D77771D344C0B613013142 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -78,8 +107,6 @@
 				7963CE992DAC33E5009CFF6D /* Unknown.io */,
 			);
 			name = Unknown.io;
-			packageProductDependencies = (
-			);
 			productName = Unknown.io;
 			productReference = 7963CE972DAC33E5009CFF6D /* Unknown.io.app */;
 			productType = "com.apple.product-type.application";
@@ -108,10 +135,6 @@
 			);
 			mainGroup = 7963CE8E2DAC33E5009CFF6D;
 			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-				7963CFA62DAC3875009CFF6D /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				7963CFA72DAC389F009CFF6D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7963CE982DAC33E5009CFF6D /* Products */;
 			projectDirPath = "";
@@ -131,6 +154,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8256F588772D07442B966075 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Unknown.io-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A8D77771D344C0B613013142 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Unknown.io/Pods-Unknown.io-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Unknown.io/Pods-Unknown.io-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Unknown.io/Pods-Unknown.io-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7963CE932DAC33E5009CFF6D /* Sources */ = {
@@ -264,20 +329,22 @@
 		};
 		7963CEA62DAC33E6009CFF6D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14D8F893AD7348535E558CEB /* Pods-Unknown.io.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Unknown.io/Preview Content\"";
 				DEVELOPMENT_TEAM = XC8MJ87UQY;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -293,20 +360,22 @@
 		};
 		7963CEA72DAC33E6009CFF6D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49C4F94436E69D07651D65CF /* Pods-Unknown.io.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Unknown.io/Preview Content\"";
 				DEVELOPMENT_TEAM = XC8MJ87UQY;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -342,25 +411,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		7963CFA62DAC3875009CFF6D /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.21.0;
-			};
-		};
-		7963CFA72DAC389F009CFF6D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 11.11.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 7963CE8F2DAC33E5009CFF6D /* Project object */;
 }

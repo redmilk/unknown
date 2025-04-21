@@ -5,9 +5,9 @@
 //  Created by Danyl Timofeyev on 30.06.2024.
 //
 
-import Foundation
-import FirebaseAuth
 import FirebaseFirestore
+import FirebaseCore
+import FirebaseAuth
 
 extension Encodable {
     func toDictionary() throws -> [String: Any] {
