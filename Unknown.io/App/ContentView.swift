@@ -13,6 +13,19 @@ struct ContentView: View {
     @State var errorMessage: String?
     
     var body: some View {
+        TabView {
+            feed
+                .tabItem {
+                    Label("Feed", systemImage: "house")
+                }
+            feed
+                .tabItem {
+                    Label("Feed 2", systemImage: "house")
+                }
+        }
+    }
+    
+    private var feed: some View {
         Group {
             if isLoaded {
                 HomeViewWrapper()
@@ -35,8 +48,6 @@ struct ContentView: View {
                 errorMessage = error.localizedDescription
             }
         }
-       
-        
     }
 }
 

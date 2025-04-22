@@ -9,10 +9,10 @@ import Foundation
 
 enum AppConstants {
     enum ClassicQuiz {
-        static let initialCategory = "History of Computers"
+        static let initialCategory = "Hip-Hop music"
         static let initialAnswersCount = 4
         static let initialLocalization = ClassicQuizFetchParams.Localization.en
-        static let initialQuestionsCount = 5
+        static let initialQuestionsCount = 10
     }
     
     enum Categories {

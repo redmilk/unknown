@@ -30,9 +30,9 @@ final class HomeViewModel {
     func viewDidLoad() {
         viewModel = makeInitialViewModel()
         view?.update(with: viewModel)
-//        /// TEST
-//        let collectionModel = self.makeViewModel(classicQuiz: HomeUtils.quiz)
-//        self.view?.update(with: .init(collectionViewModel: collectionModel))
+
+        onGenerateCategories(params: categoriesFetchParams)
+        onGenerateClassicPack(params: classicQuizFetchParams)
     }
     
     func onGenerateImage(params: ImageGenerationFetchParams) {
@@ -264,9 +264,9 @@ final class HomeViewModel {
         let header = HomeCollectionView.ViewModel.Block(
             section: .init(hash: UUID().hashValue, kind: .generators),
             items: [
-                HomeCollectionView.Item(hash: UUID().hashValue, kind: .imageGenerator(imageGenerator)),
+                HomeCollectionView.Item(hash: UUID().hashValue, kind: .categoriesGenerator(categoriesGenerator)),
                 HomeCollectionView.Item(hash: UUID().hashValue, kind: .classicGenerator(classicGenerator)),
-                HomeCollectionView.Item(hash: UUID().hashValue, kind: .categoriesGenerator(categoriesGenerator))
+                HomeCollectionView.Item(hash: UUID().hashValue, kind: .imageGenerator(imageGenerator))
             ]
         )
         return header
@@ -277,7 +277,14 @@ final class HomeViewModel {
         var blocks: [HomeCollectionView.ViewModel.Block] = []
         categoriesList.forEach { category in
             let items = category.subCategories.map { subCategory in
-                let viewModel = SubCategoryCell.ViewModel(title: subCategory.title)
+                let viewModel = SubCategoryCell.ViewModel(title: subCategory.title, onTap: { [weak self] in
+                    self?.onGenerateClassicPack(params: .init(
+                        categoryName: subCategory.title,
+                        answersCount: 4,
+                        questionsCount: 10,
+                        localization: .en)
+                    )
+                })
                 return HomeCollectionView.Item(hash: UUID().hashValue, kind: .subcategory(viewModel))
             }
             let block = HomeCollectionView.ViewModel.Block(

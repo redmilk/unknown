@@ -15,5 +15,5 @@ struct ImageGenerationFetchParams: Encodable {
     let n: Int
     let size: String
     
-    static let initial = ImageGenerationFetchParams(model: "", style: "", quality: "", prompt: "prompt", n: 1, size: "")
+    static let initial = ImageGenerationFetchParams(model: "", style: "", quality: "", prompt: "Fish", n: 1, size: "")
 }

@@ -27,7 +27,7 @@ final class HomeViewController: UIViewController, HomeViewControllerIn {
     }
     
     private let collection = HomeCollectionView()
-    private let emptyState = EmptyStateView(description: "Here is nothing, yet...")
+    private let emptyState = EmptyStateView(description: "")
     private let emitter = ParticleEmitterView()
     private let viewModel: HomeViewModel
     

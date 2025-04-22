@@ -188,7 +188,7 @@ extension HomeCollectionView: UICollectionViewDelegate {
         case let .verticalDouble(vm):
             vm.onSelect.perform()
         case let .subcategory(vm):
-            break//vm.perform()
+            vm.onTap()
         case let .horizontalCollection(vm):
             break//vm.perform()
         case let .classicQuiz(vm):
@@ -316,29 +316,29 @@ private extension HomeCollectionView {
         // Item
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0 / 5.0)
+            heightDimension: .fractionalHeight(1.0 / 10.0)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         // Group
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(200)
+            heightDimension: .absolute(400)
         )
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 2, trailing: 2)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         
         // Column Group
         let columnGroupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0 / 3.0),
-            heightDimension: .absolute(200)
+            widthDimension: .fractionalWidth(0.45),//1.0 / 3.0),
+            heightDimension: .absolute(400)
         )
         let columnGroup = NSCollectionLayoutGroup.horizontal(layoutSize: columnGroupSize, subitems: [group])
         columnGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         
         // Section
         let section = NSCollectionLayoutSection(group: columnGroup)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0)
         section.orthogonalScrollingBehavior = .continuous
 
         // Header (optional)

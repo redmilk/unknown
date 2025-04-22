@@ -101,10 +101,10 @@ final class ClassicGeneratorCell: ImageCell {
         configureTextfield(localizationTextField)
         configureTextfield(questionsCountTextField)
         labelsStack.distribution = .fillEqually
-        labelsStack.spacing = 4
+        labelsStack.spacing = 6
         labelsStack.axis = .vertical
         textFieldsStack.distribution = .fillEqually
-        textFieldsStack.spacing = 0
+        textFieldsStack.spacing = 2
         textFieldsStack.axis = .vertical
         headerLabelsStack.axis = .vertical
         headerLabelsStack.alignment = .center
@@ -160,7 +160,7 @@ final class ClassicGeneratorCell: ImageCell {
         ])
         
         labelsStack.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().inset(16)
             make.top.equalTo(headerLabelsStack.snp.bottom)
         }
         textFieldsStack.snp.makeConstraints { make in
@@ -184,7 +184,7 @@ final class ClassicGeneratorCell: ImageCell {
         
         generateButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(textFieldsStack.snp.bottom)
+            make.top.equalTo(textFieldsStack.snp.bottom).offset(8)
         }
     }
     

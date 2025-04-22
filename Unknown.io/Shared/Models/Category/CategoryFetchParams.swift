@@ -11,5 +11,5 @@ struct CategoryFetchParams: Encodable {
     let numberOfCategories: Int
     let rootCategory: String
     
-    static let initial = CategoryFetchParams(numberOfCategories: 5, rootCategory: "Cars")
+    static let initial = CategoryFetchParams(numberOfCategories: 54, rootCategory: "Space and Astronomy")
 }
