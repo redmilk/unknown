@@ -20,6 +20,7 @@ final class HomeViewModel {
     private var classicQuizList: [ClassicQuizModel] = []
     private var categoriesList: [CategoryRootModel] = []
     private var imageGenerationList: [ImageGenerationModel] = []
+    private var loadingCategories = Set<CategoryModel>()
     
     private var latestAnsweredID: String?
     
@@ -52,7 +53,7 @@ final class HomeViewModel {
         }
     }
     
-    func onGenerateClassicPack(params: ClassicQuizFetchParams) {
+    func onGenerateClassicPack(params: ClassicQuizFetchParams, completion: (() -> Void)? = nil) {
         classicQuizFetchParams = params
         let message = Message(
             id: UUID(),
@@ -61,6 +62,7 @@ final class HomeViewModel {
             createdAt: Date()
         )
         APIClientImpl.shared.getClassicQuizModels(messages: [message], completion: { [weak self] questions in
+            defer { completion?() }
             guard let self else { return }
             guard let questions else {
                 DispatchQueue.main.async {
@@ -277,13 +279,26 @@ final class HomeViewModel {
         var blocks: [HomeCollectionView.ViewModel.Block] = []
         categoriesList.forEach { category in
             let items = category.subCategories.map { subCategory in
-                let viewModel = SubCategoryCell.ViewModel(title: subCategory.title, onTap: { [weak self] in
-                    self?.onGenerateClassicPack(params: .init(
-                        categoryName: subCategory.title,
-                        answersCount: 4,
-                        questionsCount: 10,
-                        localization: .en)
-                    )
+                let viewModel = SubCategoryCell.ViewModel(
+                    state: loadingCategories.contains(subCategory) ? .isLoading : .default,
+                    title: subCategory.title,
+                    onTap: { [weak self] in
+                        guard let self else { return }
+                        self.loadingCategories.insert(subCategory)
+                        self.viewModel = makeViewModel()
+                        self.view.update(with: self.viewModel)
+                        self.onGenerateClassicPack(
+                            params: .init(
+                                categoryName: subCategory.title,
+                                answersCount: 4,
+                                questionsCount: 10,
+                                localization: .en),
+                            completion: { [weak self] in
+                                guard let self else { return }
+                                self.loadingCategories.remove(subCategory)
+                                self.viewModel = makeViewModel()
+                                self.view.update(with: self.viewModel)
+                            })
                 })
                 return HomeCollectionView.Item(hash: UUID().hashValue, kind: .subcategory(viewModel))
             }

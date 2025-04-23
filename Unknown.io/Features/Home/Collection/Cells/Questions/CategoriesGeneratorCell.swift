@@ -38,7 +38,7 @@ final class CategoriesGeneratorCell: ImageCell {
     private let headerLabelsStack = UIStackView()
     private let labelsStack = UIStackView()
     private let textFieldsStack = UIStackView()
-    private let generateButton = LoaderButton()
+    private let generateButton = LoaderButton(title: "Generate Categories")
     private let categoryTextfield = InsetTextfield(textInsets: .init(top: 2, left: 4, bottom: 2, right: 4))
     private let categoriesCountTextField = InsetTextfield(textInsets: .init(top: 2, left: 4, bottom: 2, right: 4))
     private let localizationTextField = InsetTextfield(textInsets: .init(top: 2, left: 4, bottom: 2, right: 4))
@@ -169,7 +169,7 @@ final class CategoriesGeneratorCell: ImageCell {
             make.top.equalTo(headerLabelsStack.snp.bottom)
         }
         textFieldsStack.snp.makeConstraints { make in
-            make.leading.equalTo(labelsStack.snp.trailing)
+            make.leading.equalTo(labelsStack.snp.trailing).offset(8)
             make.top.equalTo(labelsStack.snp.top)
         }
         

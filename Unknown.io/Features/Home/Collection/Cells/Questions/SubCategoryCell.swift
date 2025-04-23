@@ -8,13 +8,19 @@
 import UIKit
 
 final class SubCategoryCell: UICollectionViewCell {
-    
     struct ViewModel {
+        enum State {
+            case isLoading
+            case `default`
+        }
+        
+        let state: State
         let title: String
         var onTap: () -> Void
     }
     
     private let titleLabel = UILabel()
+    private let activity = CirclesActivityIndicatorFactory.make(height: Constants.activityHeight)
     private var viewModel: ViewModel!
 
     // MARK: - Init
@@ -32,12 +38,14 @@ final class SubCategoryCell: UICollectionViewCell {
     func update(with model: ViewModel) {
         titleLabel.text = model.title
         viewModel = model
-        viewModel.onTap = { [weak self] in
-            model.onTap()
-            self?.bounceAnimation()
+        switch model.state {
+        case .isLoading:
+            startLoading()
+        case .default:
+            stopLoading()
         }
     }
-    
+
     private func configureUI() {
         titleLabel.textColor = .white
         titleLabel.font = UIFont.sfProDisplayRegular(ofSize: 11)
@@ -56,13 +64,41 @@ final class SubCategoryCell: UICollectionViewCell {
         }
     }
     
-    private func bounceAnimation() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.titleLabel.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+    private func startLoading() {
+        bounceAnimation()
+        addSubview(activity)
+        isUserInteractionEnabled = false
+        layer.cornerRadius = Constants.activityHeight / 2
+        activity.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.equalTo(Constants.activityHeight)
+            make.width.equalTo(Constants.activityHeight)
+        }
+    }
+    
+    private func stopLoading() {
+        activity.removeFromSuperview()
+        isUserInteractionEnabled = true
+        layer.cornerRadius = Constants.activityHeight / 2
+    }
+    
+    func bounceAnimation() {
+        UIView.animate(withDuration: 0.05, animations: {
+            self.titleLabel.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         }, completion: { _ in
-            UIView.animate(withDuration: 0.1) {
-                self.titleLabel.transform = CGAffineTransform.identity
-            }
+            UIView.animate(
+                withDuration: 0.15,
+                delay: 0,
+                usingSpringWithDamping: 0.4,
+                initialSpringVelocity: 6,
+                options: .curveEaseOut,
+                animations: {
+                    self.titleLabel.transform = .identity
+                }, completion: nil)
         })
+    }
+    
+    private enum Constants {
+        static let activityHeight: CGFloat = 40
     }
 }

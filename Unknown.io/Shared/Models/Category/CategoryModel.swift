@@ -19,7 +19,7 @@ struct CategoryRootModel {
     }
 }
 
-struct CategoryModel {
+struct CategoryModel: Hashable {
     let title: String
     
     init(dto: CategoryDTO) {

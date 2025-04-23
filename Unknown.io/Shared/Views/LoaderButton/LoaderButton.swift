@@ -11,34 +11,33 @@ import SnapKit
 final class LoaderButton: UIButton {
     private enum Constants {
         static let height: CGFloat = 20
-        static let width: CGFloat = 40
-        static let loadindWidth: CGFloat = 20
-        static let title = "+"
+        static let width: CGFloat = 100
     }
     
     private var activityIndicator: UIView!
+    
+    init(title: String) {
+        super.init(frame: .zero)
+        configure(title: title)
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        fatalError()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configure()
+        fatalError()
     }
     
-    private func configure() {
+    private func configure(title: String) {
         layer.masksToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
-        setTitle(Constants.title, for: .normal)
+        setTitle(title, for: .normal)
         titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
         activityIndicator = CirclesActivityIndicatorFactory.make(height: Constants.height)
         contentEdgeInsets = .init(top: 4, left: 8, bottom: 4, right: 8)
-        snp.makeConstraints { make in
-            make.height.equalTo(Constants.height)
-            make.width.equalTo(Constants.width)
-        }
     }
     
     func startLoading() {
@@ -48,7 +47,8 @@ final class LoaderButton: UIButton {
         layer.cornerRadius = Constants.height / 2
         activityIndicator.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
-            make.height.width.equalTo(Constants.height)
+            make.height.equalTo(Constants.height)
+            make.width.equalTo(Constants.width)
         }
     }
     

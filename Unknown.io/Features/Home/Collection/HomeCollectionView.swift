@@ -162,9 +162,8 @@ extension HomeCollectionView {
                 let title = self.viewModel.getTitleForSectionAtIndexPath?(indexPath)
                 header.update(with: .init(title: title ?? "-", subtitle: ""))
                 return header
-
-            default:
-                return nil
+                
+            default: return nil
             }
         }
         return dataSource
@@ -189,6 +188,8 @@ extension HomeCollectionView: UICollectionViewDelegate {
             vm.onSelect.perform()
         case let .subcategory(vm):
             vm.onTap()
+            let cell = collectionView.cellForItem(at: indexPath) as? SubCategoryCell
+            cell?.bounceAnimation()
         case let .horizontalCollection(vm):
             break//vm.perform()
         case let .classicQuiz(vm):

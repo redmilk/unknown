@@ -36,7 +36,7 @@ final class ImageGeneratorCell: ImageCell {
     private let headerLabelsStack = UIStackView()
     private let labelsStack = UIStackView()
     private let textFieldsStack = UIStackView()
-    private let generateButton = LoaderButton()
+    private let generateButton = LoaderButton(title: "Generate Image")
     private let promptTextfield = InsetTextfield()
     private let subjectTextfield = InsetTextfield()
     private let settingTextfield = InsetTextfield()
@@ -95,10 +95,10 @@ final class ImageGeneratorCell: ImageCell {
     private func configureView() {
         configureTextfield(promptTextfield)
         labelsStack.distribution = .fillEqually
-        labelsStack.spacing = 4
+        labelsStack.spacing = 6
         labelsStack.axis = .vertical
         textFieldsStack.distribution = .fillEqually
-        textFieldsStack.spacing = 0
+        textFieldsStack.spacing = 2
         textFieldsStack.axis = .vertical
         headerLabelsStack.axis = .vertical
         headerLabelsStack.alignment = .center
@@ -142,11 +142,11 @@ final class ImageGeneratorCell: ImageCell {
         ])
         
         labelsStack.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().inset(16)
             make.top.equalTo(headerLabelsStack.snp.bottom)
         }
         textFieldsStack.snp.makeConstraints { make in
-            make.leading.equalTo(labelsStack.snp.trailing)
+            make.leading.equalTo(labelsStack.snp.trailing).offset(8)
             make.top.equalTo(labelsStack.snp.top)
         }
         
@@ -166,7 +166,7 @@ final class ImageGeneratorCell: ImageCell {
         
         generateButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(textFieldsStack.snp.bottom)
+            make.top.equalTo(textFieldsStack.snp.bottom).offset(16)
         }
     }
     
